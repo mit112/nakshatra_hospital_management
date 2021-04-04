@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "424764375976",
+    "project_id": "nakshatra-hospital",
+    "storage_bucket": "nakshatra-hospital.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424764375976:android:1310017efbe309c300539d",
+        "android_client_info": {
+          "package_name": "com.example.nakshatra_hospital_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424764375976-ftju6pteafhj6u5g84obufogd5trs5cb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArfS4xfUCl0cF9YdiLRgke08teuiiIy9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424764375976-ftju6pteafhj6u5g84obufogd5trs5cb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

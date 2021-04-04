@@ -48,7 +48,11 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
             ),
-            Container(),
+            Container(
+              child: Column(
+                children: [],
+              ),
+            ),
           ],
         ),
       ),
