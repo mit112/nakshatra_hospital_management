@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:nakshatra_hospital_management/constants.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:connectivity/connectivity.dart';
+import 'package:nakshatra_hospital_management/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:nakshatra_hospital_management/userScreens/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nakshatra_hospital_management/services/auth.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -8,6 +17,8 @@ class Authenticate extends StatefulWidget {
 }
 
 class _AuthenticateState extends State<Authenticate> {
+  String email;
+  String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +88,7 @@ class _AuthenticateState extends State<Authenticate> {
                         textAlign: TextAlign.center,
                         onChanged: (value) {
                           //Do something with the user input.
+                          email = value;
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Enter your email',
@@ -105,6 +117,7 @@ class _AuthenticateState extends State<Authenticate> {
                         textAlign: TextAlign.center,
                         onChanged: (value) {
                           //Do something with the user input.
+                          password = value;
                         },
                         decoration: kTextFieldDecoration.copyWith(
                           hintText: 'Enter your password',
@@ -122,15 +135,24 @@ class _AuthenticateState extends State<Authenticate> {
                     ),
                     RoundedButtonlogin(
                       title: 'Log In',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return Homepage();
-                            },
-                          ),
-                        );
+                      onPressed: () async {
+                        var connectivityResult = await Connectivity()
+                            .checkConnectivity(); // User defined class
+                        print(connectivityResult);
+                        // ignore: unrelated_type_equality_checks
+                        if (connectivityResult == ConnectivityResult.mobile ||
+                            connectivityResult == ConnectivityResult.wifi) {
+                          try {
+                            context.read<AuthService>().signIn(
+                                  email: email.trim(),
+                                  password: password,
+                                );
+                            // final user = await _auth.signInWithEmailAndPassword(
+                            //     email: email.trim(), password: password);
+                          } catch (e) {
+                            print(e);
+                          }
+                        }
                       },
                     ),
                   ],

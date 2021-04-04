@@ -1,21 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nakshatra_hospital_management/authenticate/authenticate.dart';
+import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:nakshatra_hospital_management/userScreens/homepage.dart';
-import 'package:nakshatra_hospital_management/wrapper.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Nakshatra Hospital',
-      theme: ThemeData(
-          appBarTheme: AppBarTheme(
-        brightness: Brightness.dark,
-      )),
-      home: Wrapper(),
+    // final firebaseuser = context.watch<User>();
+//     if (firebaseuser != null) {
+//       return Homepage();
+//     }
+//     return Authenticate();
+//   }
+// }
+
+    return MultiProvider(
+      providers: [
+        Provider<AuthService>(
+          create: (_) => AuthService(auth: FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthService>().authStateChanges,
+          initialData: null,
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Nakshatra Hospital',
+        theme: ThemeData(
+            appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
+        )),
+        home: AuthenticationWrapper(),
+      ),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      return Homepage();
+    }
+    return Authenticate();
   }
 }
