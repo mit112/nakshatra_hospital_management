@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nakshatra_hospital_management/constants.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:connectivity/connectivity.dart';
-import 'package:nakshatra_hospital_management/main.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:nakshatra_hospital_management/userScreens/homepage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 
 class Authenticate extends StatefulWidget {

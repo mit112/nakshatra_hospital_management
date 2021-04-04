@@ -1,9 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-import '../models/user.dart';
-import 'package:firebase_user_stream/firebase_user_stream.dart';
-import 'package:nakshatra_hospital_management/authenticate/authenticate.dart';
 
 // SharedPreferences pref;
 

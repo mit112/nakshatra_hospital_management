@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nakshatra_hospital_management/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
