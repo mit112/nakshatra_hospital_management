@@ -60,6 +60,19 @@ class _HomepageState extends State<Homepage> {
                     },
                     title: 'Sign out',
                   ),
+                  RoundedButtonlogin(
+                    onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return New_Complaint();
+                      //     },
+                      //   ),
+                      // );
+                    },
+                    title: 'patient form',
+                  ),
                 ],
               ),
             ),

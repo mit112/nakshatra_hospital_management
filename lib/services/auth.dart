@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-// SharedPreferences pref;
-
 class AuthService {
   final FirebaseAuth auth;
 

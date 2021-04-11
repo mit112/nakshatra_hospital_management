@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nakshatra_hospital_management/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity/connectivity.dart';
-
 import 'package:nakshatra_hospital_management/services/auth.dart';
 
 class Authenticate extends StatefulWidget {
