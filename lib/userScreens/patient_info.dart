@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nakshatra_hospital_management/services/auth.dart';
 
 class PatientForm extends StatefulWidget {
   @override
@@ -8,9 +11,30 @@ class PatientForm extends StatefulWidget {
 
 class _PatientFormState extends State<PatientForm> {
   final formKey = GlobalKey<FormState>();
-  String _flu, _firstTime, _feeDetails, _otherExpenses, _feeAmount;
-  String pName, pTemp, pNumber, pAddress;
+  String _flu,
+      _firstTime,
+      _feeDetails,
+      _otherExpenses,
+      _feeAmount,
+      _other,
+      _notes;
+
+  String pName, pTemp, pAddress;
+  String pNumber;
   String _selectedDate;
+  DocumentSnapshot doc;
+  String uid = auth.currentUser.uid.toString();
+
+  CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('patients');
+  // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
+  CollectionReference get personaldetails =>
+      collectionReference.doc(uid).collection('personal details');
+  CollectionReference get report =>
+      collectionReference.doc(uid).collection('patient report');
+  CollectionReference get feedetails =>
+      collectionReference.doc(uid).collection('fee details');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,11 +132,10 @@ class _PatientFormState extends State<PatientForm> {
                     setState(() {});
                   },
                   keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.done,
-                  obscureText: true,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     labelText: 'Phone number',
-                    hintText: 'Enter password',
+                    hintText: 'Enter phone number',
                     hintStyle: TextStyle(
                       height: 1.5,
                       fontStyle: FontStyle.italic,
@@ -507,6 +530,10 @@ class _PatientFormState extends State<PatientForm> {
                         // validator: (val) {
                         //   return val.isNotEmpty ? null : "Enter address";
                         // },
+                        onChanged: (val) {
+                          _other = val ?? ' ';
+                          setState(() {});
+                        },
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
@@ -526,6 +553,10 @@ class _PatientFormState extends State<PatientForm> {
                         // validator: (val) {
                         //   return val.isNotEmpty ? null : "Enter address";
                         // },
+                        onChanged: (val) {
+                          _notes = val ?? ' ';
+                          setState(() {});
+                        },
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
                         decoration: InputDecoration(
@@ -541,13 +572,39 @@ class _PatientFormState extends State<PatientForm> {
                   ],
                 ),
                 Container(
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     child: Text('submit'),
-                    onPressed: () {
-                      print(_selectedDate);
+                    onPressed: () async {
+                      // print(_selectedDate);
 
-                      if (formKey.currentState.validate()) {}
-                      ;
+                      if (formKey.currentState.validate()) {
+                        await personaldetails.add({
+                          'patient Name': pName,
+                          'phone number': pNumber,
+                          'date': _selectedDate,
+                          'address': pAddress,
+                        }).then((value) {
+                          print(value.id);
+                        });
+                        await report.add({
+                          'date': _selectedDate,
+                          'body temp': pTemp,
+                          'flu symptoms': _flu,
+                          'first visit': _firstTime,
+                          'other expenses': _otherExpenses,
+                          'other': _other,
+                          'notes': _notes,
+                        }).then((value) {
+                          print(value.id);
+                        });
+                        await feedetails.add({
+                          'date': _selectedDate,
+                          'fee details': _feeDetails,
+                          'fee collected': _feeAmount,
+                        }).then((value) {
+                          print(value.id);
+                        });
+                      }
                     },
                   ),
                 ),
