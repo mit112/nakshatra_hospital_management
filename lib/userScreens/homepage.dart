@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nakshatra_hospital_management/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
+import 'package:nakshatra_hospital_management/userScreens/patient_info.dart';
 import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
@@ -62,14 +63,14 @@ class _HomepageState extends State<Homepage> {
                   ),
                   RoundedButtonlogin(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return New_Complaint();
-                      //     },
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return PatientForm();
+                          },
+                        ),
+                      );
                     },
                     title: 'patient form',
                   ),
