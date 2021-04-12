@@ -24,16 +24,17 @@ class _PatientFormState extends State<PatientForm> {
   String _selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
+  String currentid;
 
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
-  CollectionReference get personaldetails =>
-      collectionReference.doc(uid).collection('personal details');
+  // CollectionReference get personaldetails =>
+  //     collectionReference.doc(currentid).collection('personal details');
   CollectionReference get report =>
-      collectionReference.doc(uid).collection('patient report');
-  CollectionReference get feedetails =>
-      collectionReference.doc(uid).collection('fee details');
+      collectionReference.doc(currentid).collection('patient report');
+  // CollectionReference get feedetails =>
+  //     collectionReference.doc(uid).collection('fee details');
 
   @override
   Widget build(BuildContext context) {
@@ -578,29 +579,30 @@ class _PatientFormState extends State<PatientForm> {
                       // print(_selectedDate);
 
                       if (formKey.currentState.validate()) {
-                        await personaldetails.add({
+                        await collectionReference.add({
                           'patient Name': pName,
                           'phone number': pNumber,
                           'date': _selectedDate,
                           'address': pAddress,
                         }).then((value) {
+                          currentid = value.id;
                           print(value.id);
                         });
-                        await report.add({
-                          'date': _selectedDate,
+                        report.add({
+                          // 'patient Name': pName,
+                          // 'phone number': pNumber,
+                          // 'date': _selectedDate,
+                          // 'address': pAddress,
+                          'fee details': _feeDetails,
+                          'fee collected': _feeAmount,
                           'body temp': pTemp,
                           'flu symptoms': _flu,
                           'first visit': _firstTime,
+                          'date': _selectedDate,
+
                           'other expenses': _otherExpenses,
                           'other': _other,
                           'notes': _notes,
-                        }).then((value) {
-                          print(value.id);
-                        });
-                        await feedetails.add({
-                          'date': _selectedDate,
-                          'fee details': _feeDetails,
-                          'fee collected': _feeAmount,
                         }).then((value) {
                           print(value.id);
                         });
