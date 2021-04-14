@@ -25,14 +25,15 @@ class _PatientFormState extends State<PatientForm> {
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
   String currentid;
+  String reportid;
 
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
   // CollectionReference get personaldetails =>
   //     collectionReference.doc(currentid).collection('personal details');
-  CollectionReference get report =>
-      collectionReference.doc(currentid).collection('patient report');
+  // CollectionReference get report =>
+  //     collectionReference.doc(currentid).collection('patient report');
   // CollectionReference get feedetails =>
   //     collectionReference.doc(uid).collection('fee details');
 
@@ -584,28 +585,19 @@ class _PatientFormState extends State<PatientForm> {
                           'phone number': pNumber,
                           'date': _selectedDate,
                           'address': pAddress,
-                        }).then((value) {
-                          currentid = value.id;
-                          print(value.id);
-                        });
-                        report.add({
-                          // 'patient Name': pName,
-                          // 'phone number': pNumber,
-                          // 'date': _selectedDate,
-                          // 'address': pAddress,
                           'fee details': _feeDetails,
                           'fee collected': _feeAmount,
                           'body temp': pTemp,
                           'flu symptoms': _flu,
                           'first visit': _firstTime,
-                          'date': _selectedDate,
-
                           'other expenses': _otherExpenses,
                           'other': _other,
                           'notes': _notes,
                         }).then((value) {
+                          currentid = value.id;
                           print(value.id);
                         });
+                        Navigator.pop(context);
                       }
                     },
                   ),
@@ -617,4 +609,19 @@ class _PatientFormState extends State<PatientForm> {
       ),
     );
   }
+}
+
+String currentid;
+// String reportid;
+// Future getPost() async {
+//   QuerySnapshot qn = await report.get();
+//   return qn.docs;
+// }
+String feedetails;
+String firstvisit;
+Future<void> getName() async {
+  DocumentSnapshot ds =
+      await FirebaseFirestore.instance.collection('users').doc(currentid).get();
+  feedetails = ds.data()['fee details'];
+  firstvisit = ds.data()['first visit'];
 }
