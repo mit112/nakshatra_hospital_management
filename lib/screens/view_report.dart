@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:nakshatra_hospital_management/userScreens/viewpatients.dart';
+import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/viewpatients.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:nakshatra_hospital_management/constants.dart';
+import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'patient_info.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nakshatra_hospital_management/constants.dart';
+import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/constants/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
