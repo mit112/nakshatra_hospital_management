@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/login.dart';
+// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/login.dart';
+import 'screens/login.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/homepage.dart';
+// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/homepage.dart';
+import 'screens/homepage.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/constants/constants.dart';
+import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/view_report.dart';
 import 'patient_info.dart';
 
 class ViewPatients extends StatefulWidget {
