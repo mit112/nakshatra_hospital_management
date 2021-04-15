@@ -13,7 +13,6 @@ class _ViewPatientsState extends State<ViewPatients> {
   DocumentSnapshot doc;
   // String name='h';
   String currentid;
-
   String uid = auth.currentUser.uid.toString();
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
