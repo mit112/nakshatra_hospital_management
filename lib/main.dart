@@ -11,7 +11,8 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(MyApp(
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Nakshatra Hospital',
         theme: ThemeData(
             appBarTheme: AppBarTheme(

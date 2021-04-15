@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 // import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/constants/constants.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
@@ -19,84 +20,190 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.blueAccent,
-        title: Text('Nakshatra Hospital'),
-        centerTitle: true,
+        //elevation: 8.0,
+        backgroundColor: Colors.green[500],
+        title: Text(
+            'Homepage',
+            style:GoogleFonts.poppins(
+              textStyle: TextStyle(
+                color: Colors.white,
+                fontSize:23.0,
+                letterSpacing: 0.5,
+                //fontWeight:FontWeight.normal,
+              ),
+            )
+        ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      drawer:Drawer(
+        elevation: 8.0,
+        child: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      'Nakshatra',
-                      style: TextStyle(
-                        letterSpacing: 2.0,
-                        fontFamily: 'Abel',
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+            Container(
+              height: 170.0,
+              child: UserAccountsDrawerHeader(
+                accountName:Text(
+                  'Nakshatra Hospital.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17.0,
                   ),
-                  Center(
-                    child: Text(
-                      'Hospital',
-                      style: TextStyle(
-                        letterSpacing: 3.0,
-                        fontFamily: 'Abel',
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                ),
+                accountEmail: Text(
+                  'hello@ac.in',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17.0,
                   ),
-                ],
+                ),
+                currentAccountPicture: CircleAvatar(
+                  radius:40.0,
+                  backgroundImage: NetworkImage(""),
+                ),
               ),
             ),
+            Divider(
+              color: Colors.grey[200],
+              thickness: 4.5,
+            ),
+          ],
+        ),
+
+
+
+    ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(15.0, 80.0, 0.0, 0.0),
+                  child: Text(
+                    'Nakshatra',
+                    style:GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontSize: 80.0,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(15.0, 190.0, 0.0, 0.0),
+                  child: Text(
+                    'Hospital',
+                    style:GoogleFonts.lato(
+                      textStyle: TextStyle(
+                        fontSize: 80.0,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(298.0, 155.0, 0.0, 0.0),
+                  child: Text(
+                    '.',
+                    style: TextStyle(
+                        fontSize: 120.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 50,),
             Container(
               child: Column(
                 children: [
-                  RoundedButtonlogin(
-                    onPressed: () {
-                      context.read<AuthService>().signOut();
-                    },
-                    title: 'Sign out',
-                  ),
-                  RoundedButtonlogin(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return PatientForm();
-                          },
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                        child:Container(
+                          height:48.0,
+                          child: Material(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent.withOpacity(0.8),
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                    context, MaterialPageRoute(
+                                    builder: (context) => PatientForm())
+                                );
+                              },
+                              child:Center(
+                                child: Text(
+                                  'PatientForm',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                    title: 'patient form',
+                      ),
+                    ],
                   ),
-                  RoundedButtonlogin(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return ViewPatients();
-                          },
+                  SizedBox(height: 50,),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                        child:Container(
+                          height:48.0,
+                          child: Material(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent.withOpacity(0.8),
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                    context, MaterialPageRoute(
+                                    builder: (context) => ViewPatients())
+                                );
+                              },
+                              child:Center(
+                                child: Text(
+                                  'ViewPatients',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                    title: 'View patients',
+                      ),
+                    ],
                   ),
+
                 ],
               ),
             ),
           ],
         ),
       ),
+
+      floatingActionButton:FloatingActionButton(
+        child:Icon(
+          Icons.exit_to_app,
+        ),
+        backgroundColor: Colors.green,
+        onPressed: () {
+          context.read<AuthService>().signOut();
+        },
+      ),
     );
   }
 }
+
