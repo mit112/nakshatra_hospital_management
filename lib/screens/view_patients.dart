@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'patient_info.dart';
+import 'patient_form.dart';
 
 class ViewPatients extends StatefulWidget {
   @override

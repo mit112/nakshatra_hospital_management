@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/constants/constants.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/patient_info.dart';
-import 'package:nakshatra_hospital_management/screens/patient_info.dart';
-// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/viewpatients.dart';
-import 'package:nakshatra_hospital_management/screens/viewpatients.dart';
+import 'package:nakshatra_hospital_management/screens/patient_form.dart';
+import 'package:nakshatra_hospital_management/screens/view_patients.dart';
 import 'package:provider/provider.dart';
 
 class Homepage extends StatefulWidget {
