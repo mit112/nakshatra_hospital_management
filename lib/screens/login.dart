@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nakshatra_hospital_management/screens/homepage.dart';
+import 'package:nakshatra_hospital_management/screens/patient_form.dart';
 import 'package:provider/provider.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:connectivity/connectivity.dart';
@@ -184,11 +186,11 @@ class _AuthenticateState extends State<Authenticate> {
                               try {
                                 context.read<AuthService>().signIn(
                                   email: email.trim(),
-                                  password: password,
-                                );
+                                  password: password;
+
                                 // final user = await _auth.signInWithEmailAndPassword(
                                 //     email: email.trim(), password: password);
-                              } catch (e) {
+                              }catch (e) {
                                 print(e);
                               }
                             }
