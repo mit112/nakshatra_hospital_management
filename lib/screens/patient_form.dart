@@ -57,7 +57,6 @@ class _PatientFormState extends State<PatientForm> {
         ),
         elevation: 8.0,
         backgroundColor: Colors.green[500],
-        centerTitle: true,
       ),
       body: new GestureDetector(
         onTap: () {
