@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 // import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/login.dart';
 import 'screens/login.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
@@ -52,6 +53,9 @@ class MyApp extends StatelessWidget {
 class AuthenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) {
