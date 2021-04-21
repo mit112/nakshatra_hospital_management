@@ -5,6 +5,7 @@ import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:nakshatra_hospital_management/screens/patient_form.dart';
 import 'package:nakshatra_hospital_management/screens/view_patients.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -17,7 +18,7 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        //elevation: 8.0,
+        elevation: 8.0,
         backgroundColor: Colors.green[500],
         title: Text(
             'Homepage',
@@ -28,7 +29,7 @@ class _HomepageState extends State<Homepage> {
                 letterSpacing: 0.5,
                 //fontWeight:FontWeight.normal,
               ),
-            )
+            ),
         ),
       ),
       drawer:Drawer(
@@ -74,7 +75,7 @@ class _HomepageState extends State<Homepage> {
             Stack(
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 80.0, 0.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(15.0, 40.0, 0.0, 0.0),
                   child: Text(
                     'Nakshatra',
                     style:GoogleFonts.lato(
@@ -86,7 +87,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 190.0, 0.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(15.0, 120.0, 0.0, 0.0),
                   child: Text(
                     'Hospital',
                     style:GoogleFonts.lato(
@@ -98,7 +99,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(298.0, 155.0, 0.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(294.0, 90.0, 0.0, 0.0),
                   child: Text(
                     '.',
                     style: TextStyle(
@@ -110,7 +111,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ],
             ),
-            SizedBox(height: 50,),
+            SizedBox(height: 60,),
             Container(
               child: Column(
                 children: [
@@ -148,7 +149,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 50,),
+                  SizedBox(height: 40,),
                   Column(
                     children: [
                       Padding(
