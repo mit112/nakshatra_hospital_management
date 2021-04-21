@@ -12,7 +12,7 @@ class PatientForm extends StatefulWidget {
 
 class _PatientFormState extends State<PatientForm> {
   final formKey = GlobalKey<FormState>();
-  final  _fbKey = GlobalKey<FormState>();
+  final _fbKey = GlobalKey<FormState>();
 
   String _flu,
       _firstTime,
@@ -46,10 +46,10 @@ class _PatientFormState extends State<PatientForm> {
       appBar: AppBar(
         title: Text(
           'Nakshatra Hospital',
-          style:GoogleFonts.poppins(
+          style: GoogleFonts.poppins(
             textStyle: TextStyle(
               color: Colors.white,
-              fontSize:20.0,
+              fontSize: 20.0,
               letterSpacing: 0.5,
               //fontWeight:FontWeight.normal,
             ),
@@ -66,18 +66,20 @@ class _PatientFormState extends State<PatientForm> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left:20,top: 20),
+                padding: const EdgeInsets.only(left: 20, top: 20),
                 child: Text(
                   'Nakshatra-patient les & payments',
-                  style:GoogleFonts.lato(
+                  style: GoogleFonts.lato(
                     textStyle: TextStyle(
-                      fontSize:30.0,
+                      fontSize: 30.0,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
@@ -127,7 +129,7 @@ class _PatientFormState extends State<PatientForm> {
                           labelStyle: TextStyle(
                             height: 1.2,
                             fontStyle: FontStyle.italic,
-                            fontSize:18.0,
+                            fontSize: 18.0,
                           ),
                         ),
                       ),
@@ -197,384 +199,385 @@ class _PatientFormState extends State<PatientForm> {
                       SizedBox(
                         height: 50.0,
                       ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      Column(
                         children: [
-                          Text(
-                            'Does the patient suffer from flu symptoms?',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'no',
-                              groupValue: _flu,
-                              onChanged: (val) {
-                                _flu = val;
-                                setState(() {});
-                              }),
-                          Text('No'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'yes',
-                              groupValue: _flu,
-                              onChanged: (val) {
-                                _flu = val;
-                                setState(() {});
-                              }),
-                          Text('Yes'),
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Is the patient visiting for the first time?',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Yes',
-                              groupValue: _firstTime,
-                              onChanged: (val) {
-                                _firstTime = val;
-                                setState(() {});
-                              }),
-                          Text('Yes'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value:
-                              'No, this is follow-up within one week of initial visit',
-                              groupValue: _firstTime,
-                              onChanged: (val) {
-                                _firstTime = val;
-                                setState(() {});
-                              }),
-                          Text('No, this is followup within one '
-                              'week'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'No, but last visit was few weeks back',
-                              groupValue: _firstTime,
-                              onChanged: (val) {
-                                _firstTime = val;
-                                setState(() {});
-                              }),
-                          Text('No, but last visit was few weeks back'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Fee details',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Paid online',
-                              groupValue: _feeDetails,
-                              onChanged: (val) {
-                                _feeDetails = val;
-                                setState(() {});
-                              }),
-                          Text('Paid online'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Paid in cash',
-
-                              groupValue: _feeDetails,
-                              onChanged: (val) {
-                                _feeDetails = val;
-                                setState(() {});
-                              }
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Does the patient suffer from flu symptoms?',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
-                          Text('Paid in cash'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'no',
+                                  groupValue: _flu,
+                                  onChanged: (val) {
+                                    _flu = val;
+                                    setState(() {});
+                                  }),
+                              Text('No'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'yes',
+                                  groupValue: _flu,
+                                  onChanged: (val) {
+                                    _flu = val;
+                                    setState(() {});
+                                  }),
+                              Text('Yes'),
+                            ],
+                          )
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
                         children: [
-                          Radio(
-                              value: 'Not charged',
-                              groupValue: _feeDetails,
-                              onChanged: (val) {
-                                _feeDetails = val;
-                                setState(() {});
-                              }),
-                          Text('Not charged'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Is the patient visiting for the first time?',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Yes',
+                                  groupValue: _firstTime,
+                                  onChanged: (val) {
+                                    _firstTime = val;
+                                    setState(() {});
+                                  }),
+                              Text('Yes'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value:
+                                      'No, this is follow-up within one week of initial visit',
+                                  groupValue: _firstTime,
+                                  onChanged: (val) {
+                                    _firstTime = val;
+                                    setState(() {});
+                                  }),
+                              Text('No, this is followup within one '
+                                  'week'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value:
+                                      'No, but last visit was few weeks back',
+                                  groupValue: _firstTime,
+                                  onChanged: (val) {
+                                    _firstTime = val;
+                                    setState(() {});
+                                  }),
+                              Text('No, but last visit was few weeks back'),
+                            ],
+                          ),
                         ],
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
                         children: [
-                          Text(
-                            'Fees collected in INR',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Fee details',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Paid online',
+                                  groupValue: _feeDetails,
+                                  onChanged: (val) {
+                                    _feeDetails = val;
+                                    setState(() {});
+                                  }),
+                              Text('Paid online'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Paid in cash',
+                                  groupValue: _feeDetails,
+                                  onChanged: (val) {
+                                    _feeDetails = val;
+                                    setState(() {});
+                                  }),
+                              Text('Paid in cash'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Not charged',
+                                  groupValue: _feeDetails,
+                                  onChanged: (val) {
+                                    _feeDetails = val;
+                                    setState(() {});
+                                  }),
+                              Text('Not charged'),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Fees collected in INR',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: '600',
+                                  groupValue: _feeAmount,
+                                  onChanged: (val) {
+                                    _feeAmount = val;
+                                    setState(() {});
+                                  }),
+                              Text('600'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: '500',
+                                  groupValue: _feeAmount,
+                                  onChanged: (val) {
+                                    _feeAmount = val;
+                                    setState(() {});
+                                  }),
+                              Text('500'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: '400',
+                                  groupValue: _feeAmount,
+                                  onChanged: (val) {
+                                    _feeAmount = val;
+                                    setState(() {});
+                                  }),
+                              Text('400'), //
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: '300',
+                                  groupValue: _feeAmount,
+                                  onChanged: (val) {
+                                    _feeAmount = val;
+                                    setState(() {});
+                                  }),
+                              Text('300'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'no',
+                                  groupValue: _feeAmount,
+                                  onChanged: (val) {
+                                    _feeAmount = val;
+                                    setState(() {});
+                                  }),
+                              Text('200'),
+                            ],
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: TextFormField(
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.done,
+                              decoration: InputDecoration(
+                                labelText: 'Others',
+                                labelStyle: TextStyle(
+                                  height: 1.2,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 18.0,
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: '600',
-                              groupValue: _feeAmount,
-                              onChanged: (val) {
-                                _feeAmount = val;
-                                setState(() {});
-                              }),
-                          Text('600'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: '500',
-                              groupValue: _feeAmount,
-                              onChanged: (val) {
-                                _feeAmount = val;
-                                setState(() {});
-                              }),
-                          Text('500'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: '400',
-                              groupValue: _feeAmount,
-                              onChanged: (val) {
-                                _feeAmount = val;
-                                setState(() {});
-                              }),
-                          Text('400'), //
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: '300',
-                              groupValue: _feeAmount,
-                              onChanged: (val) {
-                                _feeAmount = val;
-                                setState(() {});
-                              }),
-                          Text('300'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'no',
-                              groupValue: _feeAmount,
-                              onChanged: (val) {
-                                _feeAmount = val;
-                                setState(() {});
-                              }),
-                          Text('200'),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                            labelText: 'Others',
-                            labelStyle: TextStyle(
-                              height: 1.2,
-                              fontStyle: FontStyle.italic,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
 
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Column(
                         children: [
-                          Text(
-                            'Expenses for surgery/medicines/rented \n equipment etc.',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w400,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Expenses for surgery/medicines/rented \n equipment etc.',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'OCT machine',
+                                  groupValue: _otherExpenses,
+                                  onChanged: (val) {
+                                    _otherExpenses = val;
+                                    setState(() {});
+                                  }),
+                              Text('OCT machine'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Perimeter',
+                                  groupValue: _otherExpenses,
+                                  onChanged: (val) {
+                                    _otherExpenses = val;
+                                    setState(() {});
+                                  }),
+                              Text('Perimeter'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Medicine',
+                                  groupValue: _otherExpenses,
+                                  onChanged: (val) {
+                                    _otherExpenses = val;
+                                    setState(() {});
+                                  }),
+                              Text('Medicine'), //
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'External doctor',
+                                  groupValue: _otherExpenses,
+                                  onChanged: (val) {
+                                    _otherExpenses = val;
+                                    setState(() {});
+                                  }),
+                              Text('External doctor'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Nurse',
+                                  groupValue: _otherExpenses,
+                                  onChanged: (val) {
+                                    _otherExpenses = val;
+                                    setState(() {});
+                                  }),
+                              Text('Nurse'),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Radio(
+                                  value: 'Attendant',
+                                  groupValue: _otherExpenses,
+                                  onChanged: (val) {
+                                    _otherExpenses = val;
+                                    setState(() {});
+                                  }),
+                              Text('Attendant'),
+                            ],
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: TextFormField(
+                              onChanged: (val) {
+                                _other = val ?? ' ';
+                                setState(() {});
+                              },
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.done,
+                              decoration: InputDecoration(
+                                labelText: 'Others',
+                                labelStyle: TextStyle(
+                                  height: 1.2,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 18.0,
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'OCT machine',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('OCT machine'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Perimeter',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Perimeter'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Medicine',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Medicine'), //
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'External doctor',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('External doctor'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Nurse',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Nurse'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Attendant',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Attendant'),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: TextFormField(
-                          onChanged: (val) {
-                            _other = val ?? ' ';
-                            setState(() {});
-                          },
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.done,
-                          decoration: InputDecoration(
-                            labelText: 'Others',
-                            labelStyle: TextStyle(
-                              height: 1.2,
-                              fontStyle: FontStyle.italic,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                       SizedBox(
                         height: 15.0,
                       ),
@@ -599,20 +602,24 @@ class _PatientFormState extends State<PatientForm> {
                         ],
                       ),
 
-                      SizedBox(height:20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                            child:Container(
-                              height:48.0,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
                               child: Material(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                shadowColor:
+                                    Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
                                 child: GestureDetector(
-                                  onTap: ()async {
+                                  onTap: () async {
                                     // print(_selectedDate);
 
                                     if (formKey.currentState.validate()) {
@@ -636,7 +643,7 @@ class _PatientFormState extends State<PatientForm> {
                                       Navigator.pop(context);
                                     }
                                   },
-                                  child:Center(
+                                  child: Center(
                                     child: Text(
                                       'Submit',
                                       style: TextStyle(
@@ -650,7 +657,9 @@ class _PatientFormState extends State<PatientForm> {
                               ),
                             ),
                           ),
-                          SizedBox(height:25,),
+                          SizedBox(
+                            height: 25,
+                          ),
                         ],
                       ),
                       // Container(
@@ -707,4 +716,5 @@ Future<void> getName() async {
       await FirebaseFirestore.instance.collection('users').doc(currentid).get();
   feedetails = ds.data()['fee details'];
   firstvisit = ds.data()['first visit'];
+  //hello world
 }
