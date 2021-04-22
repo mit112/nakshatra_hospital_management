@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:nakshatra_hospital_management/screens/patient_form.dart';
 import 'package:nakshatra_hospital_management/screens/view_patients.dart';
+import 'package:nakshatra_hospital_management/userScreens/ot_register.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
@@ -184,6 +186,42 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 50,),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                        child:Container(
+                          height:48.0,
+                          child: Material(
+                            color: Colors.green,
+                            borderRadius: BorderRadius.circular(20.0),
+                            shadowColor: Colors.greenAccent.withOpacity(0.8),
+                            elevation: 7.0,
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(
+                                    context, MaterialPageRoute(
+                                    builder: (context) => ot_register())
+                                );
+                              },
+                              child:Center(
+                                child: Text(
+                                  'OT Register',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
 
                 ],
               ),
