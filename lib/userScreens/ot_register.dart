@@ -849,11 +849,13 @@ class _ot_registerState extends State<ot_register> {
                                                 Row(
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      'Washroom-area, equipment & furniture wiped clean',
-                                                      style: TextStyle(
-                                                        fontSize: 16.0,
-                                                        fontWeight: FontWeight.w400,
+                                                    Flexible(
+                                                      child: Text(
+                                                        'Washroom-area, equipment & furniture wiped clean',
+                                                        style: TextStyle(
+                                                          fontSize: 16.0,
+                                                          fontWeight: FontWeight.w400,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
@@ -1017,11 +1019,13 @@ class _ot_registerState extends State<ot_register> {
                                                       Row(
                                                         mainAxisAlignment: MainAxisAlignment.start,
                                                         children: [
-                                                          Text(
-                                                            'Washroom-Non accessible area sprayed with disinfectant',
-                                                            style: TextStyle(
-                                                              fontSize: 16.0,
-                                                              fontWeight: FontWeight.w400,
+                                                          Flexible(
+                                                            child: Text(
+                                                              'Washroom-Non accessible area sprayed with disinfectant',
+                                                              style: TextStyle(
+                                                                fontSize: 16.0,
+                                                                fontWeight: FontWeight.w400,
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -1621,12 +1625,14 @@ class _ot_registerState extends State<ot_register> {
                                                                   Row(
                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                     children: [
-                                                                      Text(
-                                                                        'Swab results'
-                                                                            'Mark only one circle',
-                                                                        style: TextStyle(
-                                                                          fontSize: 16.0,
-                                                                          fontWeight: FontWeight.w400,
+                                                                      Flexible(
+                                                                        child: Text(
+                                                                          'Swab results'
+                                                                              'Mark only one circle',
+                                                                          style: TextStyle(
+                                                                            fontSize: 16.0,
+                                                                            fontWeight: FontWeight.w400,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ],
@@ -1641,7 +1647,7 @@ class _ot_registerState extends State<ot_register> {
                                                                             _firstTime = val;
                                                                             setState(() {});
                                                                           }),
-                                                                      Text('Negative/acceptable for surgeries'),
+                                                                      Flexible(child: Text('Negative/acceptable for surgeries')),
                                                                     ],
                                                                   ),
                                                                   Row(
@@ -1654,7 +1660,7 @@ class _ot_registerState extends State<ot_register> {
                                                                             _firstTime = val;
                                                                             setState(() {});
                                                                           }),
-                                                                      Text('Positive: Clean/refumigate as required. See test report for details'),
+                                                                      Text('Positive: Clean/refumigate as required.\n See test report for details'),
                                                                     ],
                                                                   ),
                                                                   SizedBox(
