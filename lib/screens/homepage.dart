@@ -15,7 +15,8 @@ class Homepage extends StatefulWidget {
   _HomepageState createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin{
+class _HomepageState extends State<Homepage>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   bool isPlaying = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -29,9 +30,7 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
     super.initState();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-
   }
-
 
   @override
   void dispose() {
@@ -39,39 +38,37 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
     _animationController.dispose();
   }
 
-
-
   void _handleOnPressed() {
-          setState(() {
-            isPlaying = !isPlaying;
-            isPlaying
-                ? _animationController.forward()
-                : _animationController.reverse();
-          });
+    setState(() {
+      isPlaying = !isPlaying;
+      isPlaying
+          ? _animationController.forward()
+          : _animationController.reverse();
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       primary: true,
-     // backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
-       elevation: 8.0,
+        elevation: 8.0,
         backgroundColor: Colors.green[500],
         title: Text(
-              'Homepage',
-              style:GoogleFonts.poppins(
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize:23.0,
-                  letterSpacing: 0.5,
-                  //fontWeight:FontWeight.normal,
-                ),
-              ),
+          'Homepage',
+          style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 23.0,
+              letterSpacing: 0.5,
+              //fontWeight:FontWeight.normal,
+            ),
           ),
+        ),
         leading: IconButton(
           icon: AnimatedIcon(
-              icon: AnimatedIcons.menu_close, progress: _animationController
-          ),
+              icon: AnimatedIcons.menu_close, progress: _animationController),
           onPressed: () {
             if (!_isDrawerOpen) {
               _scaffoldKey.currentState.openDrawer();
@@ -86,7 +83,7 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
         ),
       ),
 
-      body:Scaffold(
+      body: Scaffold(
         key: _scaffoldKey,
         drawer: Drawer(
           elevation: 8.0,
@@ -96,11 +93,11 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                 height: 170.0,
                 child: UserAccountsDrawerHeader(
                   currentAccountPicture: CircleAvatar(
-                    radius:40.0,
+                    radius: 40.0,
                     backgroundImage: NetworkImage(""),
                     backgroundColor: Colors.blue[100],
                   ),
-                  accountName:Text(
+                  accountName: Text(
                     'Nakshatra Hospital.',
                     style: TextStyle(
                       color: Colors.black,
@@ -115,12 +112,11 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                       fontSize: 18.0,
                     ),
                   ),
-
                 ),
               ),
               Divider(
                 color: Colors.grey[200],
-                thickness:3,
+                thickness: 3,
               ),
               // ListTile(
               //   leading:IconButton(
@@ -138,11 +134,16 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
 
               FlatButton(
                 height: 50,
-                onPressed:() {},
-                child:Row(
+                onPressed: () {},
+                child: Row(
                   children: [
-                    Icon(Icons.call,color: Colors.black54,),
-                    SizedBox(width: 30,),
+                    Icon(
+                      Icons.call,
+                      color: Colors.black54,
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
                     Text(
                       'history',
                       style: TextStyle(
@@ -157,7 +158,6 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
             ],
           ),
         ),
-
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -167,7 +167,7 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                     padding: EdgeInsets.fromLTRB(15.0, 40.0, 0.0, 0.0),
                     child: Text(
                       'Nakshatra',
-                      style:GoogleFonts.lato(
+                      style: GoogleFonts.lato(
                         textStyle: TextStyle(
                           fontSize: 80.0,
                           fontWeight: FontWeight.w300,
@@ -179,7 +179,7 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                     padding: EdgeInsets.fromLTRB(15.0, 120.0, 0.0, 0.0),
                     child: Text(
                       'Hospital',
-                      style:GoogleFonts.lato(
+                      style: GoogleFonts.lato(
                         textStyle: TextStyle(
                           fontSize: 80.0,
                           fontWeight: FontWeight.w300,
@@ -194,14 +194,15 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                       style: TextStyle(
                           fontSize: 120.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green
-                      ),
+                          color: Colors.green),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 60,),
-             Container(
+              SizedBox(
+                height: 60,
+              ),
+              Container(
                 child: Column(
                   children: [
                     BouncingWidget(
@@ -210,112 +211,31 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                            child:Container(
-                              height:48.0,
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
                               child: Material(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                shadowColor:
+                                    Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
                                 child: InkWell(
-                                  splashColor:Colors.blue[100],
-                                  onTap: (){
+                                  splashColor: Colors.blue[100],
+                                  onTap: () {
                                     Navigator.push(
-                                        context, MaterialPageRoute(
-                                        builder: (context) => PatientForm())
-                                    );
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PatientForm()));
                                   },
-                                    child:Center(
-                                      child: Text(
-                                        'PatientForm',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 40,),
-                    BouncingWidget(
-                      scaleFactor: _scaleFactor,
-                      stayOnBottom: stayOnBottom,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                            child:Container(
-                              height:48.0,
-                              child: InkWell(
-                                splashColor:Colors.blue[100],
-                                child: Material(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor: Colors.greenAccent.withOpacity(0.8),
-                                  elevation: 7.0,
-                                  child: InkWell(
-                                    splashColor:Colors.blue[100],
-                                    onTap: (){
-                                      Navigator.push(
-                                          context, MaterialPageRoute(
-                                          builder: (context) => ViewPatients())
-                                      );
-                                    },
-                                    child:Center(
-                                      child: Text(
-                                        'ViewPatients',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 50,),
-                    BouncingWidget(
-                      scaleFactor: _scaleFactor,
-                      stayOnBottom: stayOnBottom,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                            child:Container(
-                              height:48.0,
-                              child: Material(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor: Colors.greenAccent.withOpacity(0.8),
-                                elevation: 7.0,
-                                child: InkWell(
-                                  splashColor:Colors.indigo[200],
-                                  onTap: (){
-                                    Navigator.push(
-                                        context, MaterialPageRoute(
-                                        builder: (context) => ot_register())
-                                    );
-                                  },
-                                  child:Center(
+                                  child: Center(
                                     child: Text(
-                                      'OT Register',
+                                      'Patient Form',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
+                                        fontSize: 18.0,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -327,17 +247,107 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                         ],
                       ),
                     ),
-
-
+                    SizedBox(
+                      height: 40,
+                    ),
+                    BouncingWidget(
+                      scaleFactor: _scaleFactor,
+                      stayOnBottom: stayOnBottom,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
+                              child: InkWell(
+                                splashColor: Colors.blue[100],
+                                child: Material(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  shadowColor:
+                                      Colors.greenAccent.withOpacity(0.8),
+                                  elevation: 7.0,
+                                  child: InkWell(
+                                    splashColor: Colors.blue[100],
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ViewPatients()));
+                                    },
+                                    child: Center(
+                                      child: Text(
+                                        'View Patients',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    BouncingWidget(
+                      scaleFactor: _scaleFactor,
+                      stayOnBottom: stayOnBottom,
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
+                              child: Material(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor:
+                                    Colors.greenAccent.withOpacity(0.8),
+                                elevation: 7.0,
+                                child: InkWell(
+                                  splashColor: Colors.indigo[200],
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ot_register()));
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'OT Register',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-          ],
+            ],
           ),
         ),
-
-        floatingActionButton:FloatingActionButton(
-          child:Icon(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
             Icons.exit_to_app,
           ),
           backgroundColor: Colors.green,
@@ -347,11 +357,6 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
           },
         ),
       ),
-
     );
-
   }
-
-
 }
-

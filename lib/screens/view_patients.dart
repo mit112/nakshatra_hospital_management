@@ -36,10 +36,17 @@ class _ViewPatientsState extends State<ViewPatients> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFF1E1D21),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Patients'),
-        backgroundColor: Color(0XFFB577FF),
+        title: Text(
+          'Patients',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: kFont,
+            fontSize: 25.0,
+          ),
+        ),
+        backgroundColor: Colors.green,
       ),
       body: FutureBuilder(
         future: getPosts(),
@@ -53,148 +60,41 @@ class _ViewPatientsState extends State<ViewPatients> {
                 // ignore: missing_return
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
-                  return ListTile(
-                    title: Text(
-                      snapshot.data[index].data()["patient Name"],
-                      style: kFieldStyle,
-                    ),
-                    onTap: () => navigateToDetail(snapshot.data[index]),
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Card(
+                        elevation: 10.0,
+                        color: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  snapshot.data[index].data()["patient Name"],
+                                  style: kFieldStyle,
+                                ),
+                                onTap: () =>
+                                    navigateToDetail(snapshot.data[index]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   );
                 });
           }
         },
       ),
-      // body: StreamBuilder<QuerySnapshot>(
-      //   stream: collectionReference.snapshots(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       // var user = snapshot.data;
-      //       return ListView.separated(
-      //         separatorBuilder: (_, snapshot) => Divider(
-      //           height: 25.0,
-      //         ),
-      //         itemCount: snapshot.data.docs.length,
-      //         itemBuilder: (context, index) {
-      //           DocumentSnapshot patients = snapshot.data.docs[index];
-      //           return Column(
-      //             children: [
-      //               SizedBox(
-      //                 height: 15.0,
-      //               ),
-      //
-      //               ExpansionTile(
-      //                 // iconColor: Colors.greenAccent,
-      //                 // collapsedIconColor: Colors.white,
-      //                 title: RichText(
-      //                   text: new TextSpan(
-      //                     style: new TextStyle(
-      //                       fontSize: 25.0,
-      //                     ),
-      //                     children: <TextSpan>[
-      //                       new TextSpan(
-      //                         text: 'Patient Name: ',
-      //                         style: TextStyle(color: Colors.white),
-      //                       ),
-      //                       new TextSpan(
-      //                         text: '${patients['patient Name']}',
-      //                         style: TextStyle(color: Colors.greenAccent),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //
-      //                 // title: Text(
-      //                 //   'Patient Name: ' + '${patients['patient Name']}',
-      //                 //   style: kFieldStyle,
-      //                 // ),
-      //                 subtitle: RichText(
-      //                   text: new TextSpan(
-      //                     style: new TextStyle(
-      //                       fontSize: 25.0,
-      //                     ),
-      //                     children: <TextSpan>[
-      //                       new TextSpan(
-      //                         text: 'Phone Number: ',
-      //                         style: TextStyle(color: Colors.white),
-      //                       ),
-      //                       new TextSpan(
-      //                         text: '${patients['phone number']}',
-      //                         style: TextStyle(color: Colors.greenAccent),
-      //                       ),
-      //                     ],
-      //                   ),
-      //                 ),
-      //                 // subtitle: Text(
-      //                 //   'Phone Number: ' + '${patients['phone number']}',
-      //                 //   style: kFieldStyle,
-      //                 // ),
-      //                 children: [
-      //                   Padding(
-      //                     padding: EdgeInsets.only(
-      //                       left: 15.0,
-      //                     ),
-      //                     child: Align(
-      //                       alignment: Alignment.centerLeft,
-      //                       child: Column(
-      //                         children: [
-      //                           RichText(
-      //                             text: new TextSpan(
-      //                               style: new TextStyle(
-      //                                 fontSize: 25.0,
-      //                               ),
-      //                               children: <TextSpan>[
-      //                                 new TextSpan(
-      //                                   text: 'Address: ',
-      //                                   style: TextStyle(color: Colors.white),
-      //                                 ),
-      //                                 new TextSpan(
-      //                                   text: '${patients['address']}',
-      //                                   style: TextStyle(
-      //                                       color: Colors.greenAccent),
-      //                                 ),
-      //                               ],
-      //                             ),
-      //                           ),
-      //                           SizedBox(
-      //                             height: 5.0,
-      //                           ),
-      //                           RichText(
-      //                             text: new TextSpan(
-      //                               style: new TextStyle(
-      //                                 fontSize: 25.0,
-      //                               ),
-      //                               children: <TextSpan>[
-      //                                 new TextSpan(
-      //                                   text: 'First Visit: ',
-      //                                   style: TextStyle(color: Colors.white),
-      //                                 ),
-      //                                 new TextSpan(
-      //                                   text: '${patients['date']}',
-      //                                   style: TextStyle(
-      //                                       color: Colors.greenAccent),
-      //                                 ),
-      //                               ],
-      //                             ),
-      //                           ),
-      //                           // Text(
-      //                           //   'Address: ' + '${patients['address']}',
-      //                           //   style: kFieldStyle,
-      //                           // ),
-      //                         ],
-      //                       ),
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //               // Card(
-      //             ],
-      //           );
-      //         },
-      //       );
-      //     } else
-      //       return Container();
-      //   },
-      // ),
     );
   }
 }
@@ -212,76 +112,233 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       backgroundColor: Colors.black87,
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text(
           widget.post.data()['patient Name'],
           style: kFieldStyle,
         ),
       ),
-      body: Container(
-        child: Padding(
-          padding: EdgeInsets.only(left: 10.0),
-          child: Column(
-            children: [
-              Text(
-                widget.post.data()['patient Name'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['phone number'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['address'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['date'],
-                style: kFieldStyle,
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Text(
-                'Patient Report',
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['first visit'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['fee details'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['fee collected'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['flu symptoms'],
-                style: kFieldStyle,
-              ),
-              Text(
-                'Other',
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['other'] ?? 'not available',
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['other expenses'],
-                style: kFieldStyle,
-              ),
-              Text(
-                widget.post.data()['body temp'],
-                style: kFieldStyle,
-              ),
-              // RoundedButtonlogin(
-              //   onPressed: () {},
-              //   title: 'View Report',
-              // )
-            ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Card(
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Text(
+                            widget.post.data()['patient Name'],
+                            style: TextStyle(
+                              fontFamily: kFont,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Phone Number:- ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['phone number'],
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'address:- ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['address'],
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'date:- ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['date'],
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'body temp:- ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['body temp'] + ' degrees',
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Does the patient have flu symptoms? ',
+                                style: kBoldStyle,
+                              ),
+                              Text(
+                                widget.post.data()['flu symptoms'],
+                                style: kMyStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Is the patient visiting for the first time? ',
+                                style: kBoldStyle,
+                              ),
+                              Text(
+                                widget.post.data()['first visit'],
+                                style: kMyStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Fee details:- ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['fee details'],
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              'Fees collected:- ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['fee collected'],
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Expenses for surgery/medicines/\nrented equipment etc:- ',
+                                style: kBoldStyle,
+                              ),
+                              Text(
+                                widget.post.data()['other expenses'],
+                                style: kMyStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Others:- ',
+                                style: kBoldStyle,
+                              ),
+                              Text(
+                                widget.post.data()['other'] ?? 'not available',
+                                style: kMyStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Notes:- ',
+                                style: kBoldStyle,
+                              ),
+                              Text(
+                                widget.post.data()['notes'] ?? 'not available',
+                                style: kMyStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -290,8 +347,9 @@ class _DetailPageState extends State<DetailPage> {
 }
 
 const kFieldStyle = TextStyle(
-  fontFamily: 'PoiretOne',
+  fontFamily: kFont,
+  letterSpacing: 1.2,
   color: Colors.white,
   fontWeight: FontWeight.w600,
-  fontSize: 25.0,
+  fontSize: 28.0,
 );

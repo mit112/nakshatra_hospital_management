@@ -27,6 +27,19 @@ const kTextFieldDecoration = InputDecoration(
   ),
 );
 
+const kMyStyle = TextStyle(
+  fontFamily: kFont,
+  color: Colors.black,
+  //fontWeight: FontWeight.w600,
+  fontSize: 25.0,
+);
+const kBoldStyle = TextStyle(
+  fontFamily: kFont,
+  fontSize: 25.0,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+
 class RoundedButtonlogin extends StatelessWidget {
   RoundedButtonlogin({this.colour, this.title, @required this.onPressed});
   final Color colour;
