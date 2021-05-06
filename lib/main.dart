@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Nakshatra Hospital',
         theme: ThemeData(
-          primaryColor: Colors.white,
+
             appBarTheme: AppBarTheme(
           brightness: Brightness.dark,
         ),

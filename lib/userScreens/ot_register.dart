@@ -17,11 +17,9 @@ class _ot_registerState extends State<ot_register> {
   String _flu, _firstTime, _feeDetails, _otherExpenses, _feeAmount;
   String pName, pTemp, pNumber, pAddress;
   String _selectedDate;
+  String infecto;
 
-  bool value = false,
-      value2 = false,
-      value3 = false,
-      value4 = false,
+  bool value = false,value2 = false,value3 = false,value4 = false,
       value5 = false,
       value6 = false,
       value7 = false,
@@ -96,7 +94,7 @@ class _ot_registerState extends State<ot_register> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Nakshatra Hospital',
+          'Operation Theatre',
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               color: Colors.white,
@@ -116,18 +114,18 @@ class _ot_registerState extends State<ot_register> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20),
-                child: Text(
-                  'Operation Theatre',
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 20, top: 20),
+              //   child: Text(
+              //     '',
+              //     style: GoogleFonts.lato(
+              //       textStyle: TextStyle(
+              //         fontSize: 30.0,
+              //         fontWeight: FontWeight.w400,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 10,
               ),
@@ -193,7 +191,7 @@ class _ot_registerState extends State<ot_register> {
                               ),
                             ),
                             SizedBox(
-                              height: 5.0,
+                              height:30.0,
                             ),
                             Column(
                               children: [
@@ -203,11 +201,14 @@ class _ot_registerState extends State<ot_register> {
                                     Text(
                                       'OT-Disinfectant(s) used for manual cleaning?',
                                       style: TextStyle(
-                                        fontSize: 16.0,
+                                        fontSize: 17.0,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 5,
                                 ),
                                 CheckboxListTile(
                                   title: Text(
@@ -226,35 +227,38 @@ class _ot_registerState extends State<ot_register> {
                                   onChanged: (bool value) {
                                     setState(() {
                                       this.value3 = value;
+                                      if(value3==true){
+                                        infecto = "Infecto-Cide N 20 ml/1 ltr water";
+                                      }
                                     });
                                   },
-                                ),
-                                SizedBox(
-                                  height: 10.0,
-                                ),
-                                TextFormField(
-                                  validator: (val) {
-                                    return val.isNotEmpty ? null : "Enter text";
-                                  },
-                                  //
-                                  onChanged: (val) {
-                                    pName = val;
-                                    setState(() {});
-                                  },
-                                  keyboardType: TextInputType.name,
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    labelText: 'Others ',
-                                    labelStyle: TextStyle(
-                                      height: 1.2,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 18.0,
+                                  ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  child: TextFormField(
+                                    validator: (val) {
+                                      return val.isNotEmpty ? null : "Enter text";
+                                    },
+                                    //
+                                    onChanged: (val) {
+                                      pName = val;
+                                      setState(() {});
+                                    },
+                                    keyboardType: TextInputType.name,
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                      labelText: 'Others ',
+                                      labelStyle: TextStyle(
+                                        height: 1.2,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 18.0,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 30),
                             Column(
                               children: [
                                 Row(
@@ -263,12 +267,13 @@ class _ot_registerState extends State<ot_register> {
                                     Text(
                                       'OT area wiped clean',
                                       style: TextStyle(
-                                        fontSize: 16.0,
+                                        fontSize: 17.0,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ],
                                 ),
+                                SizedBox(height: 5),
                                 CheckboxListTile(
                                   title: Text('OPD Wall'),
                                   value: this.value5,

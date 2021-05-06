@@ -12,7 +12,6 @@ class PatientForm extends StatefulWidget {
 
 class _PatientFormState extends State<PatientForm> {
   final formKey = GlobalKey<FormState>();
-  final _fbKey = GlobalKey<FormState>();
 
   String _flu,
       _firstTime,
@@ -41,15 +40,39 @@ class _PatientFormState extends State<PatientForm> {
   //     collectionReference.doc(uid).collection('fee details');
 
   @override
+  void addData() async{
+    // print(_selectedDate);
+    if (formKey.currentState.validate()) {
+      await collectionReference.add({
+        'patient Name': pName,
+        'phone number': pNumber,
+        'date': _selectedDate,
+        'address': pAddress,
+        'fee details': _feeDetails,
+        'fee collected': _feeAmount,
+        'body temp': pTemp,
+        'flu symptoms': _flu,
+        'first visit': _firstTime,
+        'other expenses': _otherExpenses,
+        'other': _other,
+        'notes': _notes,
+      }).then((value) {
+        currentid = value.id;
+        print(value.id);
+      });
+      Navigator.pop(context);
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Nakshatra Hospital',
+          'Nakshatra-patient les & payments',
           style: GoogleFonts.poppins(
             textStyle: TextStyle(
               color: Colors.white,
-              fontSize: 20.0,
+              fontSize: 18.0,
               letterSpacing: 0.5,
               //fontWeight:FontWeight.normal,
             ),
@@ -65,18 +88,6 @@ class _PatientFormState extends State<PatientForm> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20),
-                child: Text(
-                  'Nakshatra-patient les & payments',
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ),
               SizedBox(
                 height: 10,
               ),
@@ -88,6 +99,9 @@ class _PatientFormState extends State<PatientForm> {
                     //crossAxisAlignment: CrossAxisAlignment.end,
                     //mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        height: 50.0,
+                      ),
                       DateTimePicker(
                         initialValue: '',
                         type: DateTimePickerType.date,
@@ -177,6 +191,9 @@ class _PatientFormState extends State<PatientForm> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       TextFormField(
                         validator: (val) {
                           return val.isNotEmpty ? null : "Enter address";
@@ -196,9 +213,6 @@ class _PatientFormState extends State<PatientForm> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 50.0,
-                      ),
                       Column(
                         children: [
                           Row(
@@ -207,7 +221,7 @@ class _PatientFormState extends State<PatientForm> {
                               Text(
                                 'Does the patient suffer from flu symptoms?',
                                 style: TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 17.0,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -252,7 +266,7 @@ class _PatientFormState extends State<PatientForm> {
                               Text(
                                 'Is the patient visiting for the first time?',
                                 style: TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 17.0,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -313,7 +327,7 @@ class _PatientFormState extends State<PatientForm> {
                               Text(
                                 'Fee details',
                                 style: TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 17.0,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -371,7 +385,7 @@ class _PatientFormState extends State<PatientForm> {
                               Text(
                                 'Fees collected in INR',
                                 style: TextStyle(
-                                  fontSize: 16.0,
+                                  fontSize: 17.0,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -460,146 +474,139 @@ class _PatientFormState extends State<PatientForm> {
                           ),
                         ],
                       ),
-
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Column(
+                      SizedBox(height: 15,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Expenses for surgery/medicines/rented \n equipment etc.',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'OCT machine',
-                                  groupValue: _otherExpenses,
-                                  onChanged: (val) {
-                                    _otherExpenses = val;
-                                    setState(() {});
-                                  }),
-                              Text('OCT machine'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'Perimeter',
-                                  groupValue: _otherExpenses,
-                                  onChanged: (val) {
-                                    _otherExpenses = val;
-                                    setState(() {});
-                                  }),
-                              Text('Perimeter'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'Medicine',
-                                  groupValue: _otherExpenses,
-                                  onChanged: (val) {
-                                    _otherExpenses = val;
-                                    setState(() {});
-                                  }),
-                              Text('Medicine'), //
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'External doctor',
-                                  groupValue: _otherExpenses,
-                                  onChanged: (val) {
-                                    _otherExpenses = val;
-                                    setState(() {});
-                                  }),
-                              Text('External doctor'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'Nurse',
-                                  groupValue: _otherExpenses,
-                                  onChanged: (val) {
-                                    _otherExpenses = val;
-                                    setState(() {});
-                                  }),
-                              Text('Nurse'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'Attendant',
-                                  groupValue: _otherExpenses,
-                                  onChanged: (val) {
-                                    _otherExpenses = val;
-                                    setState(() {});
-                                  }),
-                              Text('Attendant'),
-                            ],
-                          ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: TextFormField(
-                              onChanged: (val) {
-                                _other = val ?? ' ';
-                                setState(() {});
-                              },
-                              keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.done,
-                              decoration: InputDecoration(
-                                labelText: 'Others',
-                                labelStyle: TextStyle(
-                                  height: 1.2,
-                                  fontStyle: FontStyle.italic,
-                                  fontSize: 18.0,
-                                ),
-                              ),
+                          Text(
+                            'Expenses for surgery/medicines/rented \n equipment etc.',
+                            style: TextStyle(
+                              fontSize: 17.0,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ],
+                      ),
+                      SizedBox(height: 5,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Radio(
+                              value: 'OCT machine',
+                              groupValue: _otherExpenses,
+                              onChanged: (val) {
+                                _otherExpenses = val;
+                                setState(() {});
+                              }),
+                          Text('OCT machine'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Radio(
+                              value: 'Perimeter',
+                              groupValue: _otherExpenses,
+                              onChanged: (val) {
+                                _otherExpenses = val;
+                                setState(() {});
+                              }),
+                          Text('Perimeter'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Radio(
+                              value: 'Medicine',
+                              groupValue: _otherExpenses,
+                              onChanged: (val) {
+                                _otherExpenses = val;
+                                setState(() {});
+                              }),
+                          Text('Medicine'), //
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Radio(
+                              value: 'External doctor',
+                              groupValue: _otherExpenses,
+                              onChanged: (val) {
+                                _otherExpenses = val;
+                                setState(() {});
+                              }),
+                          Text('External doctor'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Radio(
+                              value: 'Nurse',
+                              groupValue: _otherExpenses,
+                              onChanged: (val) {
+                                _otherExpenses = val;
+                                setState(() {});
+                              }),
+                          Text('Nurse'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Radio(
+                              value: 'Attendant',
+                              groupValue: _otherExpenses,
+                              onChanged: (val) {
+                                _otherExpenses = val;
+                                setState(() {});
+                              }),
+                          Text('Attendant'),
+                        ],
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextFormField(
+                          onChanged: (val) {
+                            _other = val ?? ' ';
+                            setState(() {});
+                          },
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.done,
+                          decoration: InputDecoration(
+                            labelText: 'Others',
+                            labelStyle: TextStyle(
+                              height: 1.2,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 15.0,
                       ),
-                      Column(
-                        children: [
-                          TextFormField(
-                            onChanged: (val) {
-                              _notes = val ?? ' ';
-                              setState(() {});
-                            },
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.done,
-                            decoration: InputDecoration(
-                              labelText: 'Notes',
-                              labelStyle: TextStyle(
-                                height: 1.2,
-                                fontStyle: FontStyle.italic,
-                                fontSize: 18.0,
-                              ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                        child: TextFormField(
+                          onChanged: (val) {
+                            _notes = val ?? ' ';
+                            setState(() {});
+                          },
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.done,
+                          decoration: InputDecoration(
+                            labelText: 'Notes',
+                            labelStyle: TextStyle(
+                              height: 1.2,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 18.0,
                             ),
                           ),
-                        ],
+                        ),
                       ),
 
                       SizedBox(
@@ -619,30 +626,7 @@ class _PatientFormState extends State<PatientForm> {
                                     Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    // print(_selectedDate);
-
-                                    if (formKey.currentState.validate()) {
-                                      await collectionReference.add({
-                                        'patient Name': pName,
-                                        'phone number': pNumber,
-                                        'date': _selectedDate,
-                                        'address': pAddress,
-                                        'fee details': _feeDetails,
-                                        'fee collected': _feeAmount,
-                                        'body temp': pTemp,
-                                        'flu symptoms': _flu,
-                                        'first visit': _firstTime,
-                                        'other expenses': _otherExpenses,
-                                        'other': _other,
-                                        'notes': _notes,
-                                      }).then((value) {
-                                        currentid = value.id;
-                                        print(value.id);
-                                      });
-                                      Navigator.pop(context);
-                                    }
-                                  },
+                                  onTap: addData,
                                   child: Center(
                                     child: Text(
                                       'Submit',
@@ -662,35 +646,6 @@ class _PatientFormState extends State<PatientForm> {
                           ),
                         ],
                       ),
-                      // Container(
-                      //   child: ElevatedButton(
-                      //     child: Text('submit'),
-                      //     onPressed: () async {
-                      //       // print(_selectedDate);
-                      //
-                      //       if (formKey.currentState.validate()) {
-                      //         await collectionReference.add({
-                      //           'patient Name': pName,
-                      //           'phone number': pNumber,
-                      //           'date': _selectedDate,
-                      //           'address': pAddress,
-                      //           'fee details': _feeDetails,
-                      //           'fee collected': _feeAmount,
-                      //           'body temp': pTemp,
-                      //           'flu symptoms': _flu,
-                      //           'first visit': _firstTime,
-                      //           'other expenses': _otherExpenses,
-                      //           'other': _other,
-                      //           'notes': _notes,
-                      //         }).then((value) {
-                      //           currentid = value.id;
-                      //           print(value.id);
-                      //         });
-                      //         Navigator.pop(context);
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -703,12 +658,15 @@ class _PatientFormState extends State<PatientForm> {
   }
 }
 
+
 String currentid;
+
 // String reportid;
 // Future getPost() async {
 //   QuerySnapshot qn = await report.get();
 //   return qn.docs;
 // }
+
 String feedetails;
 String firstvisit;
 Future<void> getName() async {
@@ -717,4 +675,5 @@ Future<void> getName() async {
   feedetails = ds.data()['fee details'];
   firstvisit = ds.data()['first visit'];
   //hello world
+
 }
