@@ -225,65 +225,65 @@ class _HomepageState extends State<Homepage> {
             ],
           ),
         ),
-      drawer: Drawer(
-        elevation: 8.0,
-        child: ListView(
-          children: [
-            Container(
-              height: 170.0,
-              child: UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: NetworkImage(""),
-                  backgroundColor: Colors.blue[100],
-                ),
-                accountName: Text(
-                  'Nakshatra Hospital.',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 19.0,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                accountEmail: Text(
-                  'hello@ac.in',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 18.0,
-                  ),
-                ),
-              ),
-            ),
-            Divider(
-              color: Colors.grey[200],
-              thickness: 3,
-            ),
-            // FlatButton(
-            //   height: 50,
-            //   onPressed: () {},
-            //   child: Row(
-            //     children: [
-            //       Icon(
-            //         Icons.call,
-            //         color: Colors.black54,
-            //       ),
-            //       SizedBox(
-            //         width: 30,
-            //       ),
-            //       Text(
-            //         'history',
-            //         style: TextStyle(
-            //           color: Colors.black,
-            //           fontSize: 19.0,
-            //           fontWeight: FontWeight.w600,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // )
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      //   elevation: 8.0,
+      //   child: ListView(
+      //     children: [
+      //       Container(
+      //         height: 170.0,
+      //         child: UserAccountsDrawerHeader(
+      //           currentAccountPicture: CircleAvatar(
+      //             radius: 40.0,
+      //             backgroundImage: NetworkImage(""),
+      //             backgroundColor: Colors.blue[100],
+      //           ),
+      //           accountName: Text(
+      //             'Nakshatra Hospital.',
+      //             style: TextStyle(
+      //               color: Colors.black,
+      //               fontSize: 19.0,
+      //               fontWeight: FontWeight.w600,
+      //             ),
+      //           ),
+      //           accountEmail: Text(
+      //             'hello@ac.in',
+      //             style: TextStyle(
+      //               color: Colors.grey,
+      //               fontSize: 18.0,
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //       Divider(
+      //         color: Colors.grey[200],
+      //         thickness: 3,
+      //       ),
+      //       // FlatButton(
+      //       //   height: 50,
+      //       //   onPressed: () {},
+      //       //   child: Row(
+      //       //     children: [
+      //       //       Icon(
+      //       //         Icons.call,
+      //       //         color: Colors.black54,
+      //       //       ),
+      //       //       SizedBox(
+      //       //         width: 30,
+      //       //       ),
+      //       //       Text(
+      //       //         'history',
+      //       //         style: TextStyle(
+      //       //           color: Colors.black,
+      //       //           fontSize: 19.0,
+      //       //           fontWeight: FontWeight.w600,
+      //       //         ),
+      //       //       ),
+      //       //     ],
+      //       //   ),
+      //       // )
+      //     ],
+      //   ),
+      // ),
         floatingActionButton: FloatingActionButton(
           child: Icon(
             Icons.exit_to_app,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'patient_form.dart';
 
 class ViewPatients extends StatefulWidget {
   @override
@@ -16,6 +15,7 @@ class _ViewPatientsState extends State<ViewPatients> {
   String uid = auth.currentUser.uid.toString();
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
+
   Future getPosts() async {
     QuerySnapshot qn = await collectionReference.get();
     return qn.docs;
@@ -109,12 +109,17 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
+    print({widget.post.data()['patient Name']});
+        print( {widget.post.data()['other expenses']});
+
+
     return Scaffold(
       backgroundColor: Colors.black87,
       appBar: AppBar(
         backgroundColor: Colors.green,
         title: Text(
           widget.post.data()['patient Name'],
+
           style: kFieldStyle,
         ),
       ),
@@ -285,7 +290,8 @@ class _DetailPageState extends State<DetailPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Expenses for surgery/medicines/\nrented equipment etc:- ',
+                                'Expenses for surgery/medicines/\n'
+                                    'rented equipment etc:- ',
                                 style: kBoldStyle,
                               ),
                               Text(
