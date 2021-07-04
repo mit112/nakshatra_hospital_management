@@ -1121,7 +1121,7 @@ class _ot_registerState extends State<ot_register> {
                                       SizedBox(
                                         height: 10.0,
                                       ),
-                                      
+
                                       DateTimePicker(
                                         initialValue: '',
                                         type: DateTimePickerType.date,
@@ -1669,8 +1669,40 @@ class _ot_registerState extends State<ot_register> {
                                               ),
                                             ),
                                           ),
+                                          Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.symmetric(horizontal: 100.0),
+                                                child: Container(
+                                                  height: 40.0,
+                                                  child: Material(
+                                                    color: Colors.green,
+                                                    borderRadius: BorderRadius.circular(500.0),
+                                                    shadowColor:
+                                                    Colors.greenAccent.withOpacity(0.8),
+                                                    elevation: 5.0,
+                                                    child: Text(
+                                                      'Submit',
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 25.0,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
 
-                                          // Container(
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                            ],
+                                          ),
+
+
+
+              // Container(
                                           //   child: ElevatedButton(
                                           //     child: Text('submit'),
                                           //     onPressed: () async {
