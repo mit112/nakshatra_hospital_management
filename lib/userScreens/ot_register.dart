@@ -137,22 +137,28 @@ class _ot_registerState extends State<ot_register> {
                           //crossAxisAlignment: CrossAxisAlignment.end,
                           //mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            TextFormField(
-                              validator: (val) {
-                                return val.isNotEmpty ? null : "Enter Time";
+                            DateTimePicker(
+                              initialValue: '',
+                              type: DateTimePickerType.date,
+                              dateLabelText: 'OT-date of manual cleaning',
+                              firstDate: DateTime(1995),
+                              lastDate: DateTime.now()
+                                  .add(Duration(days: 365)),
+                              validator: (value) {
+                                return null;
                               },
-                              //
-
-                              keyboardType: TextInputType.name,
-                              textInputAction: TextInputAction.next,
-                              decoration: InputDecoration(
-                                labelText: 'OT-Date of manual cleaning ',
-                                labelStyle: TextStyle(
-                                  height: 1.2,
-                                  fontStyle: FontStyle.italic,
-                                  fontSize: 18.0,
-                                ),
-                              ),
+                              onChanged: (value) {
+                                if (value.isNotEmpty) {
+                                  setState(() {
+                                    _selectedDate = value;
+                                  });
+                                }
+                              },
+                              onSaved: (value) {
+                                if (value.isNotEmpty) {
+                                  _selectedDate = value;
+                                }
+                              },
                             ),
                             SizedBox(
                               height: 20.0,
@@ -1526,7 +1532,7 @@ class _ot_registerState extends State<ot_register> {
                                         SizedBox(
                                           height: 10.0,
                                         ),
-                                     
+
                                         DateTimePicker(
                                           initialValue: '',
                                           type: DateTimePickerType.date,
