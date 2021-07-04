@@ -1121,29 +1121,7 @@ class _ot_registerState extends State<ot_register> {
                                       SizedBox(
                                         height: 10.0,
                                       ),
-                                      TextFormField(
-                                        validator: (val) {
-                                          return val.isNotEmpty
-                                              ? null
-                                              : "Enter text";
-                                        },
-                                        //
-                                        onChanged: (val) {
-                                          pName = val;
-                                          setState(() {});
-                                        },
-                                        keyboardType: TextInputType.name,
-                                        textInputAction: TextInputAction.next,
-                                        decoration: InputDecoration(
-                                          labelText:
-                                              'Wash room fumigation date',
-                                          labelStyle: TextStyle(
-                                            height: 1.2,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 18.0,
-                                          ),
-                                        ),
-                                      ),
+                                      
                                       DateTimePicker(
                                         initialValue: '',
                                         type: DateTimePickerType.date,
