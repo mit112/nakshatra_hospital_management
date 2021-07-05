@@ -25,6 +25,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
       _other,
       _notes;
 
+  String dropdownValue = '90';
+
   String pName, pTemp, pAddress;
   String pNumber;
   String _selectedDate;
@@ -103,8 +105,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                 child: Form(
                   key: formKey,
                   child: Column(
-                    //crossAxisAlignment: CrossAxisAlignment.end,
-                    //mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
                         height: 50.0,
@@ -157,25 +158,37 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter Temp";
-                        },
-                        onChanged: (val) {
-                          pTemp = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          labelText: 'Patient body temp. in deg.C',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
+                      Text("Patient body temp. in deg.C",
+                        style: TextStyle(
+                         color: Colors.grey[700],
+                          fontSize: 18.0,
                         ),
                       ),
+                    DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: const Icon(Icons.arrow_drop_down_outlined),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
+                      fontSize: 18.0,),
+                    underline: Container(
+                    height: 2,
+                    color: Colors.grey,
+                    ),
+                    onChanged: (newValue) {
+                    setState(() {
+                    dropdownValue = newValue;
+                    });
+                    },
+                    items: <String>['90', '91', '92', '93','94', '95', '96', '97','98', '99', '100', '101','102', '103', '104', '105','106', '107', '108', '109','110']
+                        .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                    );
+                    }).toList(),
+                    ),
+
                       SizedBox(
                         height: 20.0,
                       ),
@@ -222,6 +235,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Column(
                         children: [
+                          SizedBox(
+                            height: 20.0,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -486,7 +502,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'Expenses for surgery/medicines/rented \n equipment etc.',
+                            'Expenses for surgery/medicines/rented \nequipment etc.',
                             style: TextStyle(
                               fontSize: 17.0,
                               fontWeight: FontWeight.w400,
@@ -594,10 +610,16 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 15.0,
+                        height: 18.0,
                       ),
+                      Text("Enter additional details:",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w400
+                        ),),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(
                           onChanged: (val) {
                             _notes = val ?? ' ';
