@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nakshatra_hospital_management/screens/patient_form.dart';
+import 'package:nakshatra_hospital_management/screens/patient_registration_form.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:nakshatra_hospital_management/screens/view_patients.dart';
-import 'package:nakshatra_hospital_management/userScreens/ot_register.dart';
+import 'package:nakshatra_hospital_management/screens/ot_register.dart';
 import 'package:provider/provider.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
@@ -105,7 +105,7 @@ class _HomepageState extends State<Homepage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                PatientForm()));
+                                                PatientRegistrationForm()));
                                   },
                                   child: Center(
                                     child: Text(
