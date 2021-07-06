@@ -16,6 +16,7 @@ class NewReportScreen extends StatefulWidget {
 
 class _NewReportScreenState extends State<NewReportScreen> {
   final formKey = GlobalKey<FormState>();
+  bool check = false;
 
   String _flu,
       _firstTime,
@@ -511,84 +512,81 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         ],
                       ),
                       SizedBox(height: 5,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'OCT machine',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('OCT machine'),
-                        ],
+                      CheckboxListTile(
+                        title:
+                        Text('OCT machine'),
+                        value: this.check,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.check = check;
+                          });
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Perimeter',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Perimeter'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Medicine',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Medicine'), //
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'External doctor',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('External doctor'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Nurse',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Nurse'),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Attendant',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Attendant'),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Radio(
+                      //         value: 'Perimeter',
+                      //         groupValue: _otherExpenses,
+                      //         onChanged: (val) {
+                      //           _otherExpenses = val;
+                      //           setState(() {});
+                      //         }),
+                      //     Text('Perimeter'),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Radio(
+                      //         value: 'Medicine',
+                      //         groupValue: _otherExpenses,
+                      //         onChanged: (val) {
+                      //           _otherExpenses = val;
+                      //           setState(() {});
+                      //         }),
+                      //     Text('Medicine'), //
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Radio(
+                      //         value: 'External doctor',
+                      //         groupValue: _otherExpenses,
+                      //         onChanged: (val) {
+                      //           _otherExpenses = val;
+                      //           setState(() {});
+                      //         }),
+                      //     Text('External doctor'),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Radio(
+                      //         value: 'Nurse',
+                      //         groupValue: _otherExpenses,
+                      //         onChanged: (val) {
+                      //           _otherExpenses = val;
+                      //           setState(() {});
+                      //         }),
+                      //     Text('Nurse'),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.start,
+                      //   children: [
+                      //     Radio(
+                      //         value: 'Attendant',
+                      //         groupValue: _otherExpenses,
+                      //         onChanged: (val) {
+                      //           _otherExpenses = val;
+                      //           setState(() {});
+                      //         }),
+                      //     Text('Attendant'),
+                      //   ],
+                      // ),
                       Padding(
                         padding:
                         const EdgeInsets.symmetric(horizontal: 20.0),

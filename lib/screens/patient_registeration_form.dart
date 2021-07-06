@@ -12,7 +12,6 @@ class PatientForm extends StatefulWidget {
 
 class _PatientFormState extends State<PatientForm> {
   final formKey = GlobalKey<FormState>();
-
   String _flu,
       _firstTime,
       _feeDetails,
