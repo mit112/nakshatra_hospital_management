@@ -522,6 +522,26 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           });
                         },
                       ),
+                      CheckboxListTile(
+                        title:
+                        Text('OCT machine'),
+                        value: this.check,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.check = check;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        title:
+                        Text('OCT machine'),
+                        value: this.check,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.check = check;
+                          });
+                        },
+                      ),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.start,
                       //   children: [
