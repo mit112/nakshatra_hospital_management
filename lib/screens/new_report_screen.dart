@@ -17,7 +17,9 @@ class NewReportScreen extends StatefulWidget {
 class _NewReportScreenState extends State<NewReportScreen> {
   final formKey = GlobalKey<FormState>();
   bool check = false;
-
+  bool value = false,value2 = false,value3 = false,value4 = false,
+      value5 = false,
+      value6 = false;
   String _flu,
       _firstTime,
       _feeDetails,
@@ -515,98 +517,64 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       CheckboxListTile(
                         title:
                         Text('OCT machine'),
-                        value: this.check,
-                        onChanged: (bool check) {
+                        value: this.value,
+                        onChanged: (bool value) {
                           setState(() {
-                            this.check = check;
+                            this.value = value;
                           });
                         },
                       ),
                       CheckboxListTile(
                         title:
-                        Text('OCT machine'),
-                        value: this.check,
-                        onChanged: (bool check) {
+                        Text('Perimeter'),
+                        value: this.value2,
+                        onChanged: (bool value) {
                           setState(() {
-                            this.check = check;
+                            this.value2 = value;
                           });
                         },
                       ),
                       CheckboxListTile(
                         title:
-                        Text('OCT machine'),
-                        value: this.check,
+                        Text('Medicine'),
+                        value: this.value3,
                         onChanged: (bool check) {
                           setState(() {
-                            this.check = check;
+                            this.value3 = check;
                           });
                         },
                       ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Radio(
-                      //         value: 'Perimeter',
-                      //         groupValue: _otherExpenses,
-                      //         onChanged: (val) {
-                      //           _otherExpenses = val;
-                      //           setState(() {});
-                      //         }),
-                      //     Text('Perimeter'),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Radio(
-                      //         value: 'Medicine',
-                      //         groupValue: _otherExpenses,
-                      //         onChanged: (val) {
-                      //           _otherExpenses = val;
-                      //           setState(() {});
-                      //         }),
-                      //     Text('Medicine'), //
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Radio(
-                      //         value: 'External doctor',
-                      //         groupValue: _otherExpenses,
-                      //         onChanged: (val) {
-                      //           _otherExpenses = val;
-                      //           setState(() {});
-                      //         }),
-                      //     Text('External doctor'),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Radio(
-                      //         value: 'Nurse',
-                      //         groupValue: _otherExpenses,
-                      //         onChanged: (val) {
-                      //           _otherExpenses = val;
-                      //           setState(() {});
-                      //         }),
-                      //     Text('Nurse'),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.start,
-                      //   children: [
-                      //     Radio(
-                      //         value: 'Attendant',
-                      //         groupValue: _otherExpenses,
-                      //         onChanged: (val) {
-                      //           _otherExpenses = val;
-                      //           setState(() {});
-                      //         }),
-                      //     Text('Attendant'),
-                      //   ],
-                      // ),
+                      CheckboxListTile(
+                        title:
+                        Text('External doctor'),
+                        value: this.value4,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.value4 = check;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        title:
+                        Text('Nurse'),
+                        value: this.value5,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.value5 = check;
+                          });
+                        },
+                      ),
+                      CheckboxListTile(
+                        title:
+                        Text('Attendant'),
+                        value: this.value6,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.value6 = check;
+                          });
+                        },
+                      ),
+
                       Padding(
                         padding:
                         const EdgeInsets.symmetric(horizontal: 20.0),
