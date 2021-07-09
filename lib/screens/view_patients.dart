@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'detail_page.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ViewPatients extends StatefulWidget {
   @override
@@ -61,35 +63,64 @@ class _ViewPatientsState extends State<ViewPatients> {
                 // ignore: missing_return
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      Card(
-                        elevation: 10.0,
-                        color: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15.0),
+                  return Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.3,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 20.0,
                         ),
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              ListTile(
-                                title: Text(
-                                  snapshot.data[index].data()["Name"],
-                                  style: kFieldStyle,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal:5 ),
+                          child: Card(
+                            elevation:4,
+                            shadowColor:Colors.black.withOpacity(0.8),
+                            color:Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                snapshot.data[index].data()["Name"],
+                                style:  GoogleFonts.inter(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
                                 ),
-                                onTap: () =>
-                                    navigateToDetail(snapshot.data[index]),
                               ),
-                            ],
+                              subtitle: Text(
+                               "25/05/2021",
+                                style:  GoogleFonts.inter(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              onTap: () =>
+                                  navigateToDetail(snapshot.data[index]),
+                              leading:  Icon(
+                                Icons.format_list_numbered,
+                                color: Colors.blueGrey,
+                              )
+                            ),
                           ),
                         ),
+                      ],
+                    ),
+                    secondaryActions: [
+                      IconSlideAction(
+                        caption: "Edit",
+                        color: Colors.green,
+                        icon: Icons.edit,
+                        onTap: (){},
                       ),
+                      IconSlideAction(
+                        caption: "Delete",
+                        color: Colors.green,
+                        icon: Icons.edit,
+                        onTap: (){},
+                      )
                     ],
                   );
                 });
@@ -102,10 +133,9 @@ class _ViewPatientsState extends State<ViewPatients> {
 
 
 
-const kFieldStyle = TextStyle(
-  fontFamily: kFont,
+ const kFieldStyle = TextStyle(
   letterSpacing: 1.2,
-  color: Colors.white,
-  fontWeight: FontWeight.w600,
-  fontSize: 28.0,
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+  fontSize: 18.0,
 );
