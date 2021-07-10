@@ -132,6 +132,7 @@ class _DetailPageState extends State<DetailPage> {
                         BouncingWidget(
                           scaleFactor: _scaleFactor,
                           stayOnBottom: stayOnBottom,
+                          onPressed: () {  },
                           child: Column(
                             children: [
                               Padding(
@@ -177,6 +178,7 @@ class _DetailPageState extends State<DetailPage> {
                         BouncingWidget(
                           scaleFactor: _scaleFactor,
                           stayOnBottom: stayOnBottom,
+                          onPressed: () {  },
                           child: Column(
                             children: [
                               Padding(

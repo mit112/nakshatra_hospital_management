@@ -222,6 +222,7 @@ class _HomepageState extends State<Homepage> {
                     BouncingWidget(
                       scaleFactor: _scaleFactor,
                       stayOnBottom: stayOnBottom,
+                      onPressed: () {  },
                       child: Column(
                         children: [
                           Padding(
@@ -267,6 +268,7 @@ class _HomepageState extends State<Homepage> {
                     BouncingWidget(
                       scaleFactor: _scaleFactor,
                       stayOnBottom: stayOnBottom,
+                      onPressed: () {  },
                       child: Column(
                         children: [
                           Padding(
@@ -313,6 +315,7 @@ class _HomepageState extends State<Homepage> {
                     BouncingWidget(
                       scaleFactor: _scaleFactor,
                       stayOnBottom: stayOnBottom,
+                      onPressed: () {  },
                       child: Column(
                         children: [
                           Padding(

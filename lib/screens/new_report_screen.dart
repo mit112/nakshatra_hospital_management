@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 
@@ -20,24 +19,16 @@ class _NewReportScreenState extends State<NewReportScreen> {
   bool value = false,value2 = false,value3 = false,value4 = false,
       value5 = false,
       value6 = false;
-  String _flu,
-      _firstTime,
-      _feeDetails,
-      _otherExpenses,
-      _feeAmount,
-      _other,
-      _notes;
-
-  String dropdownValue = '90';
-
-  String pName, pTemp, pAddress;
-  String pNumber;
-  String _selectedDate;
+  String flu,
+      feeDetails,
+      otherExpenses,
+      feeAmount,
+      other,
+      notes;
+  String pTemp = '90';
+  String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
-  String currentid;
-  String reportid;
-
 
 
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
@@ -48,34 +39,38 @@ class _NewReportScreenState extends State<NewReportScreen> {
   // CollectionReference get feedetails =>
   //     collectionReference.doc(uid).collection('fee details');
 
-  @override
+
   void addData() async{
-    // print(_selectedDate);
-    CollectionReference collectionReference =
-    FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
+
 
     if (formKey.currentState.validate()) {
-      await collectionReference.add({
-        'patient Name': pName,
-        'phone number': pNumber,
-        'date': _selectedDate,
-        'address': pAddress,
-        'fee details': _feeDetails,
-        'fee collected': _feeAmount,
+      CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('patients');
+
+      await collectionReference.doc(widget.post.data()['PatientId']).update({
+          'Visits': widget.post.data()['Visits'] + 1,
+      });
+      collectionReference =
+          FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
+      String docName;
+
+      docName = 'ReportNo${widget.post.data()['Visits'] + 1}';
+      await collectionReference.doc(docName).set({
+        'report id': docName,
+        'date': selectedDate,
+        'fee details': feeDetails,
+        'fee collected': feeAmount,
         'body temp': pTemp,
-        'flu symptoms': _flu,
-        'first visit': _firstTime,
-        'other expenses': _otherExpenses,
-        'other': _other,
-        'notes': _notes,
-      }).then((value) {
-        currentid = value.id;
-        print(value.id);
+        'flu symptoms': flu,
+        'other expenses': otherExpenses,
+        'other': other,
+        'notes': notes,
       });
       Navigator.pop(context);
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -125,38 +120,15 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         onChanged: (value) {
                           if (value.isNotEmpty) {
                             setState(() {
-                              _selectedDate = value;
+                              selectedDate = value;
                             });
                           }
                         },
                         onSaved: (value) {
                           if (value.isNotEmpty) {
-                            _selectedDate = value;
+                            selectedDate = value;
                           }
                         },
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter name";
-                        },
-                        //
-                        onChanged: (val) {
-                          pName = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          labelText: 'Patient name ',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
-                        ),
                       ),
                       SizedBox(
                         height: 20.0,
@@ -168,7 +140,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         ),
                       ),
                     DropdownButton<String>(
-                    value: dropdownValue,
+                    value: pTemp,
                     icon: const Icon(Icons.arrow_drop_down_outlined),
                     iconSize: 24,
                     elevation: 16,
@@ -180,10 +152,12 @@ class _NewReportScreenState extends State<NewReportScreen> {
                     ),
                     onChanged: (newValue) {
                     setState(() {
-                    dropdownValue = newValue;
+                    pTemp = newValue;
                     });
                     },
-                    items: <String>['90', '91', '92', '93','94', '95', '96', '97','98', '99', '100', '101','102', '103', '104', '105','106', '107', '108', '109','110']
+                    items: <String>['90', '91', '92', '93','94', '95', '96',
+                      '97','98', '99', '100', '101','102', '103', '104', '105',
+                      '106', '107', '108', '109','110']
                         .map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                     value: value,
@@ -194,47 +168,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
 
                       SizedBox(
                         height: 20.0,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter number";
-                        },
-                        onChanged: (val) {
-                          pNumber = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          labelText: 'Phone number',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter address";
-                        },
-                        onChanged: (val) {
-                          pAddress = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.streetAddress,
-                        textInputAction: TextInputAction.newline,
-                        decoration: InputDecoration(
-                          labelText: 'Address',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
-                        ),
                       ),
                       Column(
                         children: [
@@ -258,9 +191,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'no',
-                                  groupValue: _flu,
+                                  groupValue: flu,
                                   onChanged: (val) {
-                                    _flu = val;
+                                    flu = val;
                                     setState(() {});
                                   }),
                               Text('No'),
@@ -271,9 +204,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'yes',
-                                  groupValue: _flu,
+                                  groupValue: flu,
                                   onChanged: (val) {
-                                    _flu = val;
+                                    flu = val;
                                     setState(() {});
                                   }),
                               Text('Yes'),
@@ -284,67 +217,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 15,
                       ),
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Is the patient visiting for the first time?',
-                                style: TextStyle(
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'Yes',
-                                  groupValue: _firstTime,
-                                  onChanged: (val) {
-                                    _firstTime = val;
-                                    setState(() {});
-                                  }),
-                              Text('Yes'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value:
-                                  'No, this is follow-up within one week of initial visit',
-                                  groupValue: _firstTime,
-                                  onChanged: (val) {
-                                    _firstTime = val;
-                                    setState(() {});
-                                  }),
-                              Text('No, this is followup within one '
-                                  'week'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value:
-                                  'No, but last visit was few weeks back',
-                                  groupValue: _firstTime,
-                                  onChanged: (val) {
-                                    _firstTime = val;
-                                    setState(() {});
-                                  }),
-                              Text('No, but last visit was few weeks back'),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
+
                       Column(
                         children: [
                           Row(
@@ -364,9 +237,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'Paid online',
-                                  groupValue: _feeDetails,
+                                  groupValue: feeDetails,
                                   onChanged: (val) {
-                                    _feeDetails = val;
+                                    feeDetails = val;
                                     setState(() {});
                                   }),
                               Text('Paid online'),
@@ -377,9 +250,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'Paid in cash',
-                                  groupValue: _feeDetails,
+                                  groupValue: feeDetails,
                                   onChanged: (val) {
-                                    _feeDetails = val;
+                                    feeDetails = val;
                                     setState(() {});
                                   }),
                               Text('Paid in cash'),
@@ -390,9 +263,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'Not charged',
-                                  groupValue: _feeDetails,
+                                  groupValue: feeDetails,
                                   onChanged: (val) {
-                                    _feeDetails = val;
+                                    feeDetails = val;
                                     setState(() {});
                                   }),
                               Text('Not charged'),
@@ -422,9 +295,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '600',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('600'),
@@ -435,9 +308,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '500',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('500'),
@@ -448,9 +321,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '400',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('400'), //
@@ -461,9 +334,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '300',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('300'),
@@ -474,9 +347,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'no',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('200'),
@@ -580,7 +453,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           onChanged: (val) {
-                            _other = val ?? ' ';
+                            other = val ?? ' ';
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
@@ -608,7 +481,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(
                           onChanged: (val) {
-                            _notes = val ?? ' ';
+                            notes = val ?? ' ';
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
