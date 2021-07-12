@@ -388,6 +388,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       SizedBox(height: 5,),
                       CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('OCT machine'),
                         value: this.value,
@@ -398,7 +399,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
-                        title:
+                          controlAffinity: ListTileControlAffinity.leading,
+                          title:
                         Text('Perimeter'),
                         value: this.value2,
                         onChanged: (bool value) {
@@ -408,7 +410,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
-                        title:
+                          controlAffinity: ListTileControlAffinity.leading,
+                          title:
                         Text('Medicine'),
                         value: this.value3,
                         onChanged: (bool check) {
@@ -418,7 +421,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
-                        title:
+                          controlAffinity: ListTileControlAffinity.leading,
+                          title:
                         Text('External doctor'),
                         value: this.value4,
                         onChanged: (bool check) {
@@ -428,6 +432,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('Nurse'),
                         value: this.value5,
@@ -438,6 +443,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('Attendant'),
                         value: this.value6,
