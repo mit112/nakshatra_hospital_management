@@ -23,18 +23,18 @@ class _ViewReportsState extends State<ViewReports> {
     return qn.docs;
   }
 
-  navigateToReportDetail(DocumentSnapshot post) {
+  navigateToReportDetail(String patientId, DocumentSnapshot post) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ReportDetailScreen(
+              patientId: patientId,
               post: post,
             )));
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     collectionReference = FirebaseFirestore.instance.collection('patients')
         .doc(widget.post.data()['PatientId'])
         .collection('reports');
@@ -92,11 +92,13 @@ class _ViewReportsState extends State<ViewReports> {
                               fontSize: 18,
                             ),
                           ),
-                          onTap: () {
-
-                          },
+                          onTap: () => navigateToReportDetail(widget.post.data()['PatientId'], snapshot.data[index]),
+                          leading:  Icon(
+                            Icons.format_list_numbered,
+                            color: Colors.blueGrey,
                         ),
                         )
+                      )
                       )
                     ],
                   ),
