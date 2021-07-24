@@ -25,7 +25,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
       feeAmount,
       other,
       notes;
-  String pTemp = '90';
+  String pTemp = 'Choose your temp';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
@@ -95,9 +95,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 10,
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
@@ -106,69 +103,80 @@ class _NewReportScreenState extends State<NewReportScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
-                        height: 50.0,
+                        height: 30.0,
                       ),
-                      DateTimePicker(
-                        initialValue: '',
-                        type: DateTimePickerType.date,
-                        dateLabelText: 'Select Date',
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now().add(Duration(days: 365)),
-                        validator: (value) {
-                          return null;
-                        },
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            setState(() {
+                      Text("Date of visit",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: DateTimePicker(
+                          initialValue: '',
+                          type: DateTimePickerType.date,
+                          dateLabelText: 'Select Date',
+                          
+                          firstDate: DateTime(1995),
+                          lastDate: DateTime.now().add(Duration(days: 365)),
+                          validator: (value) {
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              setState(() {
+                                selectedDate = value;
+                              });
+                            }
+                          },
+                          onSaved: (value) {
+                            if (value.isNotEmpty) {
                               selectedDate = value;
-                            });
-                          }
-                        },
-                        onSaved: (value) {
-                          if (value.isNotEmpty) {
-                            selectedDate = value;
-                          }
-                        },
+                            }
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
                       Text("Patient body temp. in deg.C",
                         style: TextStyle(
-                         color: Colors.grey[700],
+                         color: Colors.black,
                           fontSize: 18.0,
                         ),
                       ),
-                    DropdownButton<String>(
-                    value: pTemp,
-                    icon: const Icon(Icons.arrow_drop_down_outlined),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
-                      fontSize: 18.0,),
-                    underline: Container(
-                    height: 2,
-                    color: Colors.grey,
-                    ),
-                    onChanged: (newValue) {
-                    setState(() {
-                    pTemp = newValue;
-                    });
-                    },
-                    items: <String>['90', '91', '92', '93','94', '95', '96',
-                      '97','98', '99', '100', '101','102', '103', '104', '105',
-                      '106', '107', '108', '109','110']
-                        .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                    );
-                    }).toList(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: DropdownButton<String>(
+                      value: pTemp,
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
+                        fontSize: 18.0,),
+                      underline: Container(
+                      height: 2,
+                      color: Colors.grey,
+                      ),
+                      onChanged: (newValue) {
+                      setState(() {
+                      pTemp = newValue;
+                      });
+                      },
+                      items: <String>['Choose your temp','90', '91', '92', '93','94', '95', '96',
+                        '97','98', '99', '100', '101','102', '103', '104', '105',
+                        '106', '107', '108', '109','110']
+                          .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                      );
+                      }).toList(),
+                      ),
                     ),
 
-                      SizedBox(
-                        height: 20.0,
-                      ),
+
                       Column(
                         children: [
                           SizedBox(
@@ -479,9 +487,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Text("Enter additional details:",
                         style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w400
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w400,
                         ),),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
