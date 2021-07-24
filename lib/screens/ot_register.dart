@@ -214,7 +214,7 @@ class _ot_registerState extends State<ot_register> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 5,
+                                  height: 15,
                                 ),
                                 CheckboxListTile(
                                   title: Text(
@@ -368,6 +368,7 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ],
                             ),
+                            SizedBox(height: 25),
                             Column(
                               children: [
                                 Row(
@@ -437,7 +438,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 10.0,
+                                  height: 20.0,
                                 ),
                                 TextFormField(
                                   validator: (val) {
@@ -461,7 +462,7 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 30),
                             Column(children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -655,7 +656,7 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10.0,
+                                height: 30.0,
                               ),
                               Column(children: [
                                 Row(
@@ -706,7 +707,7 @@ class _ot_registerState extends State<ot_register> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 10.0,
+                                  height: 30.0,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -786,7 +787,7 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: 30),
                                 Column(children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -843,7 +844,7 @@ class _ot_registerState extends State<ot_register> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  SizedBox(height: 30),
                                   Column(children: [
                                     Row(
                                       mainAxisAlignment:
@@ -1006,7 +1007,7 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 5),
+                                    SizedBox(height: 30),
                                     Column(children: [
                                       Row(
                                         mainAxisAlignment:
@@ -1295,7 +1296,7 @@ class _ot_registerState extends State<ot_register> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 10.0,
+                                        height: 30.0,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -1362,7 +1363,7 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      SizedBox(height: 30),
                                       Column(children: [
                                         Row(
                                           mainAxisAlignment:
@@ -1556,7 +1557,7 @@ class _ot_registerState extends State<ot_register> {
                                             }
                                           },
                                         ),
-                                        SizedBox(height: 5),
+                                        SizedBox(height: 30),
                                         Column(children: [
                                           Row(
                                             mainAxisAlignment:
