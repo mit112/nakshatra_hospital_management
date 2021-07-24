@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 
@@ -14,7 +13,7 @@ class _AuthenticateState extends State<Authenticate> {
   String email;
   String password;
   bool loading = false;
-  @override
+
   void login() async{
     var connectivityResult = await Connectivity()
         .checkConnectivity(); // User defined class
@@ -37,6 +36,8 @@ class _AuthenticateState extends State<Authenticate> {
       }
     }
   }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,

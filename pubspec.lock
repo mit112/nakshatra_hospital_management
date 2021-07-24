@@ -7,7 +7,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.1"
+    version: "2.5.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -148,6 +148,41 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.0"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.7"
+  firebase:
+    dependency: transitive
+    description:
+      name: firebase
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.3.3"
+  firebase_analytics:
+    dependency: "direct main"
+    description:
+      name: firebase_analytics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "6.3.0"
+  firebase_analytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_analytics_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
+  firebase_analytics_web:
+    dependency: transitive
+    description:
+      name: firebase_analytics_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -190,6 +225,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1+1"
+  firebase_storage:
+    dependency: "direct main"
+    description:
+      name: firebase_storage
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.2.0"
+  firebase_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_storage_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  firebase_storage_web:
+    dependency: transitive
+    description:
+      name: firebase_storage_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1+1"
   firebase_user_stream:
     dependency: "direct main"
     description:
@@ -202,6 +258,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -275,6 +338,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  open_file:
+    dependency: "direct main"
+    description:
+      name: open_file
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.2.1"
   path:
     dependency: transitive
     description:
@@ -433,7 +503,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.1"
+    version: "1.8.0"
   stack_trace:
     dependency: transitive
     description:
@@ -468,7 +538,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.2.19"
   typed_data:
     dependency: transitive
     description:

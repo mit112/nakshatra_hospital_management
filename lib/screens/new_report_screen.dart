@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class NewReportScreen extends StatefulWidget {
 
@@ -29,7 +33,33 @@ class _NewReportScreenState extends State<NewReportScreen> {
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
+  File file;
 
+  Future<void> uploadFile() async {
+    try {
+
+      await firebase_storage.FirebaseStorage.instance
+      .ref('images'
+          '/${widget.post.data()['PatientId']}'
+          '/ReportNo${widget.post.data()['Visits'] + 1}')
+      .putFile(file);
+      print('Upload Successful');
+    } catch (e) {
+      print(e);
+    }
+  }
+  Future<void> selectFile() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+    );
+
+    if(result != null) {
+      file = File(result.files.single.path);
+    } else {
+      // User canceled the picker
+    }
+  }
 
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
   // CollectionReference get personaldetails =>
@@ -66,6 +96,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
         'other': other,
         'notes': notes,
       });
+      uploadFile();
       Navigator.pop(context);
     }
   }
@@ -509,7 +540,43 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                         ),
                       ),
-
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
+                              child: Material(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor:
+                                Colors.greenAccent.withOpacity(0.8),
+                                elevation: 7.0,
+                                child: GestureDetector(
+                                  onTap: selectFile,
+                                  child: Center(
+                                    child: Text(
+                                      'Select File',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 20,
                       ),
