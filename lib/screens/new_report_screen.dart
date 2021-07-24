@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class NewReportScreen extends StatefulWidget {
 
@@ -29,7 +33,20 @@ class _NewReportScreenState extends State<NewReportScreen> {
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
+  File file;
 
+  Future<String> uploadFile() async {
+    try {
+
+      await firebase_storage.FirebaseStorage.instance
+      .ref('images'
+          '/${widget.post.data()['PatientId']}'
+          '/ReportNo${widget.post.data()['Visits'] + 1}')
+      .putFile(file);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
   // CollectionReference get personaldetails =>
@@ -66,6 +83,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
         'other': other,
         'notes': notes,
       });
+      uploadFile();
       Navigator.pop(context);
     }
   }
@@ -502,7 +520,60 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
+                              child: Material(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor:
+                                Colors.greenAccent.withOpacity(0.8),
+                                elevation: 7.0,
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    FilePickerResult result = await FilePicker.platform.pickFiles(
+                                      type: FileType.custom,
+                                      allowedExtensions: ['jpg', 'pdf', 'doc'],
+                                    );
 
+                                    if(result != null) {
+                                      PlatformFile file2 = result.files.first;
+                                      print(file2.name);
+                                      print(file2.bytes);
+                                      print(file2.size);
+                                      print(file2.extension);
+                                      print(file2.path);
+                                      file = File(result.files.single.path);
+                                    } else {
+                                      // User canceled the picker
+                                    }
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'Upload File',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 20,
                       ),
