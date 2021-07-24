@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'detail_page.dart';
+import 'patient_detail_screen.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ViewPatients extends StatefulWidget {
@@ -24,11 +24,11 @@ class _ViewPatientsState extends State<ViewPatients> {
     return qn.docs;
   }
 
-  navigateToDetail(DocumentSnapshot post) {
+  navigateToPatientDetail(DocumentSnapshot post) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => DetailPage(
+            builder: (context) => PatientDetailScreen(
                   post: post,
                 )));
   }
@@ -98,7 +98,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                                 ),
                               ),
                               onTap: () =>
-                                  navigateToDetail(snapshot.data[index]),
+                                  navigateToPatientDetail(snapshot.data[index]),
                               leading:  Icon(
                                 Icons.format_list_numbered,
                                 color: Colors.blueGrey,

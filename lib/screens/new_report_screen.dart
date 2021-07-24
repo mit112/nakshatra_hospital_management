@@ -35,7 +35,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
   String uid = auth.currentUser.uid.toString();
   File file;
 
-  Future<String> uploadFile() async {
+  Future<void> uploadFile() async {
     try {
 
       await firebase_storage.FirebaseStorage.instance
@@ -43,8 +43,21 @@ class _NewReportScreenState extends State<NewReportScreen> {
           '/${widget.post.data()['PatientId']}'
           '/ReportNo${widget.post.data()['Visits'] + 1}')
       .putFile(file);
+      print('Upload Successful');
     } catch (e) {
       print(e);
+    }
+  }
+  Future<void> selectFile() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+    );
+
+    if(result != null) {
+      file = File(result.files.single.path);
+    } else {
+      // User canceled the picker
     }
   }
 
@@ -537,27 +550,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                                 Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
                                 child: GestureDetector(
-                                  onTap: () async {
-                                    FilePickerResult result = await FilePicker.platform.pickFiles(
-                                      type: FileType.custom,
-                                      allowedExtensions: ['jpg', 'pdf', 'doc'],
-                                    );
-
-                                    if(result != null) {
-                                      PlatformFile file2 = result.files.first;
-                                      print(file2.name);
-                                      print(file2.bytes);
-                                      print(file2.size);
-                                      print(file2.extension);
-                                      print(file2.path);
-                                      file = File(result.files.single.path);
-                                    } else {
-                                      // User canceled the picker
-                                    }
-                                  },
+                                  onTap: selectFile,
                                   child: Center(
                                     child: Text(
-                                      'Upload File',
+                                      'Select File',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16.0,

@@ -7,12 +7,12 @@ import 'package:nakshatra_hospital_management/screens/view_patients.dart';
 import 'package:nakshatra_hospital_management/screens/ot_register.dart';
 import 'package:provider/provider.dart';
 
-class Search_Patients extends StatefulWidget {
+class SearchPatients extends StatefulWidget {
   @override
-  _Search_PatientsState createState() => _Search_PatientsState();
+  _SearchPatientsState createState() => _SearchPatientsState();
 }
 
-class _Search_PatientsState extends State<Search_Patients> {
+class _SearchPatientsState extends State<SearchPatients> {
   List name;
   Map<String, dynamic> patientMap;
 
