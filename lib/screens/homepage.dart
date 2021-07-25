@@ -191,6 +191,20 @@ class _HomepageState extends State<Homepage> {
 
             child: Column(
               children: [
+                SizedBox(
+                  height: 20,
+                ),
+                //image code
+                Container(
+                  height: 250,
+                  width: 250,
+                  decoration:BoxDecoration(
+                    image: new DecorationImage(
+                      image: new AssetImage("assets/homepagelogo.jpeg"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
                 Stack(
                   children: <Widget>[
                     Container(
@@ -229,12 +243,7 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-            // child:
-            // Image.asset(
-            //   'assets/homepagelogo.jpeg',
-            //   height: 200,
-            //   color: Colors.black.withOpacity(0.80),
-            // )
+
 
                 SizedBox(
                   height: 60,
