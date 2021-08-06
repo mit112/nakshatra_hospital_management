@@ -24,7 +24,7 @@ class _SearchPatientsState extends State<SearchPatients> {
     });
     await _firestore
         .collection('patients')
-        .where("Name", isEqualTo: searchController.text)
+        .where('Name', isGreaterThanOrEqualTo: searchController.text)
         .get()
         .then((value) {
       setState(() {
@@ -32,11 +32,26 @@ class _SearchPatientsState extends State<SearchPatients> {
         isLoading = false;
       });
       print('*********************************');
-      print(name);
+      print(patientMap);
       print('*********************************');
       print('*********************************');
     });
   }
+  //
+  // searchUser() async {
+  //   return await FirebaseFirestore.instance
+  //       .collection("users")
+  //       .where('Name', isEqualTo: searchController.text)
+  //       .get()
+  //       .then((value) {
+  //     setState(() {
+  //       print('*********************************');
+  //       print('*********************************');
+  //       print(value);
+  //       Name = value;
+  //     });
+  //   });
+  // }
 
   final TextEditingController searchController = TextEditingController();
   @override
@@ -96,6 +111,20 @@ class _SearchPatientsState extends State<SearchPatients> {
                       style: kFieldStyle,
                     ),
                   ),
+                  patientMap != null
+                      ? ListTile(
+                          leading: Icon(Icons.account_box, color: Colors.black),
+                          title: Text(
+                            patientMap['Name'],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          subtitle: Text(patientMap['Address']),
+                        )
+                      : Container(),
                 ],
               ),
             ),
