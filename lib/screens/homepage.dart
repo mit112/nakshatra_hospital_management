@@ -49,9 +49,12 @@ class _HomepageState extends State<Homepage> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.green,
               ),
               child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
                 // currentAccountPicture: CircleAvatar(
                 //   radius: 40.0,
                 //   backgroundImage: NetworkImage(""),
