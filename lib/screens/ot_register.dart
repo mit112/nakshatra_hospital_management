@@ -213,7 +213,7 @@ class _ot_registerState extends State<ot_register> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 5,
+                                  height: 15,
                                 ),
                                 CheckboxListTile(
                                   title: Text(
@@ -367,6 +367,7 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ],
                             ),
+                            SizedBox(height: 25),
                             Column(
                               children: [
                                 Row(
@@ -436,7 +437,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: 10.0,
+                                  height: 20.0,
                                 ),
                                 TextFormField(
                                   validator: (val) {
@@ -460,7 +461,7 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 30),
                             Column(children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -654,7 +655,7 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10.0,
+                                height: 30.0,
                               ),
                               Column(children: [
                                 Row(
@@ -705,7 +706,7 @@ class _ot_registerState extends State<ot_register> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: 10.0,
+                                  height: 30.0,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -785,7 +786,7 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                SizedBox(height: 30),
                                 Column(children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -842,7 +843,7 @@ class _ot_registerState extends State<ot_register> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  SizedBox(height: 30),
                                   Column(children: [
                                     Row(
                                       mainAxisAlignment:
@@ -1005,7 +1006,7 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 5),
+                                    SizedBox(height: 30),
                                     Column(children: [
                                       Row(
                                         mainAxisAlignment:
@@ -1294,7 +1295,7 @@ class _ot_registerState extends State<ot_register> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: 10.0,
+                                        height: 30.0,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -1361,7 +1362,7 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 5),
+                                      SizedBox(height: 30),
                                       Column(children: [
                                         Row(
                                           mainAxisAlignment:
@@ -1555,7 +1556,7 @@ class _ot_registerState extends State<ot_register> {
                                             }
                                           },
                                         ),
-                                        SizedBox(height: 5),
+                                        SizedBox(height: 30),
                                         Column(children: [
                                           Row(
                                             mainAxisAlignment:
@@ -1632,6 +1633,9 @@ class _ot_registerState extends State<ot_register> {
                                               ),
                                             ),
                                           ),
+                                          SizedBox(
+                                            height: 31.0,
+                                          ),
                                           Column(
                                             children: [
                                               Padding(
@@ -1641,16 +1645,18 @@ class _ot_registerState extends State<ot_register> {
                                                   height: 40.0,
                                                   child: Material(
                                                     color: Colors.green,
-                                                    borderRadius: BorderRadius.circular(500.0),
+                                                    borderRadius: BorderRadius.circular(20.0),
                                                     shadowColor:
                                                     Colors.greenAccent.withOpacity(0.8),
                                                     elevation: 5.0,
-                                                    child: Text(
-                                                      'Submit',
-                                                      style: TextStyle(
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 25.0,
-                                                        color: Colors.black,
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Submit',
+                                                        style: TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 15.0,
+                                                          color: Colors.white,
+                                                        ),
                                                       ),
                                                     ),
 
@@ -1658,7 +1664,7 @@ class _ot_registerState extends State<ot_register> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: 25,
+                                                height: 30,
                                               ),
                                             ],
                                           ),
