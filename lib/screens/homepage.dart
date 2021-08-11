@@ -49,12 +49,9 @@ class _HomepageState extends State<Homepage> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.blue,
               ),
               child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                ),
                 // currentAccountPicture: CircleAvatar(
                 //   radius: 40.0,
                 //   backgroundImage: NetworkImage(""),
@@ -81,25 +78,27 @@ class _HomepageState extends State<Homepage> {
               color: Colors.grey[200],
               thickness: 3,
             ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.format_align_center,
-                    color: Colors.black54,
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  InkWell(
-                    splashColor: Colors.blue[100],
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PatientRegistrationForm()));
-                    },
-                    child: Text(
+            Container(
+              height:50,
+              child: ElevatedButton(
+                onPressed:() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PatientRegistrationForm()
+                      )
+                  );
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.format_align_center,
+                      color: Colors.black54,
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
                       'Patient Form',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
@@ -108,29 +107,39 @@ class _HomepageState extends State<Homepage> {
                         color: Colors.black,
                       ),
                     ),
+                  ],
+                ),
+                style:ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation:3,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)
                   ),
-                ],
+                ),
               ),
             ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.format_align_center,
-                    color: Colors.black54,
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  InkWell(
-                    splashColor: Colors.blue[100],
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ot_register()));
-                    },
-                    child: Text(
+            SizedBox(height: 10,),
+            Container(
+              height:50,
+              child: ElevatedButton(
+                onPressed:() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ot_register()
+                      )
+                  );
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.format_align_center,
+                      color: Colors.black54,
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
                       'OT Register',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
@@ -139,29 +148,39 @@ class _HomepageState extends State<Homepage> {
                         color: Colors.black,
                       ),
                     ),
+                  ],
+                ),
+                style:ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation:3,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)
                   ),
-                ],
+                ),
               ),
             ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.format_align_center,
-                    color: Colors.black54,
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  InkWell(
-                    splashColor: Colors.blue[100],
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewPatients()));
-                    },
-                    child: Text(
+            SizedBox(height: 10,),
+            Container(
+              height:50,
+              child: ElevatedButton(
+                onPressed:() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ViewPatients()
+                      )
+                  );
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.format_align_center,
+                      color: Colors.black54,
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
                       'View Patients',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
@@ -170,41 +189,59 @@ class _HomepageState extends State<Homepage> {
                         color: Colors.black,
                       ),
                     ),
+                  ],
+                ),
+                style:ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation:3,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)
                   ),
-                ],
+                ),
               ),
             ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.format_align_center,
-                    color: Colors.black54,
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  InkWell(
-                    splashColor: Colors.blue[100],
-                    onTap: () {
+            SizedBox(height: 10,),
+            Container(
+                    height:50,
+                    child: ElevatedButton(
+                      onPressed:() {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SearchPatients()));
-                    },
-                    child: Text(
-                      'Search Patients',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 18.0,
-                        color: Colors.black,
+                      context,
+                      MaterialPageRoute(
+                       builder: (context) => SearchPatients()
+                      )
+                      );
+                      },
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.format_align_center,
+                            color: Colors.black54,
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Text(
+                            'Search Patients',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 18.0,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      style:ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        elevation:3,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16)
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
+
           ],
         ),
       ),
@@ -279,7 +316,13 @@ class _HomepageState extends State<Homepage> {
                   BouncingWidget(
                     scaleFactor: _scaleFactor,
                     stayOnBottom: stayOnBottom,
-                    onPressed: () {},
+                   onPressed: () {
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                    builder: (context) =>
+                    PatientRegistrationForm()));
+                    },
                     child: Column(
                       children: [
                         Padding(
@@ -291,23 +334,13 @@ class _HomepageState extends State<Homepage> {
                               borderRadius: BorderRadius.circular(20.0),
                               shadowColor: Colors.greenAccent.withOpacity(0.8),
                               elevation: 7.0,
-                              child: InkWell(
-                                splashColor: Colors.blue[100],
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              PatientRegistrationForm()));
-                                },
-                                child: Center(
-                                  child: Text(
-                                    'Patient Form',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                      color: Colors.white,
-                                    ),
+                              child: Center(
+                                child: Text(
+                                  'Patient Form',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -323,7 +356,12 @@ class _HomepageState extends State<Homepage> {
                   BouncingWidget(
                     scaleFactor: _scaleFactor,
                     stayOnBottom: stayOnBottom,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ot_register()));
+                    },
                     child: Column(
                       children: [
                         Padding(
@@ -335,22 +373,13 @@ class _HomepageState extends State<Homepage> {
                               borderRadius: BorderRadius.circular(20.0),
                               shadowColor: Colors.greenAccent.withOpacity(0.8),
                               elevation: 7.0,
-                              child: InkWell(
-                                splashColor: Colors.indigo[200],
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ot_register()));
-                                },
-                                child: Center(
-                                  child: Text(
-                                    'OT Register',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                      color: Colors.white,
-                                    ),
+                              child: Center(
+                                child: Text(
+                                  'OT Register',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
@@ -366,7 +395,13 @@ class _HomepageState extends State<Homepage> {
                   BouncingWidget(
                     scaleFactor: _scaleFactor,
                     stayOnBottom: stayOnBottom,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ViewPatients()));
+                    },
                     child: Column(
                       children: [
                         Padding(
@@ -381,23 +416,13 @@ class _HomepageState extends State<Homepage> {
                                 shadowColor:
                                     Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
-                                child: InkWell(
-                                  splashColor: Colors.blue[100],
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ViewPatients()));
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'View Patients',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18.0,
-                                        color: Colors.white,
-                                      ),
+                                child: Center(
+                                  child: Text(
+                                    'View Patients',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),

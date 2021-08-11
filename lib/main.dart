@@ -41,8 +41,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Nakshatra Hospital',
         theme: ThemeData(
-
-            appBarTheme: AppBarTheme(
+          appBarTheme: AppBarTheme(
           brightness: Brightness.dark,
         ),
         ),
@@ -59,7 +58,6 @@ class AuthenticationWrapper extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
     final firebaseUser = context.watch<User>();
-
     if (firebaseUser != null) {
       return Homepage();
     }

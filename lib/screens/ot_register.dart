@@ -9,8 +9,7 @@ void main() => runApp(MaterialApp(
 
 class ot_register extends StatefulWidget {
   @override
-  _ot_registerState createState() => _ot_registerState();
-}
+  _ot_registerState createState() => _ot_registerState();}
 
 class _ot_registerState extends State<ot_register> {
   final formKey = GlobalKey<FormState>();

@@ -33,6 +33,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                 )));
   }
 
+
   // CollectionReference get report =>
   //     collectionReference.doc(currentid).collection('patient report');
 
@@ -110,16 +111,11 @@ class _ViewPatientsState extends State<ViewPatients> {
                     ),
                     secondaryActions: [
                       IconSlideAction(
-                        caption: "Edit",
-                        color: Colors.green,
-                        icon: Icons.edit,
-                        onTap: (){},
-                      ),
-                      IconSlideAction(
                         caption: "Delete",
                         color: Colors.green,
-                        icon: Icons.edit,
-                        onTap: (){},
+                        icon: Icons.delete,
+                        onTap: (){
+                        },
                       )
                     ],
                   );
