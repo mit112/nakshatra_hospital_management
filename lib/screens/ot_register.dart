@@ -1635,7 +1635,7 @@ class _ot_registerState extends State<ot_register> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 30.0,
+                                            height: 31.0,
                                           ),
                                           Column(
                                             children: [
