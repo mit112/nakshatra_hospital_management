@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -27,9 +29,11 @@ class _NewReportScreenState extends State<NewReportScreen> {
       feeDetails,
       otherExpenses,
       feeAmount,
-      other,
+      otherFees,
+      fileName,
       notes;
-  String pTemp = 'Choose your temp';
+  List<String> expenses = [];
+  String pTemp = '90';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
@@ -37,13 +41,18 @@ class _NewReportScreenState extends State<NewReportScreen> {
 
   Future<void> uploadFile() async {
     try {
-
-      await firebase_storage.FirebaseStorage.instance
-      .ref('images'
+      String fileExtension = file.path.split('.').last;
+      fileName = 'images'
           '/${widget.post.data()['PatientId']}'
-          '/ReportNo${widget.post.data()['Visits'] + 1}')
+          '/ReportNo${widget.post.data()['Visits'] + 1}'
+          '.$fileExtension';
+      await firebase_storage.FirebaseStorage.instance
+      .ref(fileName)
       .putFile(file);
+      file = null;
       print('Upload Successful');
+      print(fileName);
+
     } catch (e) {
       print(e);
     }
@@ -56,8 +65,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
 
     if(result != null) {
       file = File(result.files.single.path);
+      print(result.files.single.path);
     } else {
       // User canceled the picker
+      fileName = ' ';
     }
   }
 
@@ -80,6 +91,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
       await collectionReference.doc(widget.post.data()['PatientId']).update({
           'Visits': widget.post.data()['Visits'] + 1,
       });
+      String expensesString = expenses[0];
+      for(int i = 1; i < expenses.length; i++) {
+        expensesString += ', ${expenses[i]}';
+      }
       collectionReference =
           FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
       String docName;
@@ -88,13 +103,15 @@ class _NewReportScreenState extends State<NewReportScreen> {
       await collectionReference.doc(docName).set({
         'report id': docName,
         'date': selectedDate,
+        'expenses': expensesString,
         'fee details': feeDetails,
         'fee collected': feeAmount,
         'body temp': pTemp,
         'flu symptoms': flu,
         'other expenses': otherExpenses,
-        'other': other,
+        'other fees': otherFees,
         'notes': notes,
+        'file name': fileName,
       });
       uploadFile();
       Navigator.pop(context);
@@ -148,7 +165,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           initialValue: '',
                           type: DateTimePickerType.date,
                           dateLabelText: 'Select Date',
-                          
+
                           firstDate: DateTime(1995),
                           lastDate: DateTime.now().add(Duration(days: 365)),
                           validator: (value) {
@@ -398,7 +415,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 20.0),
                             child: TextFormField(
-                              keyboardType: TextInputType.text,
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
                                 labelText: 'Others',
@@ -408,6 +424,11 @@ class _NewReportScreenState extends State<NewReportScreen> {
                                   fontSize: 18.0,
                                 ),
                               ),
+                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,]+')),],
+                              onChanged: (val) {
+                                otherFees = val ?? '0';
+                              },
                             ),
                           ),
                         ],
@@ -434,6 +455,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         onChanged: (bool value) {
                           setState(() {
                             this.value = value;
+                            expenses.add('OCT Machine');
                           });
                         },
                       ),
@@ -445,6 +467,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         onChanged: (bool value) {
                           setState(() {
                             this.value2 = value;
+                            expenses.add('Perimeter');
                           });
                         },
                       ),
@@ -456,6 +479,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         onChanged: (bool check) {
                           setState(() {
                             this.value3 = check;
+                            expenses.add('Medicine');
                           });
                         },
                       ),
@@ -465,8 +489,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         Text('External doctor'),
                         value: this.value4,
                         onChanged: (bool check) {
+                          this.value4 = check;
                           setState(() {
-                            this.value4 = check;
+                            expenses.add('External Doctor');
                           });
                         },
                       ),
@@ -478,6 +503,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         onChanged: (bool check) {
                           setState(() {
                             this.value5 = check;
+                            expenses.add('Nurse');
                           });
                         },
                       ),
@@ -489,6 +515,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         onChanged: (bool check) {
                           setState(() {
                             this.value6 = check;
+                            expenses.add('Attendant');
                           });
                         },
                       ),
@@ -498,7 +525,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           onChanged: (val) {
-                            other = val ?? ' ';
+                            otherExpenses = val ?? 'None';
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
