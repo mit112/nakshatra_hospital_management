@@ -49,9 +49,12 @@ class _HomepageState extends State<Homepage> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.green,
               ),
               child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
                 // currentAccountPicture: CircleAvatar(
                 //   radius: 40.0,
                 //   backgroundImage: NetworkImage(""),
@@ -79,15 +82,13 @@ class _HomepageState extends State<Homepage> {
               thickness: 3,
             ),
             Container(
-              height:50,
+              height: 50,
               child: ElevatedButton(
-                onPressed:() {
+                onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PatientRegistrationForm()
-                      )
-                  );
+                          builder: (context) => PatientRegistrationForm()));
                 },
                 child: Row(
                   children: [
@@ -109,26 +110,23 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-                style:ElevatedButton.styleFrom(
+                style: ElevatedButton.styleFrom(
                   primary: Colors.white,
-                  elevation:3,
+                  elevation: 3,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)
-                  ),
+                      borderRadius: BorderRadius.circular(16)),
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-              height:50,
+              height: 50,
               child: ElevatedButton(
-                onPressed:() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ot_register()
-                      )
-                  );
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ot_register()));
                 },
                 child: Row(
                   children: [
@@ -150,26 +148,23 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-                style:ElevatedButton.styleFrom(
+                style: ElevatedButton.styleFrom(
                   primary: Colors.white,
-                  elevation:3,
+                  elevation: 3,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)
-                  ),
+                      borderRadius: BorderRadius.circular(16)),
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-              height:50,
+              height: 50,
               child: ElevatedButton(
-                onPressed:() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ViewPatients()
-                      )
-                  );
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ViewPatients()));
                 },
                 child: Row(
                   children: [
@@ -191,57 +186,54 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ],
                 ),
-                style:ElevatedButton.styleFrom(
+                style: ElevatedButton.styleFrom(
                   primary: Colors.white,
-                  elevation:3,
+                  elevation: 3,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)
-                  ),
+                      borderRadius: BorderRadius.circular(16)),
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-                    height:50,
-                    child: ElevatedButton(
-                      onPressed:() {
-                      Navigator.push(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
-                       builder: (context) => SearchPatients()
-                      )
-                      );
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.format_align_center,
-                            color: Colors.black54,
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Text(
-                            'Search Patients',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontStyle: FontStyle.italic,
-                              fontSize: 18.0,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                      style:ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                        elevation:3,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)
-                        ),
+                          builder: (context) => SearchPatients()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.format_align_center,
+                      color: Colors.black54,
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      'Search Patients',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 18.0,
+                        color: Colors.black,
                       ),
                     ),
-                  ),
-
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -316,12 +308,11 @@ class _HomepageState extends State<Homepage> {
                   BouncingWidget(
                     scaleFactor: _scaleFactor,
                     stayOnBottom: stayOnBottom,
-                   onPressed: () {
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                    builder: (context) =>
-                    PatientRegistrationForm()));
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PatientRegistrationForm()));
                     },
                     child: Column(
                       children: [
@@ -399,8 +390,7 @@ class _HomepageState extends State<Homepage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ViewPatients()));
+                              builder: (context) => ViewPatients()));
                     },
                     child: Column(
                       children: [
