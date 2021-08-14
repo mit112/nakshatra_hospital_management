@@ -1566,7 +1566,7 @@ class _ot_registerState extends State<ot_register> {
                                                 MainAxisAlignment.start,
                                             children: [
                                               Radio(
-                                                  value: 'Yes',
+                                                  value: 'No',
                                                   groupValue: _firstTime,
                                                   onChanged: (val) {
                                                     _firstTime = val;
