@@ -39,10 +39,13 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
 
   Future<String> downloadFile(String firebaseReference) async {
 
-    Directory appDocDir = await getTemporaryDirectory();
-     filePath = '${appDocDir.path}/$firebaseReference';
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+     filePath = '${appDocDir.path}/${firebaseReference.split('/').last}';
      File downloadToFile = File(filePath);
-
+    if (downloadToFile.existsSync()) {
+      await downloadToFile.delete();
+    }
+    await downloadToFile.create();
 
      try {
       await firebase_storage.FirebaseStorage.instance
@@ -205,49 +208,49 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                         SizedBox(
                           height: 20.0,
                         ),
-          // BouncingWidget(
-          //   scaleFactor: _scaleFactor,
-          //   stayOnBottom: stayOnBottom,
-          //   onPressed: () {  },
-          //   child: Column(
-          //     children: [
-          //       Padding(
-          //         padding:
-          //         const EdgeInsets.symmetric(horizontal: 60.0),
-          //         child: Container(
-          //           height: 48.0,
-          //           child: Material(
-          //             color: Colors.green,
-          //             borderRadius: BorderRadius.circular(20.0),
-          //             shadowColor:
-          //             Colors.greenAccent.withOpacity(0.8),
-          //             elevation: 7.0,
-          //             child: InkWell(
-          //               splashColor: Colors.indigo[200],
-          //               onTap: () async {
-          //                 await downloadFile('${widget.post.data()['file name']}');
-          //                 print(filePath);
-          //                 if(filePath != null) {
-          //                   OpenFile.open(filePath);
-          //                 }
-          //               },
-          //               child: Center(
-          //                 child: Text(
-          //                   'Show Image',
-          //                   style: TextStyle(
-          //                     fontWeight: FontWeight.bold,
-          //                     fontSize: 18.0,
-          //                     color: Colors.white,
-          //                   ),
-          //                 ),
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          BouncingWidget(
+            scaleFactor: _scaleFactor,
+            stayOnBottom: stayOnBottom,
+            onPressed: () {  },
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 60.0),
+                  child: Container(
+                    height: 48.0,
+                    child: Material(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.circular(20.0),
+                      shadowColor:
+                      Colors.greenAccent.withOpacity(0.8),
+                      elevation: 7.0,
+                      child: InkWell(
+                        splashColor: Colors.indigo[200],
+                        onTap: () async {
+                          await downloadFile('${widget.post.data()['file name']}');
+                          print(filePath);
+                          if(filePath != null) {
+                            OpenFile.open(filePath);
+                          }
+                        },
+                        child: Center(
+                          child: Text(
+                            'Show Image',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
                       ],
                     ),
                   ),
