@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../constants/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 const kFieldStyle = TextStyle(
   fontFamily: kFont,
@@ -35,17 +37,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
   bool stayOnBottom = false;
   String filePath;
 
-  Future<String> downloadFile(String imageName) async {
-    Directory appDocDir = await getApplicationDocumentsDirectory();
-    filePath = '${appDocDir.path}/$imageName.jpeg';
-    File downloadToFile = File(filePath);
-    try {
+  Future<String> downloadFile(String firebaseReference) async {
+
+    Directory appDocDir = await getTemporaryDirectory();
+     filePath = '${appDocDir.path}/$firebaseReference';
+     File downloadToFile = File(filePath);
+
+
+     try {
       await firebase_storage.FirebaseStorage.instance
-          .ref('images/${widget.patientId}/${widget.post.data()['report id']}')
-          .writeToFile(downloadToFile);
+          .ref(firebaseReference).writeToFile(downloadToFile);
       return filePath;
     } catch (e) {
       print(e);
+      return 'no file found';
     }
   }
 
@@ -54,12 +59,13 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    print('${widget.post.data()['file name']}');
     if(widget.post.data()['notes'] != null) {
       notes = widget.post.data()['notes'];
     } else {
       notes = 'no notes';
     }
-    downloadFile('${widget.patientId}/${widget.post.data()['report id']}');
+
   }
   @override
   Widget build(BuildContext context) {
@@ -199,45 +205,49 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                         SizedBox(
                           height: 20.0,
                         ),
-          BouncingWidget(
-            scaleFactor: _scaleFactor,
-            stayOnBottom: stayOnBottom,
-            onPressed: () {  },
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 60.0),
-                  child: Container(
-                    height: 48.0,
-                    child: Material(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor:
-                      Colors.greenAccent.withOpacity(0.8),
-                      elevation: 7.0,
-                      child: InkWell(
-                        splashColor: Colors.indigo[200],
-                        onTap: () {
-                          OpenFile.open(filePath);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Show Image',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // BouncingWidget(
+          //   scaleFactor: _scaleFactor,
+          //   stayOnBottom: stayOnBottom,
+          //   onPressed: () {  },
+          //   child: Column(
+          //     children: [
+          //       Padding(
+          //         padding:
+          //         const EdgeInsets.symmetric(horizontal: 60.0),
+          //         child: Container(
+          //           height: 48.0,
+          //           child: Material(
+          //             color: Colors.green,
+          //             borderRadius: BorderRadius.circular(20.0),
+          //             shadowColor:
+          //             Colors.greenAccent.withOpacity(0.8),
+          //             elevation: 7.0,
+          //             child: InkWell(
+          //               splashColor: Colors.indigo[200],
+          //               onTap: () async {
+          //                 await downloadFile('${widget.post.data()['file name']}');
+          //                 print(filePath);
+          //                 if(filePath != null) {
+          //                   OpenFile.open(filePath);
+          //                 }
+          //               },
+          //               child: Center(
+          //                 child: Text(
+          //                   'Show Image',
+          //                   style: TextStyle(
+          //                     fontWeight: FontWeight.bold,
+          //                     fontSize: 18.0,
+          //                     color: Colors.white,
+          //                   ),
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
                       ],
                     ),
                   ),

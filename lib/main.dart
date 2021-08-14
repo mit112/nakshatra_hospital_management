@@ -19,14 +19,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final firebaseuser = context.watch<User>();
-//     if (firebaseuser != null) {
-//       return Homepage();
-//     }
-//     return Authenticate();
-//   }
-// }
-
     return MultiProvider(
       providers: [
         Provider<AuthService>(
@@ -52,6 +44,7 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthenticationWrapper extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

@@ -40,19 +40,34 @@ class _NewReportScreenState extends State<NewReportScreen> {
   File file;
 
   Future<void> uploadFile() async {
+    // try {
+    //   String fileExtension = file.path.split('.').last;
+    //   fileName = 'files'
+    //       '/${widget.post.data()['PatientId']}'
+    //       '/ReportNo${widget.post.data()['Visits'] + 1}'
+    //       '.$fileExtension';
+    //
+    //    await firebase_storage.FirebaseStorage.instance
+    //   .ref(fileName).putFile(file);
+    //
+    //   print('Upload Successful');
+    //   print(fileName);
+    //
+    // } catch (e) {
+    //   print(e);
+    // }
     try {
-      String fileExtension = file.path.split('.').last;
-      fileName = 'images'
+      //String fileExtension = file.path.split('.').last;
+      fileName = 'files'
           '/${widget.post.data()['PatientId']}'
-          '/ReportNo${widget.post.data()['Visits'] + 1}'
-          '.$fileExtension';
-      await firebase_storage.FirebaseStorage.instance
-      .ref(fileName)
-      .putFile(file);
-      file = null;
-      print('Upload Successful');
-      print(fileName);
+          '/ReportNo${widget.post.data()['Visits'] + 1}';
 
+      String fileExtension = file.path.split('.').last;
+      fileName += '.$fileExtension';
+
+      await firebase_storage.FirebaseStorage.instance
+          .ref(fileName)
+          .putFile(file);
     } catch (e) {
       print(e);
     }
@@ -68,7 +83,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
       print(result.files.single.path);
     } else {
       // User canceled the picker
-      fileName = ' ';
     }
   }
 
@@ -83,10 +97,14 @@ class _NewReportScreenState extends State<NewReportScreen> {
 
   void addData() async{
 
+    await uploadFile();
 
     if (formKey.currentState.validate()) {
+
       CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
+
+      print(fileName);
 
       await collectionReference.doc(widget.post.data()['PatientId']).update({
           'Visits': widget.post.data()['Visits'] + 1,
@@ -113,7 +131,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
         'notes': notes,
         'file name': fileName,
       });
-      uploadFile();
       Navigator.pop(context);
     }
   }
