@@ -33,7 +33,6 @@ class _ViewPatientsState extends State<ViewPatients> {
                 )));
   }
 
-
   // CollectionReference get report =>
   //     collectionReference.doc(currentid).collection('patient report');
 
@@ -73,49 +72,47 @@ class _ViewPatientsState extends State<ViewPatients> {
                           height: 20.0,
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal:5 ),
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: Card(
-                            elevation:4,
-                            shadowColor:Colors.black.withOpacity(0.8),
-                            color:Colors.white,
+                            elevation: 4,
+                            shadowColor: Colors.black.withOpacity(0.8),
+                            color: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: ListTile(
-                              title: Text(
-                                snapshot.data[index].data()["Name"],
-                                style:  GoogleFonts.inter(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
+                                title: Text(
+                                  snapshot.data[index].data()["Name"],
+                                  style: GoogleFonts.inter(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              subtitle: Text(
-                               "25/05/2021",
-                                style:  GoogleFonts.inter(
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
+                                subtitle: Text(
+                                  "25/05/2021",
+                                  style: GoogleFonts.inter(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              onTap: () =>
-                                  navigateToPatientDetail(snapshot.data[index]),
-                              leading:  Icon(
-                                Icons.format_list_numbered,
-                                color: Colors.blueGrey,
-                              )
-                            ),
+                                onTap: () => navigateToPatientDetail(
+                                    snapshot.data[index]),
+                                leading: Icon(
+                                  Icons.format_list_numbered,
+                                  color: Colors.blueGrey,
+                                )),
                           ),
                         ),
                       ],
-                    ),
+                    ), //testing
                     secondaryActions: [
                       IconSlideAction(
                         caption: "Delete",
                         color: Colors.green,
                         icon: Icons.delete,
-                        onTap: (){
-                        },
+                        onTap: () {},
                       )
                     ],
                   );
@@ -127,9 +124,7 @@ class _ViewPatientsState extends State<ViewPatients> {
   }
 }
 
-
-
- const kFieldStyle = TextStyle(
+const kFieldStyle = TextStyle(
   letterSpacing: 1.2,
   color: Colors.black,
   fontWeight: FontWeight.w500,
