@@ -2,6 +2,7 @@ import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nakshatra_hospital_management/screens/new_report_screen.dart';
+import 'package:nakshatra_hospital_management/screens/view_reports.dart';
 import '../constants/constants.dart';
 import 'ot_register.dart';
 
@@ -13,14 +14,14 @@ const kFieldStyle = TextStyle(
   fontSize: 28.0,
 );
 
-class DetailPage extends StatefulWidget {
+class PatientDetailScreen extends StatefulWidget {
   final DocumentSnapshot post;
-  DetailPage({this.post});
+  PatientDetailScreen({this.post});
   @override
-  _DetailPageState createState() => _DetailPageState();
+  _PatientDetailScreenState createState() => _PatientDetailScreenState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
@@ -132,6 +133,7 @@ class _DetailPageState extends State<DetailPage> {
                         BouncingWidget(
                           scaleFactor: _scaleFactor,
                           stayOnBottom: stayOnBottom,
+                          onPressed: () {  },
                           child: Column(
                             children: [
                               Padding(
@@ -177,6 +179,7 @@ class _DetailPageState extends State<DetailPage> {
                         BouncingWidget(
                           scaleFactor: _scaleFactor,
                           stayOnBottom: stayOnBottom,
+                          onPressed: () {  },
                           child: Column(
                             children: [
                               Padding(
@@ -197,7 +200,7 @@ class _DetailPageState extends State<DetailPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ot_register()));
+                                                    ViewReports(widget.post)));
                                       },
                                       child: Center(
                                         child: Text(

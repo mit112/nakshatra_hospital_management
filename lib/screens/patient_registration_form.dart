@@ -27,14 +27,9 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
       FirebaseFirestore.instance.collection('patients');
 
   void addData() async{
-    String docId;
     String docName;
     if(formKey.currentState.validate()) {
-      if(pName.length < 4) {
-        docName = '$pNumber$pName';
-      } else {
-        docName = '$pNumber${pName.substring(0, 4)}';
-      }
+      docName = '$pNumber$pName';
       await collectionReference.doc(docName).set({
         'Name': pName,
         'Number': pNumber,

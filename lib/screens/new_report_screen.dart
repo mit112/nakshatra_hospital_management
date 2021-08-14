@@ -1,9 +1,14 @@
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class NewReportScreen extends StatefulWidget {
 
@@ -16,26 +21,70 @@ class NewReportScreen extends StatefulWidget {
 
 class _NewReportScreenState extends State<NewReportScreen> {
   final formKey = GlobalKey<FormState>();
-
-  String _flu,
-      _firstTime,
-      _feeDetails,
-      _otherExpenses,
-      _feeAmount,
-      _other,
-      _notes;
-
-  String dropdownValue = '90';
-
-  String pName, pTemp, pAddress;
-  String pNumber;
-  String _selectedDate;
+  bool check = false;
+  bool value = false,value2 = false,value3 = false,value4 = false,
+      value5 = false,
+      value6 = false;
+  String flu,
+      feeDetails,
+      otherExpenses,
+      feeAmount,
+      otherFees,
+      fileName,
+      notes;
+  List<String> expenses = [];
+  String pTemp = '90';
+  String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
-  String currentid;
-  String reportid;
+  File file;
 
+  Future<void> uploadFile() async {
+    // try {
+    //   String fileExtension = file.path.split('.').last;
+    //   fileName = 'files'
+    //       '/${widget.post.data()['PatientId']}'
+    //       '/ReportNo${widget.post.data()['Visits'] + 1}'
+    //       '.$fileExtension';
+    //
+    //    await firebase_storage.FirebaseStorage.instance
+    //   .ref(fileName).putFile(file);
+    //
+    //   print('Upload Successful');
+    //   print(fileName);
+    //
+    // } catch (e) {
+    //   print(e);
+    // }
+    try {
+      //String fileExtension = file.path.split('.').last;
+      fileName = 'files'
+          '/${widget.post.data()['PatientId']}'
+          '/ReportNo${widget.post.data()['Visits'] + 1}';
 
+      String fileExtension = file.path.split('.').last;
+      fileName += '.$fileExtension';
+
+      await firebase_storage.FirebaseStorage.instance
+          .ref(fileName)
+          .putFile(file);
+    } catch (e) {
+      print(e);
+    }
+  }
+  Future<void> selectFile() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+    );
+
+    if(result != null) {
+      file = File(result.files.single.path);
+      print(result.files.single.path);
+    } else {
+      // User canceled the picker
+    }
+  }
 
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
   // CollectionReference get personaldetails =>
@@ -45,34 +94,48 @@ class _NewReportScreenState extends State<NewReportScreen> {
   // CollectionReference get feedetails =>
   //     collectionReference.doc(uid).collection('fee details');
 
-  @override
+
   void addData() async{
-    // print(_selectedDate);
-    CollectionReference collectionReference =
-    FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
+
+    await uploadFile();
 
     if (formKey.currentState.validate()) {
-      await collectionReference.add({
-        'patient Name': pName,
-        'phone number': pNumber,
-        'date': _selectedDate,
-        'address': pAddress,
-        'fee details': _feeDetails,
-        'fee collected': _feeAmount,
+
+      CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('patients');
+
+      print(fileName);
+
+      await collectionReference.doc(widget.post.data()['PatientId']).update({
+          'Visits': widget.post.data()['Visits'] + 1,
+      });
+      String expensesString = expenses[0];
+      for(int i = 1; i < expenses.length; i++) {
+        expensesString += ', ${expenses[i]}';
+      }
+      collectionReference =
+          FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
+      String docName;
+
+      docName = 'ReportNo${widget.post.data()['Visits'] + 1}';
+      await collectionReference.doc(docName).set({
+        'report id': docName,
+        'date': selectedDate,
+        'expenses': expensesString,
+        'fee details': feeDetails,
+        'fee collected': feeAmount,
         'body temp': pTemp,
-        'flu symptoms': _flu,
-        'first visit': _firstTime,
-        'other expenses': _otherExpenses,
-        'other': _other,
-        'notes': _notes,
-      }).then((value) {
-        currentid = value.id;
-        print(value.id);
+        'flu symptoms': flu,
+        'other expenses': otherExpenses,
+        'other fees': otherFees,
+        'notes': notes,
+        'file name': fileName,
       });
       Navigator.pop(context);
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -97,9 +160,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 10,
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
@@ -108,51 +168,38 @@ class _NewReportScreenState extends State<NewReportScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
-                        height: 50.0,
+                        height: 30.0,
                       ),
-                      DateTimePicker(
-                        initialValue: '',
-                        type: DateTimePickerType.date,
-                        dateLabelText: 'Select Date',
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now().add(Duration(days: 365)),
-                        validator: (value) {
-                          return null;
-                        },
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            setState(() {
-                              _selectedDate = value;
-                            });
-                          }
-                        },
-                        onSaved: (value) {
-                          if (value.isNotEmpty) {
-                            _selectedDate = value;
-                          }
-                        },
+                      Text("Date of visit",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                        ),
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter name";
-                        },
-                        //
-                        onChanged: (val) {
-                          pName = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          labelText: 'Patient name ',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: DateTimePicker(
+                          initialValue: '',
+                          type: DateTimePickerType.date,
+                          dateLabelText: 'Select Date',
+
+                          firstDate: DateTime(1995),
+                          lastDate: DateTime.now().add(Duration(days: 365)),
+                          validator: (value) {
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              setState(() {
+                                selectedDate = value;
+                              });
+                            }
+                          },
+                          onSaved: (value) {
+                            if (value.isNotEmpty) {
+                              selectedDate = value;
+                            }
+                          },
                         ),
                       ),
                       SizedBox(
@@ -160,79 +207,41 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Text("Patient body temp. in deg.C",
                         style: TextStyle(
-                         color: Colors.grey[700],
+                         color: Colors.black,
                           fontSize: 18.0,
                         ),
                       ),
-                    DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: const Icon(Icons.arrow_drop_down_outlined),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
-                      fontSize: 18.0,),
-                    underline: Container(
-                    height: 2,
-                    color: Colors.grey,
-                    ),
-                    onChanged: (newValue) {
-                    setState(() {
-                    dropdownValue = newValue;
-                    });
-                    },
-                    items: <String>['90', '91', '92', '93','94', '95', '96', '97','98', '99', '100', '101','102', '103', '104', '105','106', '107', '108', '109','110']
-                        .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                    );
-                    }).toList(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: DropdownButton<String>(
+                      value: pTemp,
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
+                        fontSize: 18.0,),
+                      underline: Container(
+                      height: 2,
+                      color: Colors.grey,
+                      ),
+                      onChanged: (newValue) {
+                      setState(() {
+                      pTemp = newValue;
+                      });
+                      },
+                      items: <String>['Choose your temp','90', '91', '92', '93','94', '95', '96',
+                        '97','98', '99', '100', '101','102', '103', '104', '105',
+                        '106', '107', '108', '109','110']
+                          .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                      );
+                      }).toList(),
+                      ),
                     ),
 
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter number";
-                        },
-                        onChanged: (val) {
-                          pNumber = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          labelText: 'Phone number',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter address";
-                        },
-                        onChanged: (val) {
-                          pAddress = val;
-                          setState(() {});
-                        },
-                        keyboardType: TextInputType.streetAddress,
-                        textInputAction: TextInputAction.newline,
-                        decoration: InputDecoration(
-                          labelText: 'Address',
-                          labelStyle: TextStyle(
-                            height: 1.2,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18.0,
-                          ),
-                        ),
-                      ),
+
                       Column(
                         children: [
                           SizedBox(
@@ -255,9 +264,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'no',
-                                  groupValue: _flu,
+                                  groupValue: flu,
                                   onChanged: (val) {
-                                    _flu = val;
+                                    flu = val;
                                     setState(() {});
                                   }),
                               Text('No'),
@@ -268,9 +277,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'yes',
-                                  groupValue: _flu,
+                                  groupValue: flu,
                                   onChanged: (val) {
-                                    _flu = val;
+                                    flu = val;
                                     setState(() {});
                                   }),
                               Text('Yes'),
@@ -281,67 +290,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 15,
                       ),
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Is the patient visiting for the first time?',
-                                style: TextStyle(
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value: 'Yes',
-                                  groupValue: _firstTime,
-                                  onChanged: (val) {
-                                    _firstTime = val;
-                                    setState(() {});
-                                  }),
-                              Text('Yes'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value:
-                                  'No, this is follow-up within one week of initial visit',
-                                  groupValue: _firstTime,
-                                  onChanged: (val) {
-                                    _firstTime = val;
-                                    setState(() {});
-                                  }),
-                              Text('No, this is followup within one '
-                                  'week'),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Radio(
-                                  value:
-                                  'No, but last visit was few weeks back',
-                                  groupValue: _firstTime,
-                                  onChanged: (val) {
-                                    _firstTime = val;
-                                    setState(() {});
-                                  }),
-                              Text('No, but last visit was few weeks back'),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
+
                       Column(
                         children: [
                           Row(
@@ -361,9 +310,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'Paid online',
-                                  groupValue: _feeDetails,
+                                  groupValue: feeDetails,
                                   onChanged: (val) {
-                                    _feeDetails = val;
+                                    feeDetails = val;
                                     setState(() {});
                                   }),
                               Text('Paid online'),
@@ -374,9 +323,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'Paid in cash',
-                                  groupValue: _feeDetails,
+                                  groupValue: feeDetails,
                                   onChanged: (val) {
-                                    _feeDetails = val;
+                                    feeDetails = val;
                                     setState(() {});
                                   }),
                               Text('Paid in cash'),
@@ -387,9 +336,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'Not charged',
-                                  groupValue: _feeDetails,
+                                  groupValue: feeDetails,
                                   onChanged: (val) {
-                                    _feeDetails = val;
+                                    feeDetails = val;
                                     setState(() {});
                                   }),
                               Text('Not charged'),
@@ -419,9 +368,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '600',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('600'),
@@ -432,9 +381,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '500',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('500'),
@@ -445,9 +394,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '400',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('400'), //
@@ -458,9 +407,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: '300',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('300'),
@@ -471,9 +420,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             children: [
                               Radio(
                                   value: 'no',
-                                  groupValue: _feeAmount,
+                                  groupValue: feeAmount,
                                   onChanged: (val) {
-                                    _feeAmount = val;
+                                    feeAmount = val;
                                     setState(() {});
                                   }),
                               Text('200'),
@@ -483,7 +432,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 20.0),
                             child: TextFormField(
-                              keyboardType: TextInputType.text,
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
                                 labelText: 'Others',
@@ -493,6 +441,11 @@ class _NewReportScreenState extends State<NewReportScreen> {
                                   fontSize: 18.0,
                                 ),
                               ),
+                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,]+')),],
+                              onChanged: (val) {
+                                otherFees = val ?? '0';
+                              },
                             ),
                           ),
                         ],
@@ -511,90 +464,85 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         ],
                       ),
                       SizedBox(height: 5,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'OCT machine',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('OCT machine'),
-                        ],
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title:
+                        Text('OCT machine'),
+                        value: this.value,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.value = value;
+                            expenses.add('OCT Machine');
+                          });
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Perimeter',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Perimeter'),
-                        ],
+                      CheckboxListTile(
+                          controlAffinity: ListTileControlAffinity.leading,
+                          title:
+                        Text('Perimeter'),
+                        value: this.value2,
+                        onChanged: (bool value) {
+                          setState(() {
+                            this.value2 = value;
+                            expenses.add('Perimeter');
+                          });
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Medicine',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Medicine'), //
-                        ],
+                      CheckboxListTile(
+                          controlAffinity: ListTileControlAffinity.leading,
+                          title:
+                        Text('Medicine'),
+                        value: this.value3,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.value3 = check;
+                            expenses.add('Medicine');
+                          });
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'External doctor',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('External doctor'),
-                        ],
+                      CheckboxListTile(
+                          controlAffinity: ListTileControlAffinity.leading,
+                          title:
+                        Text('External doctor'),
+                        value: this.value4,
+                        onChanged: (bool check) {
+                          this.value4 = check;
+                          setState(() {
+                            expenses.add('External Doctor');
+                          });
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Nurse',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Nurse'),
-                        ],
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title:
+                        Text('Nurse'),
+                        value: this.value5,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.value5 = check;
+                            expenses.add('Nurse');
+                          });
+                        },
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Radio(
-                              value: 'Attendant',
-                              groupValue: _otherExpenses,
-                              onChanged: (val) {
-                                _otherExpenses = val;
-                                setState(() {});
-                              }),
-                          Text('Attendant'),
-                        ],
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title:
+                        Text('Attendant'),
+                        value: this.value6,
+                        onChanged: (bool check) {
+                          setState(() {
+                            this.value6 = check;
+                            expenses.add('Attendant');
+                          });
+                        },
                       ),
+
                       Padding(
                         padding:
                         const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           onChanged: (val) {
-                            _other = val ?? ' ';
+                            otherExpenses = val ?? 'None';
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
@@ -614,15 +562,14 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Text("Enter additional details:",
                         style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w400
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w400,
                         ),),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(
                           onChanged: (val) {
-                            _notes = val ?? ' ';
+                            notes = val ?? ' ';
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
@@ -637,7 +584,43 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                         ),
                       ),
-
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding:
+                            const EdgeInsets.symmetric(horizontal: 60.0),
+                            child: Container(
+                              height: 48.0,
+                              child: Material(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor:
+                                Colors.greenAccent.withOpacity(0.8),
+                                elevation: 7.0,
+                                child: GestureDetector(
+                                  onTap: selectFile,
+                                  child: Center(
+                                    child: Text(
+                                      'Select File',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 20,
                       ),
