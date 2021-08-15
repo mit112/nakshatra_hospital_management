@@ -87,10 +87,10 @@ class _ot_registerState extends State<ot_register> {
       valueStand = false,
       valueLegs = false,
       valueInstrument = false,
-      value69 = false,
-      value70 = false,
-      value71 = false,
-      value72 = false;
+      value69ac = false,
+      valueair = false,
+      valueplate = false,
+      valuebelow = false;
 
   @override
   Widget build(BuildContext context) {
@@ -1459,38 +1459,38 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                         CheckboxListTile(
                                           title: Text('AC'),
-                                          value: this.value69,
+                                          value: this.value69ac,
                                           onChanged: (bool value) {
                                             setState(() {
-                                              this.value69 = value;
+                                              this.value69ac = value;
                                             });
                                           },
                                         ),
                                         CheckboxListTile(
                                           title: Text('Air'),
-                                          value: this.value70,
+                                          value: this.valueair,
                                           onChanged: (bool value) {
                                             setState(() {
-                                              this.value70 = value;
+                                              this.valueair = value;
                                             });
                                           },
                                         ),
                                         CheckboxListTile(
                                           title: Text('Culture plate'),
-                                          value: this.value71,
+                                          value: this.valueplate,
                                           onChanged: (bool value) {
                                             setState(() {
-                                              this.value71 = value;
+                                              this.valueplate = value;
                                             });
                                           },
                                         ),
                                         CheckboxListTile(
                                           title: Text(
                                               'Wash room-specify location in Other  below'),
-                                          value: this.value72,
+                                          value: this.valuebelow,
                                           onChanged: (bool value) {
                                             setState(() {
-                                              this.value72 = value;
+                                              this.valuebelow = value;
                                             });
                                           },
                                         ),
