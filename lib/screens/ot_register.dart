@@ -19,21 +19,21 @@ class _ot_registerState extends State<ot_register> {
   String _selectedDate;
   String infecto;
 
-  bool value = false,
-      value2 = false,
-      value3 = false,
-      value4 = false,
-      value5 = false,
-      value6 = false,
-      value7 = false,
-      value8 = false,
-      value9 = false,
-      value10 = false,
-      value11 = false,
-      value12 = false,
-      value13 = false,
-      value14 = false,
-      value15 = false,
+  bool valuebaci = false,
+      valueinfecto = false,
+      valueopdwall = false,
+      valuedeadwall = false,
+      valueside = false,
+      valuepassae = false,
+      valueac = false,
+      valuelower = false,
+      valueupper = false,
+      valuemicroscope = false,
+      valuetable = false,
+      valuetrolley = false,
+      valuechair = false,
+      valueaddrolley = false,
+      valuestool = false,
       value16 = false,
       value17 = false,
       value18 = false,
@@ -221,21 +221,21 @@ class _ot_registerState extends State<ot_register> {
                                 CheckboxListTile(
                                   title: Text(
                                       'Bacilloid solution 20ml/1 ltr water'),
-                                  value: this.value,
+                                  value: this.valuebaci,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value = value;
+                                      this.valuebaci = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title:
                                       Text('Infecto-Cide N 20 ml/1 ltr water'),
-                                  value: this.value3,
+                                  value: this.valueopdwall,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value3 = value;
-                                      if (value3 == true) {
+                                      this.valueopdwall = value;
+                                      if (valueopdwall == true) {
                                         infecto =
                                             "Infecto-Cide N 20 ml/1 ltr water";
                                       }
@@ -288,64 +288,64 @@ class _ot_registerState extends State<ot_register> {
                                 SizedBox(height: 5),
                                 CheckboxListTile(
                                   title: Text('OPD Wall'),
-                                  value: this.value5,
+                                  value: this.valueside,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value5 = value;
+                                      this.valueside = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('Dead Wall'),
-                                  value: this.value6,
+                                  value: this.valuedeadwall,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value6 = value;
+                                      this.valuedeadwall = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('Door side wall & door'),
-                                  value: this.value7,
+                                  value: this.valueac,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value7 = value;
+                                      this.valueac = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('Passage wall'),
-                                  value: this.value8,
+                                  value: this.valuelower,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value8 = value;
+                                      this.valuelower = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('AC wall'),
-                                  value: this.value9,
+                                  value: this.valueupper,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value9 = value;
+                                      this.valueupper = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('Lower ceiling'),
-                                  value: this.value10,
+                                  value: this.valuemicroscope,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value10 = value;
+                                      this.valuemicroscope = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('Upper ceiling'),
-                                  value: this.value11,
+                                  value: this.valuetable,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value11 = value;
+                                      this.valuetable = value;
                                     });
                                   },
                                 ),
@@ -391,28 +391,28 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                                 CheckboxListTile(
                                   title: Text('Microscope Stand'),
-                                  value: this.value13,
+                                  value: this.valuemicroscope,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value13 = value;
+                                      this.valuemicroscope= value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('OT table, including legs'),
-                                  value: this.value14,
+                                  value: this.valueaddrolley,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value14 = value;
+                                      this.valueaddrolley = value;
                                     });
                                   },
                                 ),
                                 CheckboxListTile(
                                   title: Text('Instrument trolley'),
-                                  value: this.value15,
+                                  value: this.valuestool,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.value15 = value;
+                                      this.valuestool = value;
                                     });
                                   },
                                 ),
