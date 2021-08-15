@@ -128,7 +128,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                       ),
                       TextFormField(
                         validator: (val) {
-                          return val.isNotEmpty ? null : "Enter name";
+                          return null;
                         },
                         //
                         onChanged: (val) {
@@ -152,7 +152,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                       ),
                       TextFormField(
                         validator: (val) {
-                          return val.isNotEmpty ? null : "Enter number";
+                          return null;
                         },
                         onChanged: (val) {
                           pNumber = val;
