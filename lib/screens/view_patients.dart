@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/constants/constants.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
@@ -56,7 +57,7 @@ class _ViewPatientsState extends State<ViewPatients> {
         builder: (_, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: Text('Loading...'),
+              child:CircularProgressIndicator(),
             );
           } else {
             return ListView.builder(
@@ -99,9 +100,11 @@ class _ViewPatientsState extends State<ViewPatients> {
                                 ),
                                 onTap: () => navigateToPatientDetail(
                                     snapshot.data[index]),
-                                leading: Icon(
-                                  Icons.format_list_numbered,
-                                  color: Colors.blueGrey,
+                                leading: Container(
+                                  child: Icon(
+                                    FontAwesomeIcons.circleNotch,
+                                    color: Colors.indigo[300],
+                                  ),
                                 )),
                           ),
                         ),

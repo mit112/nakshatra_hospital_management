@@ -151,9 +151,6 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         height: 20.0,
                       ),
                       TextFormField(
-                        validator: (val) {
-                          return null;
-                        },
                         onChanged: (val) {
                           pNumber = val;
                           setState(() {});

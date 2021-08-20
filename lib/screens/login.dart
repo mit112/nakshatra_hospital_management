@@ -47,18 +47,18 @@ class _AuthenticateState extends State<Authenticate> {
                 child: CircularProgressIndicator(),
               ),
             )
-          : GestureDetector(
-              onTap: () {
-                FocusScope.of(context).requestFocus(new FocusNode());
-              },
-              child: SingleChildScrollView(
+          : SingleChildScrollView(
+            child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                },
                 child: Container(
                   height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
-                      colors: <Color>[Colors.black, Colors.teal], // red to
+                        colors: <Color>[Colors.teal,Colors.black] // red to
                     ),
                   ),
                   child: GestureDetector(
@@ -67,6 +67,7 @@ class _AuthenticateState extends State<Authenticate> {
                     },
                     child: Column(
                       children: [
+                        SizedBox(height: 50,),
                         Stack(
                           children: <Widget>[
                             Container(
@@ -117,7 +118,7 @@ class _AuthenticateState extends State<Authenticate> {
                           ],
                         ),
                         SizedBox(
-                          height: 1,
+                          height:100,
                         ),
                         Column(
                           children: [
@@ -220,7 +221,7 @@ class _AuthenticateState extends State<Authenticate> {
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(20.0),
                                   shadowColor:
-                                      Colors.greenAccent.withOpacity(0.8),
+                                      Colors.black.withOpacity(0.8),
                                   elevation: 7.0,
                                   child: GestureDetector(
                                     onTap: login,
@@ -245,7 +246,7 @@ class _AuthenticateState extends State<Authenticate> {
                   ),
                 ),
               ),
-            ),
+          ),
     );
   }
 }

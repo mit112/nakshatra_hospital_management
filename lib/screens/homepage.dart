@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/screens/patient_registration_form.dart';
 import 'package:nakshatra_hospital_management/screens/search_patients.dart';
@@ -62,27 +63,31 @@ class _HomepageState extends State<Homepage> {
                 // ),
                 accountName: Text(
                   'Nakshatra Hospital.',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 19.0,
-                    fontWeight: FontWeight.w600,
+                  style:GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 19.0,
+                      fontWeight:FontWeight.w600,
+                    ),
                   ),
                 ),
                 accountEmail: Text(
                   'hello@ac.in',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
+                   style:GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                  color: Colors.white60,
+                  fontSize: 18.0, fontWeight:FontWeight.w600,
+
                   ),
+              ),
                 ),
               ),
             ),
-            Divider(
-              color: Colors.grey[200],
-              thickness: 3,
+            SizedBox(
+              height:20,
             ),
             Container(
-              height: 50,
+              height: 55,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -93,19 +98,20 @@ class _HomepageState extends State<Homepage> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.format_align_center,
-                      color: Colors.black54,
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
                     ),
                     SizedBox(
                       width: 30,
                     ),
                     Text(
                       'Patient Form',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 18.0,
-                        color: Colors.black,
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -113,8 +119,7 @@ class _HomepageState extends State<Homepage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
+
                 ),
               ),
             ),
@@ -122,7 +127,7 @@ class _HomepageState extends State<Homepage> {
               height: 10,
             ),
             Container(
-              height: 50,
+              height: 55,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -131,19 +136,20 @@ class _HomepageState extends State<Homepage> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.format_align_center,
-                      color: Colors.black54,
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
                     ),
                     SizedBox(
                       width: 30,
                     ),
                     Text(
                       'OT Register',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 18.0,
-                        color: Colors.black,
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -151,8 +157,7 @@ class _HomepageState extends State<Homepage> {
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
+
                 ),
               ),
             ),
@@ -160,7 +165,7 @@ class _HomepageState extends State<Homepage> {
               height: 10,
             ),
             Container(
-              height: 50,
+              height: 55,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
@@ -169,28 +174,28 @@ class _HomepageState extends State<Homepage> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.format_align_center,
-                      color: Colors.black54,
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
                     ),
                     SizedBox(
                       width: 30,
                     ),
                     Text(
                       'View Patients',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 18.0,
-                        color: Colors.black,
-                      ),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
+                    ),
                     ),
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
+
                 ),
               ),
             ),
@@ -198,7 +203,7 @@ class _HomepageState extends State<Homepage> {
               height: 10,
             ),
             Container(
-              height: 50,
+              height: 55,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -209,28 +214,28 @@ class _HomepageState extends State<Homepage> {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.format_align_center,
-                      color: Colors.black54,
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
                     ),
                     SizedBox(
                       width: 30,
                     ),
                     Text(
                       'Search Patients',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 18.0,
-                        color: Colors.black,
-                      ),
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
+                    ),
                     ),
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                   elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
+
                 ),
               ),
             ),
@@ -264,36 +269,47 @@ class _HomepageState extends State<Homepage> {
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.fromLTRB(15.0, 40.0, 0.0, 0.0),
-                  child: Text(
-                    'Nakshatra',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.w300,
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'Nakshatra',
+                      style: GoogleFonts.openSans(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 80.0,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ),
                   ),
-                ),
+      ),
+
                 Container(
                   padding: EdgeInsets.fromLTRB(15.0, 120.0, 0.0, 0.0),
-                  child: Text(
-                    'Hospital',
-                    style: GoogleFonts.lato(
-                      textStyle: TextStyle(
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.w300,
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'Hospital',
+                      style: GoogleFonts.openSans(
+                        textStyle: TextStyle(
+                          fontSize: 80.0,
+                          fontWeight: FontWeight.w300,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(294.0, 90.0, 0.0, 0.0),
-                  child: Text(
-                    '.',
-                    style: TextStyle(
-                        fontSize: 120.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green),
+                  padding: EdgeInsets.fromLTRB(300.0, 98.0, 0.0, 0.0),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      '.',
+                      style: TextStyle(
+                          fontSize: 120.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green),
+                    ),
                   ),
                 ),
               ],
@@ -435,8 +451,11 @@ class _HomepageState extends State<Homepage> {
 
       floatingActionButton: FloatingActionButton(
         child: Icon(
-          Icons.exit_to_app,
+          //Icons.exit_to_app,
+          FontAwesomeIcons.times,
+              color: Colors.white,
         ),
+
         backgroundColor: Colors.green,
         elevation: 8.0,
         onPressed: () {
