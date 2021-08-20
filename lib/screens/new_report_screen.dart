@@ -22,9 +22,9 @@ class NewReportScreen extends StatefulWidget {
 class _NewReportScreenState extends State<NewReportScreen> {
   final formKey = GlobalKey<FormState>();
   bool check = false;
-  bool value = false,value2 = false,value3 = false,value4 = false,
-      value5 = false,
-      value6 = false;
+  bool octMachine = false,perimeter = false,medicine = false,externalDoctor = false,
+      nurse = false,
+      attendant = false;
   String flu,
       feeDetails,
       otherExpenses,
@@ -32,12 +32,37 @@ class _NewReportScreenState extends State<NewReportScreen> {
       otherFees,
       fileName,
       notes;
-  List<String> expenses = [];
   String pTemp = '90';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
   File file;
+  String expensesString = '';
+  List <String> expensesList = [];
+
+  void expensesStringMaker() {
+      if(octMachine)
+        expensesList.add('Oct Machine');
+      if(perimeter)
+        expensesList.add('Perimeter');
+      if(medicine)
+        expensesList.add('Medicine');
+      if(externalDoctor)
+        expensesList.add('External Doctor');
+      if(nurse)
+        expensesList.add('Nurse');
+      if(attendant)
+        expensesList.add('Attendant');
+
+      if(expensesList.isNotEmpty){
+        expensesString = expensesList[0];
+        int length = expensesList.length;
+        if(length > 1)
+          for(int i = 1; i < length; i++)
+            expensesString += ', ' + expensesList[i];
+      }
+
+  }
 
   Future<void> uploadFile() async {
     // try {
@@ -106,13 +131,13 @@ class _NewReportScreenState extends State<NewReportScreen> {
 
       print(fileName);
 
+      expensesStringMaker();
+
       await collectionReference.doc(widget.post.data()['PatientId']).update({
           'Visits': widget.post.data()['Visits'] + 1,
       });
-      String expensesString = expenses[0];
-      for(int i = 1; i < expenses.length; i++) {
-        expensesString += ', ${expenses[i]}';
-      }
+
+
       collectionReference =
           FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
       String docName;
@@ -468,11 +493,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('OCT machine'),
-                        value: this.value,
+                        value: this.octMachine,
                         onChanged: (bool value) {
                           setState(() {
-                            this.value = value;
-                            expenses.add('OCT Machine');
+                            this.octMachine = value;
                           });
                         },
                       ),
@@ -480,11 +504,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           controlAffinity: ListTileControlAffinity.leading,
                           title:
                         Text('Perimeter'),
-                        value: this.value2,
+                        value: this.perimeter,
                         onChanged: (bool value) {
                           setState(() {
-                            this.value2 = value;
-                            expenses.add('Perimeter');
+                            this.perimeter = value;
                           });
                         },
                       ),
@@ -492,11 +515,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           controlAffinity: ListTileControlAffinity.leading,
                           title:
                         Text('Medicine'),
-                        value: this.value3,
+                        value: this.medicine,
                         onChanged: (bool check) {
                           setState(() {
-                            this.value3 = check;
-                            expenses.add('Medicine');
+                            this.medicine = check;
                           });
                         },
                       ),
@@ -504,11 +526,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           controlAffinity: ListTileControlAffinity.leading,
                           title:
                         Text('External doctor'),
-                        value: this.value4,
+                        value: this.externalDoctor,
                         onChanged: (bool check) {
-                          this.value4 = check;
+                          this.externalDoctor = check;
                           setState(() {
-                            expenses.add('External Doctor');
                           });
                         },
                       ),
@@ -516,11 +537,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('Nurse'),
-                        value: this.value5,
+                        value: this.nurse,
                         onChanged: (bool check) {
                           setState(() {
-                            this.value5 = check;
-                            expenses.add('Nurse');
+                            this.nurse = check;
                           });
                         },
                       ),
@@ -528,11 +548,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('Attendant'),
-                        value: this.value6,
+                        value: this.attendant,
                         onChanged: (bool check) {
                           setState(() {
-                            this.value6 = check;
-                            expenses.add('Attendant');
+                            this.attendant = check;
                           });
                         },
                       ),
@@ -542,7 +561,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           onChanged: (val) {
-                            otherExpenses = val ?? 'None';
+                            otherExpenses = val;
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,

@@ -63,11 +63,8 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
     // TODO: implement initState
     super.initState();
     print('${widget.post.data()['file name']}');
-    if(widget.post.data()['notes'] != null) {
-      notes = widget.post.data()['notes'];
-    } else {
-      notes = 'no notes';
-    }
+    notes = widget.post.data()['notes'] ?? 'N/A';
+
 
   }
   @override
@@ -236,7 +233,7 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                         },
                         child: Center(
                           child: Text(
-                            'Show Image',
+                            'Show File',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18.0,
