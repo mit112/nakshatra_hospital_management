@@ -32,10 +32,14 @@ class ReportDetailScreen extends StatefulWidget {
 
 class _ReportDetailScreenState extends State<ReportDetailScreen> {
 
-  String notes = '';
+  String notes;
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
   String filePath;
+  String expenses;
+  String otherFees;
+  String otherExpenses;
+
 
   Future<String> downloadFile(String firebaseReference) async {
 
@@ -64,7 +68,9 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
     super.initState();
     print('${widget.post.data()['file name']}');
     notes = widget.post.data()['notes'] ?? 'N/A';
-
+    expenses = widget.post.data()['expenses'] ?? 'N/A';
+    otherExpenses = widget.post.data()['other expenses'] ?? 'N/A';
+    otherFees = widget.post.data()['other fees'] ?? 'N/A';
 
   }
   @override
@@ -177,6 +183,22 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                              'Other Fees : ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              otherFees,
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
                               'fee details : ',
                               style: kBoldStyle,
                             ),
@@ -188,6 +210,38 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                         ),
                         SizedBox(
                           height: 10.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Expenses : ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              widget.post.data()['expenses'],
+                              style: kMyStyle,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Other Expenses : ',
+                              style: kBoldStyle,
+                            ),
+                            Text(
+                              otherExpenses,
+                              style: kMyStyle,
+                            ),
+                          ],
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

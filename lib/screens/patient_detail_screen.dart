@@ -25,7 +25,17 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
 
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
-  
+  String pNumber;
+  String pAddress;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pNumber = widget.post.data()['Number'] ?? 'N/A';
+    pAddress = widget.post.data()['Address'] ?? 'N/A';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +86,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                               style: kBoldStyle,
                             ),
                             Text(
-                              widget.post.data()['Number'],
+                              pNumber,
                               style: kMyStyle,
                             ),
                           ],
@@ -92,7 +102,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                               style: kBoldStyle,
                             ),
                             Text(
-                              widget.post.data()['Address'],
+                              pAddress,
                               style: kMyStyle,
                             ),
                           ],
