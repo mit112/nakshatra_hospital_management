@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,7 @@ class ot_register extends StatefulWidget {
 
 class _ot_registerState extends State<ot_register> {
   final formKey = GlobalKey<FormState>();
-  String _flu, _firstTime, _feeDetails, _otherExpenses, _feeAmount;
+  String _flu, swabResults, _feeDetails, _otherExpenses, _feeAmount;
   String pName, pTemp, pNumber, pAddress;
   String _selectedDate;
   String infecto;
@@ -87,10 +88,284 @@ class _ot_registerState extends State<ot_register> {
       valueStand = false,
       valueLegs = false,
       valueInstrument = false,
-      value69ac = false,
+      valueaircondition = false,
       valueair = false,
       valueplate = false,
       valuebelow = false;
+
+  String disinfectantsForManualCleaningString = '';
+  List<String> disinfectantsForManualCleaningList = [];
+
+  void disinfectantsForManualCleaningStringMaker() {
+    if (valuebaci)
+      disinfectantsForManualCleaningList
+          .add('Bacilloid solution 20ml/1 ltr water');
+    if (valueinfecto)
+      disinfectantsForManualCleaningList
+          .add('Infecto-Cide N 20 ml/1 ltr water');
+
+    if (disinfectantsForManualCleaningList.isNotEmpty) {
+      disinfectantsForManualCleaningString =
+          disinfectantsForManualCleaningList[0];
+      int length = disinfectantsForManualCleaningList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          disinfectantsForManualCleaningString +=
+              ', ' + disinfectantsForManualCleaningList[i];
+    }
+  }
+
+  String otAreaWipedCleanString = '';
+  List<String> otAreaWipedCleanList = [];
+
+  void otAreaWipedCleanStringMaker() {
+    if (valueopdwall) otAreaWipedCleanList.add('OPD Wall');
+    if (valuedeadwall) otAreaWipedCleanList.add('Dead Wall');
+    if (valueside) otAreaWipedCleanList.add('Door side wall & door');
+    if (valuepassage) otAreaWipedCleanList.add('Passage wall');
+    if (valueac) otAreaWipedCleanList.add('AC wall');
+    if (valuelower) otAreaWipedCleanList.add('Lower ceiling');
+    if (valueupper) otAreaWipedCleanList.add('Upper ceiling');
+
+    if (otAreaWipedCleanList.isNotEmpty) {
+      otAreaWipedCleanString = otAreaWipedCleanList[0];
+      int length = otAreaWipedCleanList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          otAreaWipedCleanString += ', ' + otAreaWipedCleanList[i];
+    }
+  }
+
+  String otEquipmentWipedCleanString = '';
+  List<String> otEquipmentWipedCleanList = [];
+
+  void otEquipmentWipedCleanStringMaker() {
+    if (valuemicroscope) otEquipmentWipedCleanList.add('Microscope Stand');
+    if (valuetable) otEquipmentWipedCleanList.add('OT table, including legs');
+    if (valuetrolley) otEquipmentWipedCleanList.add('Instrument trolley');
+    if (valuechair) otEquipmentWipedCleanList.add('Surgeons chair');
+    if (valueaddtrolley)
+      otEquipmentWipedCleanList.add('Additional storage trolley');
+    if (valuestool) otEquipmentWipedCleanList.add('Additional stool');
+
+    if (otEquipmentWipedCleanList.isNotEmpty) {
+      otEquipmentWipedCleanString = otEquipmentWipedCleanList[0];
+      int length = otEquipmentWipedCleanList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          otEquipmentWipedCleanString += ', ' + otEquipmentWipedCleanList[i];
+    }
+  }
+
+  String otNonAccessibleAreaSprayedWithDisinfectantString = '';
+  List<String> otNonAccessibleAreaSprayedWithDisinfectantList = [];
+
+  void otNonAccessibleAreaSprayedWithDisinfectantStringMaker() {
+    if (value4corner)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('4 corners of upper ceiling');
+    if (value2corner)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('2 corners of lower ceiling');
+    if (value4cornerfloor)
+      otNonAccessibleAreaSprayedWithDisinfectantList.add('4 corners of floor');
+    if (valueAC) otNonAccessibleAreaSprayedWithDisinfectantList.add('AC');
+    if (valuebottom)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Intricate geometry area of OT table bottom');
+    if (valuetrolleybottom)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Intricate geometry area of instrument trolley bottom');
+    if (valuetray)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Intricate geometry area of additional storage tray');
+    if (valueintristool)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Intricate geometry area of additional stool');
+    if (valueintrichair)
+      otNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Intricate geometry area of surgeons chair');
+
+    if (otEquipmentWipedCleanList.isNotEmpty) {
+      otNonAccessibleAreaSprayedWithDisinfectantString =
+          otNonAccessibleAreaSprayedWithDisinfectantList[0];
+      int length = otNonAccessibleAreaSprayedWithDisinfectantList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          otNonAccessibleAreaSprayedWithDisinfectantString +=
+              ', ' + otNonAccessibleAreaSprayedWithDisinfectantList[i];
+    }
+  }
+
+  String otFumigationChemicalsString = '';
+  List<String> otFumigationChemicalsList = [];
+
+  void otFumigationChemicalsStringMaker() {
+    if (valuebac) otFumigationChemicalsList.add('Bacilloid 20ml/1 ltr');
+    if (valueinfect) otFumigationChemicalsList.add('Infecto Cide-N 20ml/1 ltr');
+
+    if (otFumigationChemicalsList.isNotEmpty) {
+      otFumigationChemicalsString = otFumigationChemicalsList[0];
+      int length = otFumigationChemicalsList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          otFumigationChemicalsString += ', ' + otFumigationChemicalsList[i];
+    }
+  }
+
+  String washroomChemicalForManualCleaningString = '';
+  List<String> washroomChemicalForManualCleaningList = [];
+
+  void washroomChemicalForManualCleaningStringMaker() {
+    if (value20mlbac)
+      washroomChemicalForManualCleaningList.add('Bacilloid 20ml/1 ltr');
+    if (value20mlinfect)
+      washroomChemicalForManualCleaningList.add('Infecto Cide-N 20ml/1 ltr');
+
+    if (washroomChemicalForManualCleaningList.isNotEmpty) {
+      washroomChemicalForManualCleaningString =
+          washroomChemicalForManualCleaningList[0];
+      int length = washroomChemicalForManualCleaningList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          washroomChemicalForManualCleaningString +=
+              ', ' + washroomChemicalForManualCleaningList[i];
+    }
+  }
+
+  String washroomAreaWipedCleanString = '';
+  List<String> washroomAreaWipedCleanList = [];
+
+  void washroomAreaWipedCleanStringMaker() {
+    if (valuetiles)
+      washroomAreaWipedCleanList.add('Tiles on sides of wash basin');
+    if (valuegranite)
+      washroomAreaWipedCleanList.add('Granite around wash basin');
+    if (valueescape)
+      washroomAreaWipedCleanList.add('Escape route window sill(granite)');
+    if (valueotdoor) washroomAreaWipedCleanList.add('OT door wall & door');
+    if (valueexit) washroomAreaWipedCleanList.add('Exit door to passage');
+    if (valuewooden) washroomAreaWipedCleanList.add('Wooden bench');
+    if (valueFan) washroomAreaWipedCleanList.add('Fan');
+    if (valueouterarea)
+      washroomAreaWipedCleanList.add('Storage trolley outer area');
+    if (valueinsidedrawer)
+      washroomAreaWipedCleanList.add('Storage trolley inside drawers');
+    if (valueaC) washroomAreaWipedCleanList.add('AC');
+    if (valueFloor) washroomAreaWipedCleanList.add('Floor');
+    if (valuefumigation) washroomAreaWipedCleanList.add('Fumigation machine');
+    if (valuemedicine)
+      washroomAreaWipedCleanList
+          .add('Various medicines & chemicals bottles outer side');
+
+    if (washroomAreaWipedCleanList.isNotEmpty) {
+      washroomAreaWipedCleanString = washroomAreaWipedCleanList[0];
+      int length = washroomAreaWipedCleanList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          washroomAreaWipedCleanString += ', ' + washroomAreaWipedCleanList[i];
+    }
+  }
+
+  String washroomNonAccessibleAreaSprayedWithDisinfectantString = '';
+  List<String> washroomNonAccessibleAreaSprayedWithDisinfectantList = [];
+
+  void washroomNonAccessibleAreaSprayedWithDisinfectantStringMaker() {
+    if (value4cornerupper)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('4 corners of upper ceiling');
+    if (value4corneroffloor)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('4 corners of floor');
+    if (value4cornerescape)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('4 corners of escape route');
+    if (valuewashbasin)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Underneath wash basin');
+    if (valuewatertap)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Non-accessable area of water tap');
+    if (valuepurifier)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Behind water purifier');
+    if (valueunderneathbench)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Underneath wooden bench');
+    if (valueunderneathtrolley)
+      washroomNonAccessibleAreaSprayedWithDisinfectantList
+          .add('Underneath storage trolley');
+
+    if (washroomNonAccessibleAreaSprayedWithDisinfectantList.isNotEmpty) {
+      washroomNonAccessibleAreaSprayedWithDisinfectantString =
+          washroomNonAccessibleAreaSprayedWithDisinfectantList[0];
+      int length = washroomNonAccessibleAreaSprayedWithDisinfectantList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          washroomNonAccessibleAreaSprayedWithDisinfectantString +=
+              ', ' + washroomNonAccessibleAreaSprayedWithDisinfectantList[i];
+    }
+  }
+
+  String washroomChemicalForFumigationString = '';
+  List<String> washroomChemicalForFumigationList = [];
+
+  void washroomChemicalForFumigationStringMaker() {
+    if (valuechembac)
+      washroomChemicalForFumigationList.add('Bacilloid 20ml/1 ltr');
+    if (valuecheminfect)
+      washroomChemicalForFumigationList.add('Infecto Cide-N 20ml/1 ltr');
+
+    if (washroomChemicalForFumigationList.isNotEmpty) {
+      washroomChemicalForFumigationString =
+          washroomChemicalForFumigationList[0];
+      int length = washroomChemicalForFumigationList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          washroomChemicalForFumigationString +=
+              ', ' + washroomChemicalForFumigationList[i];
+    }
+  }
+
+  String swabSampleLocationsString = '';
+  List<String> swabSampleLocationsList = [];
+
+  void swabSampleLocationsStringMaker() {
+    if (valueOPD) swabSampleLocationsList.add('OPD wall');
+    if (valueDead) swabSampleLocationsList.add('Dead wall');
+    if (valueDoorside) swabSampleLocationsList.add('Door wall & door');
+    if (valuePassageWall) swabSampleLocationsList.add('Passage wall');
+    if (valueACWall) swabSampleLocationsList.add('AC wall');
+    if (valueLowerCeiling) swabSampleLocationsList.add('Lower ceiling');
+    if (valueUpperCeiling) swabSampleLocationsList.add('Upper ceiling');
+    if (valueStand) swabSampleLocationsList.add('Microscope head');
+    if (valueLegs) swabSampleLocationsList.add('OT table');
+    if (valueInstrument) swabSampleLocationsList.add('Instrument trolley');
+    if (valueaircondition) swabSampleLocationsList.add('AC');
+    if (valueair) swabSampleLocationsList.add('Air');
+    if (valueplate) swabSampleLocationsList.add('Culture plate');
+    if (valuebelow)
+      swabSampleLocationsList.add('Wash room-specify location in Other  below');
+
+    if (swabSampleLocationsList.isNotEmpty) {
+      swabSampleLocationsString = swabSampleLocationsList[0];
+      int length = swabSampleLocationsList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          swabSampleLocationsString += ', ' + swabSampleLocationsList[i];
+    }
+  }
+
+  void addData() {
+    CollectionReference collectionReference =
+        FirebaseFirestore.instance.collection('otregister');
+
+    //String makers fun
+
+    collectionReference.add({
+      //OT details
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -430,7 +705,7 @@ class _ot_registerState extends State<ot_register> {
                                   value: this.valueaddtrolley,
                                   onChanged: (bool value) {
                                     setState(() {
-                                      this.valueaddtrolley= value;
+                                      this.valueaddtrolley = value;
                                     });
                                   },
                                 ),
@@ -521,10 +796,10 @@ class _ot_registerState extends State<ot_register> {
                               CheckboxListTile(
                                 title: Text(
                                     'Intricate geometry area of OT table bottom'),
-                                value: this.valuebottom ,
+                                value: this.valuebottom,
                                 onChanged: (bool value) {
                                   setState(() {
-                                    this.valuebottom  = value;
+                                    this.valuebottom = value;
                                   });
                                 },
                               ),
@@ -1213,7 +1488,7 @@ class _ot_registerState extends State<ot_register> {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Washroom-chemical used for manual cleaning',
+                                            'Washroom-chemical used for fumigation',
                                             style: TextStyle(
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.w400,
@@ -1459,10 +1734,10 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                         CheckboxListTile(
                                           title: Text('AC'),
-                                          value: this.value69ac,
+                                          value: this.valueaircondition,
                                           onChanged: (bool value) {
                                             setState(() {
-                                              this.value69ac = value;
+                                              this.valueaircondition = value;
                                             });
                                           },
                                         ),
@@ -1569,9 +1844,9 @@ class _ot_registerState extends State<ot_register> {
                                             children: [
                                               Radio(
                                                   value: 'Yes',
-                                                  groupValue: _firstTime,
+                                                  groupValue: swabResults,
                                                   onChanged: (val) {
-                                                    _firstTime = val;
+                                                    swabResults = val;
                                                     setState(() {});
                                                   }),
                                               Flexible(
@@ -1585,9 +1860,9 @@ class _ot_registerState extends State<ot_register> {
                                             children: [
                                               Radio(
                                                   value: 'No',
-                                                  groupValue: _firstTime,
+                                                  groupValue: swabResults,
                                                   onChanged: (val) {
-                                                    _firstTime = val;
+                                                    swabResults = val;
                                                     setState(() {});
                                                   }),
                                               Text(

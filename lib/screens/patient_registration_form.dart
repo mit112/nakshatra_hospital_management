@@ -8,11 +8,11 @@ class PatientRegistrationForm extends StatefulWidget {
   const PatientRegistrationForm({Key key}) : super(key: key);
 
   @override
-  _PatientRegistrationFormState createState() => _PatientRegistrationFormState();
+  _PatientRegistrationFormState createState() =>
+      _PatientRegistrationFormState();
 }
 
 class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
-
   final formKey = GlobalKey<FormState>();
 
   String pName;
@@ -26,9 +26,9 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
 
-  void addData() async{
+  void addData() async {
     String docName;
-    if(formKey.currentState.validate()) {
+    if (formKey.currentState.validate()) {
       docName = '$pNumber$pName';
       await collectionReference.doc(docName).set({
         'Name': pName,
@@ -49,12 +49,11 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
         title: Text(
           'Patient Registration',
           style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              letterSpacing: 0.5,
-            )
-          ),
+              textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 18.0,
+            letterSpacing: 0.5,
+          )),
         ),
         elevation: 8.0,
         backgroundColor: Colors.green[500],
@@ -62,7 +61,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
-          },
+        },
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -70,7 +69,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                 height: 10.0,
               ),
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -88,7 +87,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                           setState(() {});
                         },
                         keyboardType: TextInputType.name,
-                         textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           labelText: 'Name',
                           labelStyle: TextStyle(
@@ -105,13 +104,14 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         initialValue: '',
                         type: DateTimePickerType.date,
                         dateLabelText: 'Date of Birth',
-                        firstDate: DateTime.now().subtract(Duration(days: 36500)),
+                        firstDate:
+                            DateTime.now().subtract(Duration(days: 36500)),
                         lastDate: DateTime.now().add(Duration(days: 365)),
                         validator: (value) {
                           return null;
                         },
                         onChanged: (value) {
-                          if(value.isNotEmpty) {
+                          if (value.isNotEmpty) {
                             setState(() {
                               pBirthDate = value;
                             });
@@ -146,7 +146,9 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.0,),
+                      SizedBox(
+                        height: 20.0,
+                      ),
                       SizedBox(
                         height: 20.0,
                       ),
@@ -176,14 +178,14 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         children: [
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
+                                const EdgeInsets.symmetric(horizontal: 60.0),
                             child: Container(
                               height: 48.0,
                               child: Material(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(20.0),
                                 shadowColor:
-                                Colors.greenAccent.withOpacity(0.8),
+                                    Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
                                 child: GestureDetector(
                                   onTap: addData,
