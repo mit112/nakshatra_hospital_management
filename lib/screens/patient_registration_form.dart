@@ -1,9 +1,10 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-
+import 'package:intl/intl.dart';
 class PatientRegistrationForm extends StatefulWidget {
   const PatientRegistrationForm({Key key}) : super(key: key);
 
@@ -14,8 +15,12 @@ class PatientRegistrationForm extends StatefulWidget {
 
 class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
   final formKey = GlobalKey<FormState>();
-
-  String pName;
+  String dtoday = DateTime.now().toString();
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+  DateTime today = new DateTime.now();
+  double _scaleFactor = 1.0;
+  bool stayOnBottom = false;
+  String pName,sName;
   String pAddress;
   String pNumber;
   String pBirthDate;
@@ -27,11 +32,13 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
       FirebaseFirestore.instance.collection('patients');
 
   void addData() async {
+    print(dateFormat);
     String docName;
     if (formKey.currentState.validate()) {
       docName = '$pNumber$pName';
       await collectionReference.doc(docName).set({
-        'Name': pName,
+        'Firstname': pName,
+        'Surname': sName,
         'Number': pNumber,
         'Address': pAddress,
         'BirthDate': pBirthDate,
@@ -89,10 +96,31 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                          labelText: 'Name',
+                          labelText: 'Firstname',
                           labelStyle: TextStyle(
                             height: 1.2,
-                            fontStyle: FontStyle.italic,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return val.isNotEmpty ? null : "Enter Surname";
+                        },
+                        //
+                        onChanged: (val) {
+                          sName = val;
+                          setState(() {});
+                        },
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: 'Surname',
+                          labelStyle: TextStyle(
+                            height: 1.2,
                             fontSize: 18.0,
                           ),
                         ),
@@ -101,15 +129,15 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         height: 20.0,
                       ),
                       DateTimePicker(
+                        validator: (val) {
+                          return val.isNotEmpty ? null : "Enter Date";
+                        },
                         initialValue: '',
                         type: DateTimePickerType.date,
                         dateLabelText: 'Date of Birth',
                         firstDate:
                             DateTime.now().subtract(Duration(days: 36500)),
                         lastDate: DateTime.now().add(Duration(days: 365)),
-                        validator: (value) {
-                          return null;
-                        },
                         onChanged: (value) {
                           if (value.isNotEmpty) {
                             setState(() {
@@ -149,9 +177,6 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
                       TextFormField(
                         onChanged: (val) {
                           pNumber = val;
@@ -172,41 +197,42 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         height: 20.0,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
-                              child: Material(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor:
+                      BouncingWidget(
+                        scaleFactor: _scaleFactor,
+                        stayOnBottom: stayOnBottom,
+                        onPressed: addData,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                              child: Container(
+                                height: 48.0,
+                                child: InkWell(
+                                  splashColor: Colors.blue[100],
+                                  child: Material(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    shadowColor:
                                     Colors.greenAccent.withOpacity(0.8),
-                                elevation: 7.0,
-                                child: GestureDetector(
-                                  onTap: addData,
-                                  child: Center(
-                                    child: Text(
-                                      'Submit',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Colors.white,
+                                    elevation: 7.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Submit',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,8 +18,11 @@ class _ViewPatientsState extends State<ViewPatients> {
   // String name='h';
   String currentid;
   String uid = auth.currentUser.uid.toString();
+  // Timestamp t = document['Register Date'];
+  // DateTime d = t.toDate();
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
+
 
   Future getPosts() async {
     QuerySnapshot qn = await collectionReference.get();
@@ -83,7 +87,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                             ),
                             child: ListTile(
                                 title: Text(
-                                  snapshot.data[index].data()["Name"],
+                                 '${snapshot.data[index].data()["Firstname"]} ${snapshot.data[index].data()["Surname"]} ',
                                   style: GoogleFonts.inter(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500,
@@ -91,7 +95,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                                   ),
                                 ),
                                 subtitle: Text(
-                                  "25/05/2021",
+                                 '${snapshot.data[index].data()["BirthDate"]}',
                                   style: GoogleFonts.inter(
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w500,
@@ -125,6 +129,7 @@ class _ViewPatientsState extends State<ViewPatients> {
       ),
     );
   }
+
 }
 
 const kFieldStyle = TextStyle(

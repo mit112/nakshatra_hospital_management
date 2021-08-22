@@ -62,7 +62,7 @@ class _HomepageState extends State<Homepage> {
                 //   backgroundColor: Colors.blue[100],
                 // ),
                 accountName: Text(
-                  'Nakshatra Hospital.',
+                  'Nakshatra iCare.',
                   style:GoogleFonts.roboto(
                     textStyle: TextStyle(
                       color: Colors.white70,
@@ -72,7 +72,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 accountEmail: Text(
-                  'hello@ac.in',
+                  'Nakshatra@ac.in',
                    style:GoogleFonts.roboto(
                   textStyle: TextStyle(
                   color: Colors.white60,
@@ -425,6 +425,49 @@ class _HomepageState extends State<Homepage> {
                                 child: Center(
                                   child: Text(
                                     'View Patients',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  BouncingWidget(
+                    scaleFactor: _scaleFactor,
+                    stayOnBottom: stayOnBottom,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchPatients()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: Container(
+                            height: 48.0,
+                            child: InkWell(
+                              splashColor: Colors.blue[100],
+                              child: Material(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20.0),
+                                shadowColor:
+                                Colors.greenAccent.withOpacity(0.8),
+                                elevation: 7.0,
+                                child: Center(
+                                  child: Text(
+                                    'Search Patients',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0,

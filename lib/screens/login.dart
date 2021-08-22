@@ -1,3 +1,4 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,9 @@ class Authenticate extends StatefulWidget {
 
 class _AuthenticateState extends State<Authenticate> {
   String email;
+  double _scaleFactor = 1.0;
+  bool stayOnBottom = false;
+
   String password;
   bool loading = false;
 
@@ -210,27 +214,27 @@ class _AuthenticateState extends State<Authenticate> {
                         SizedBox(
                           height: 40.0,
                         ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 60.0),
-                              child: Container(
-                                height: 45.0,
-                                child: Material(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor:
-                                      Colors.black.withOpacity(0.8),
-                                  elevation: 7.0,
-                                  child: GestureDetector(
-                                    onTap: login,
+                        BouncingWidget(
+                          scaleFactor: _scaleFactor,
+                          stayOnBottom: stayOnBottom,
+                          onPressed:login,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                child: Container(
+                                  height: 48.0,
+                                  child: Material(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    shadowColor: Colors.black.withOpacity(0.8),
+                                    elevation: 7.0,
                                     child: Center(
                                       child: Text(
                                         'Login',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
+                                          fontSize: 18.0,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -238,8 +242,8 @@ class _AuthenticateState extends State<Authenticate> {
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
