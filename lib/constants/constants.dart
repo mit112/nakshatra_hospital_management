@@ -28,7 +28,6 @@ const kTextFieldDecoration = InputDecoration(
 );
 
 const kMyStyle = TextStyle(
-  fontFamily: kFont,
   color: Colors.black,
   //fontWeight: FontWeight.w600,
   fontSize: 25.0,
