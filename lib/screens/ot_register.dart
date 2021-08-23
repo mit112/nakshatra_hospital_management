@@ -1930,7 +1930,7 @@ class _ot_registerState extends State<ot_register> {
 
                                                       child: Center(
                                                         child: Text(
-                                                          'Upload File',
+                                                          'Upload Files',
                                                           style: TextStyle(
                                                             fontWeight: FontWeight.bold,
                                                             fontSize: 16.0,
