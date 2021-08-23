@@ -16,7 +16,9 @@ class ot_register extends StatefulWidget {
 class _ot_registerState extends State<ot_register> {
   final formKey = GlobalKey<FormState>();
   String _flu, swabResults, _feeDetails, _otherExpenses, _feeAmount;
-  String pName, pTemp, pNumber, pAddress,pOTDisinfectant,pOTarea,pOTEquipment,pOTNonaccessible,pOTfumigation,pWashroom,pWashroom_area,pWashroomNon_accessible,pWashroom_chemical,pSwab_sample,pSwab_result;
+  String pTemp, pNumber, pAddress,pOTDisinfectant,pOTarea,pOTEquipment,pOTNonaccessible,pOTfumigation,pWashroom,pWashroom_area,pWashroomNon_accessible,pWashroom_chemical,pSwab_sample,pSwab_result, pManual_started,
+      pManual_completed,pFumigation_started,pFumigation_completed,pWashroom_started,pWashroom_completed,pWfumigation_started,pWfumigation_completed,
+  pSwab_takentime;
   String _selectedDate;
   String infecto;
 
@@ -444,6 +446,10 @@ class _ot_registerState extends State<ot_register> {
                               validator: (val) {
                                 return val.isNotEmpty ? null : "Enter Time";
                               },
+                              onChanged: (val) {
+                                pManual_started = val;
+                                setState(() {});
+                              },
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
@@ -461,7 +467,10 @@ class _ot_registerState extends State<ot_register> {
                             TextFormField(
                               validator: (val) {
                                 return val.isNotEmpty ? null : "Enter Time";
-                              },
+                              }, onChanged: (val) {
+                              pManual_completed = val;
+                              setState(() {});
+                            },
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
@@ -900,7 +909,7 @@ class _ot_registerState extends State<ot_register> {
                                   return val.isNotEmpty ? null : "Enter Time";
                                 },
                                 onChanged: (val) {
-                                  pNumber = val;
+                                  pFumigation_started = val;
                                   setState(() {});
                                 },
                                 keyboardType: TextInputType.number,
@@ -922,7 +931,7 @@ class _ot_registerState extends State<ot_register> {
                                   return val.isNotEmpty ? null : "Enter Time";
                                 },
                                 onChanged: (val) {
-                                  pNumber = val;
+                                  pFumigation_completed = val;
                                   setState(() {});
                                 },
                                 keyboardType: TextInputType.number,
@@ -1036,7 +1045,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                   //
                                   onChanged: (val) {
-                                    pName = val;
+                                    pWashroom_started = val;
                                     setState(() {});
                                   },
                                   keyboardType: TextInputType.name,
@@ -1057,7 +1066,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                   //
                                   onChanged: (val) {
-                                    pName = val;
+                                    pWashroom_completed = val;
                                     setState(() {});
                                   },
                                   keyboardType: TextInputType.name,
@@ -1442,7 +1451,7 @@ class _ot_registerState extends State<ot_register> {
                                       },
                                       //
                                       onChanged: (val) {
-                                        pName = val;
+                                        pWfumigation_started = val;
                                         setState(() {});
                                       },
                                       keyboardType: TextInputType.name,
@@ -1468,7 +1477,7 @@ class _ot_registerState extends State<ot_register> {
                                       },
                                       //
                                       onChanged: (val) {
-                                        pName = val;
+                                        pWfumigation_completed = val;
                                         setState(() {});
                                       },
                                       keyboardType: TextInputType.name,
@@ -1617,7 +1626,7 @@ class _ot_registerState extends State<ot_register> {
                                         },
                                         //
                                         onChanged: (val) {
-                                          pName = val;
+                                          pSwab_takentime = val;
                                           setState(() {});
                                         },
                                         keyboardType: TextInputType.name,
