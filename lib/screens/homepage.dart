@@ -300,7 +300,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(350.0, 98.0, 0.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(351.0, 98.0, 0.0, 0.0),
                   child: FittedBox(
                     fit: BoxFit.fitWidth,
                     child: Text(
