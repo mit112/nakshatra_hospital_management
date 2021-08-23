@@ -1911,7 +1911,44 @@ class _ot_registerState extends State<ot_register> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 31.0,
+                                            height: 20,
+                                          ),
+                                          Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                const EdgeInsets.symmetric(horizontal: 60.0),
+                                                child: Container(
+                                                  height: 40.0,
+                                                  child: Material(
+                                                    color: Colors.green,
+                                                    borderRadius: BorderRadius.circular(15.0),
+                                                    shadowColor:
+                                                    Colors.greenAccent.withOpacity(0.8),
+                                                    elevation: 7.0,
+                                                    child: GestureDetector(
+
+                                                      child: Center(
+                                                        child: Text(
+                                                          'Upload File',
+                                                          style: TextStyle(
+                                                            fontWeight: FontWeight.bold,
+                                                            fontSize: 16.0,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 25,
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 40.0,
                                           ),
                                           Column(
                                             children: [
@@ -1925,7 +1962,7 @@ class _ot_registerState extends State<ot_register> {
                                                     color: Colors.green,
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            20.0),
+                                                            30.0),
                                                     shadowColor: Colors
                                                         .greenAccent
                                                         .withOpacity(0.8),
