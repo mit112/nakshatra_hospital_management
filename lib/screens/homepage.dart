@@ -424,7 +424,7 @@ class _HomepageState extends State<Homepage> {
                                 elevation: 7.0,
                                 child: Center(
                                   child: Text(
-                                    'View Patients',
+                                    'Registered Patients',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18.0,
