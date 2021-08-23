@@ -181,7 +181,7 @@ class _HomepageState extends State<Homepage> {
                       width: 30,
                     ),
                     Text(
-                      'View Patients',
+                      'Registered Patients',
                       style: GoogleFonts.roboto(
                         textStyle: TextStyle(
                           color: Colors.black,

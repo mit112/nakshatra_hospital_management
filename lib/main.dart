@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Nakshatra Hospital',
+        title: 'Nakshatra Eye Care',
         theme: ThemeData(
           appBarTheme: AppBarTheme(
           brightness: Brightness.dark,
