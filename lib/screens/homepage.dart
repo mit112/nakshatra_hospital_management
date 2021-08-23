@@ -289,7 +289,7 @@ class _HomepageState extends State<Homepage> {
                   child: FittedBox(
                     fit: BoxFit.fitWidth,
                     child: Text(
-                      'Hospital',
+                      'Eye Care',
                       style: GoogleFonts.openSans(
                         textStyle: TextStyle(
                           fontSize: 80.0,
