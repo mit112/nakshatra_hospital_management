@@ -16,7 +16,7 @@ class ot_register extends StatefulWidget {
 class _ot_registerState extends State<ot_register> {
   final formKey = GlobalKey<FormState>();
   String _flu, swabResults, _feeDetails, _otherExpenses, _feeAmount;
-  String pName, pTemp, pNumber, pAddress;
+  String pName, pTemp, pNumber, pAddress,pOTDisinfectant,pOTarea,pOTEquipment,pOTNonaccessible,pOTfumigation,pWashroom,pWashroom_area,pWashroomNon_accessible,pWashroom_chemical,pSwab_sample,pSwab_result;
   String _selectedDate;
   String infecto;
 
@@ -528,7 +528,7 @@ class _ot_registerState extends State<ot_register> {
                                     },
                                     //
                                     onChanged: (val) {
-                                      pName = val;
+                                      pOTDisinfectant = val;
                                       setState(() {});
                                     },
                                     keyboardType: TextInputType.name,
@@ -633,7 +633,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                   //
                                   onChanged: (val) {
-                                    pName = val;
+                                    pOTarea = val;
                                     setState(() {});
                                   },
                                   keyboardType: TextInputType.name,
@@ -727,7 +727,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                   //
                                   onChanged: (val) {
-                                    pName = val;
+                                    pOTEquipment = val;
                                     setState(() {});
                                   },
                                   keyboardType: TextInputType.name,
@@ -852,7 +852,7 @@ class _ot_registerState extends State<ot_register> {
                                 },
                                 //
                                 onChanged: (val) {
-                                  pName = val;
+                                  pOTNonaccessible = val;
                                   setState(() {});
                                 },
                                 keyboardType: TextInputType.name,
@@ -974,7 +974,11 @@ class _ot_registerState extends State<ot_register> {
                                   height: 10.0,
                                 ),
                                 TextFormField(
-                                  //
+                                   onChanged: (val) {
+                                     pOTfumigation = val;
+                                     setState(() {}
+                                     );
+                                                                   },
 
                                   keyboardType: TextInputType.name,
                                   textInputAction: TextInputAction.next,
@@ -1110,7 +1114,7 @@ class _ot_registerState extends State<ot_register> {
                                   },
                                   //
                                   onChanged: (val) {
-                                    pName = val;
+                                    pWashroom = val;
                                     setState(() {});
                                   },
                                   keyboardType: TextInputType.name,
@@ -1271,7 +1275,7 @@ class _ot_registerState extends State<ot_register> {
                                     },
                                     //
                                     onChanged: (val) {
-                                      pName = val;
+                                      pWashroom_area = val;
                                       setState(() {});
                                     },
                                     keyboardType: TextInputType.name,
@@ -1386,7 +1390,7 @@ class _ot_registerState extends State<ot_register> {
                                       },
                                       //
                                       onChanged: (val) {
-                                        pName = val;
+                                        pWashroomNon_accessible = val;
                                         setState(() {});
                                       },
                                       keyboardType: TextInputType.name,
@@ -1526,7 +1530,7 @@ class _ot_registerState extends State<ot_register> {
                                         },
                                         //
                                         onChanged: (val) {
-                                          pName = val;
+                                          pWashroom_chemical= val;
                                           setState(() {});
                                         },
                                         keyboardType: TextInputType.name,
@@ -1780,7 +1784,7 @@ class _ot_registerState extends State<ot_register> {
                                           },
                                           //
                                           onChanged: (val) {
-                                            pName = val;
+                                            pSwab_sample= val;
                                             setState(() {});
                                           },
                                           keyboardType: TextInputType.name,
@@ -1880,7 +1884,7 @@ class _ot_registerState extends State<ot_register> {
                                             },
                                             //
                                             onChanged: (val) {
-                                              pName = val;
+                                              pSwab_result= val;
                                               setState(() {});
                                             },
                                             keyboardType: TextInputType.name,
