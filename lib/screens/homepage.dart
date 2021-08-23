@@ -299,19 +299,6 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(300.0, 98.0, 0.0, 0.0),
-                  child: FittedBox(
-                    fit: BoxFit.fitWidth,
-                    child: Text(
-                      '.',
-                      style: TextStyle(
-                          fontSize: 120.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green),
-                    ),
-                  ),
-                ),
               ],
             ),
 
