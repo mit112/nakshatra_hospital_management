@@ -15,6 +15,7 @@ class ViewPatients extends StatefulWidget {
 
 class _ViewPatientsState extends State<ViewPatients> {
   DocumentSnapshot doc;
+  List list = List();
   // String name='h';
   String currentid;
   String uid = auth.currentUser.uid.toString();
@@ -22,6 +23,14 @@ class _ViewPatientsState extends State<ViewPatients> {
   // DateTime d = t.toDate();
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
+
+  delete() async{
+    print("checking");
+    CollectionReference reference =
+    FirebaseFirestore.instance.collection("patients");
+    QuerySnapshot query = await reference.get();
+    query.docs[0].reference.delete();
+  }
 
 
   Future getPosts() async {
@@ -68,60 +77,65 @@ class _ViewPatientsState extends State<ViewPatients> {
                 // ignore: missing_return
                 itemCount: snapshot.data.length,
                 itemBuilder: (_, index) {
+                  final item = snapshot.data[index].data();
+                  final name = '${snapshot.data[index].data()["Firstname"]} ${snapshot.data[index].data()["Surname"]}';
                   return Slidable(
-                    actionPane: SlidableDrawerActionPane(),
-                    actionExtentRatio: 0.3,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Card(
-                            elevation: 4,
-                            shadowColor: Colors.black.withOpacity(0.8),
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.2,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Card(
+                              elevation: 4,
+                              shadowColor: Colors.black.withOpacity(0.8),
+                              color: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: ListTile(
+                                  title: Text(
+                                   '${snapshot.data[index].data()["Firstname"]} ${snapshot.data[index].data()["Surname"]} ',
+                                    style: GoogleFonts.inter(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                   '${snapshot.data[index].data()["BirthDate"]}',
+                                    style: GoogleFonts.inter(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  onTap: () => navigateToPatientDetail(
+                                      snapshot.data[index]),
+                                  leading: Container(
+                                    child: Icon(
+                                      FontAwesomeIcons.circleNotch,
+                                      color: Colors.indigo[300],
+                                    ),
+                                  )),
                             ),
-                            child: ListTile(
-                                title: Text(
-                                 '${snapshot.data[index].data()["Firstname"]} ${snapshot.data[index].data()["Surname"]} ',
-                                  style: GoogleFonts.inter(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                 '${snapshot.data[index].data()["BirthDate"]}',
-                                  style: GoogleFonts.inter(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                onTap: () => navigateToPatientDetail(
-                                    snapshot.data[index]),
-                                leading: Container(
-                                  child: Icon(
-                                    FontAwesomeIcons.circleNotch,
-                                    color: Colors.indigo[300],
-                                  ),
-                                )),
                           ),
-                        ),
+                        ],
+                      ), //testing
+                      secondaryActions: [
+                        IconSlideAction(
+                          caption: "Delete",
+                          color:Colors.indigo[300],
+                          icon: Icons.delete,
+                          onTap: () {
+                            delete();
+                            ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text('$name dismissed')));
+                      },
+
+                        )
                       ],
-                    ), //testing
-                    secondaryActions: [
-                      IconSlideAction(
-                        caption: "Delete",
-                        color: Colors.green,
-                        icon: Icons.delete,
-                        onTap: () {},
-                      )
-                    ],
                   );
                 });
           }

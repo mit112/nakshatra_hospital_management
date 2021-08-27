@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart';
 
@@ -120,7 +121,13 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Date : ',
-                              style: kBoldStyle,
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),
                             ),
                             Text(
                               widget.post.data()['date'],
@@ -136,12 +143,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Temperature : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               widget.post.data()['body temp'],
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -152,12 +170,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Flu symptoms : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               '${widget.post.data()['flu symptoms']}',
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -168,12 +197,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'fee collected : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               widget.post.data()['fee collected'],
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -184,12 +224,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Other Fees : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               otherFees,
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -200,12 +251,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'fee details : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               widget.post.data()['fee details'],
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -216,12 +278,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Expenses : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               widget.post.data()['expenses'],
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -235,12 +308,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Other Expenses : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                               otherExpenses,
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         Column(
@@ -248,12 +332,23 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                           children: [
                             Text(
                               'Notes : ',
-                              style: kBoldStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22.0,
+                                  fontWeight:FontWeight.w500,
+                                ),
+                              ),                            ),
                             Text(
                                 notes,
-                              style: kMyStyle,
-                            ),
+                              style: GoogleFonts.roboto(
+                                textStyle: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontSize: 22.0,
+                                    fontWeight:FontWeight.w500,
+                                    letterSpacing: 0.5
+                                ),
+                              ),                            ),
                           ],
                         ),
                         SizedBox(
@@ -262,7 +357,13 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
           BouncingWidget(
             scaleFactor: _scaleFactor,
             stayOnBottom: stayOnBottom,
-            onPressed: () {  },
+            onPressed: () async {
+              await downloadFile('${widget.post.data()['file name']}');
+              print(filePath);
+              if(filePath != null) {
+                OpenFile.open(filePath);
+              }
+            },
             child: Column(
               children: [
                 Padding(
@@ -279,11 +380,7 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                       child: InkWell(
                         splashColor: Colors.indigo[200],
                         onTap: () async {
-                          await downloadFile('${widget.post.data()['file name']}');
-                          print(filePath);
-                          if(filePath != null) {
-                            OpenFile.open(filePath);
-                          }
+
                         },
                         child: Center(
                           child: Text(

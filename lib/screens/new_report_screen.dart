@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class NewReportScreen extends StatefulWidget {
 
 class _NewReportScreenState extends State<NewReportScreen> {
   final formKey = GlobalKey<FormState>();
+  double _scaleFactor = 1.0;
+  bool stayOnBottom = false;
   bool check = false;
   bool octMachine = false,perimeter = false,medicine = false,externalDoctor = false,
       nurse = false,
@@ -608,31 +611,35 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Column(
                         children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
-                              child: Material(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor:
-                                Colors.greenAccent.withOpacity(0.8),
-                                elevation: 7.0,
-                                child: GestureDetector(
-                                  onTap: selectFile,
-                                  child: Center(
-                                    child: Text(
-                                      'Select File',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Colors.white,
+                          BouncingWidget(
+                            scaleFactor: _scaleFactor,
+                            stayOnBottom: stayOnBottom,
+                            onPressed: selectFile,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                  child: Container(
+                                    height: 48.0,
+                                    child: Material(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                      elevation: 7.0,
+                                      child: Center(
+                                        child: Text(
+                                          'Select file',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                           SizedBox(
@@ -645,31 +652,35 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Column(
                         children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
-                              child: Material(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor:
-                                Colors.greenAccent.withOpacity(0.8),
-                                elevation: 7.0,
-                                child: GestureDetector(
-                                  onTap: addData,
-                                  child: Center(
-                                    child: Text(
-                                      'Submit',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Colors.white,
+                          BouncingWidget(
+                            scaleFactor: _scaleFactor,
+                            stayOnBottom: stayOnBottom,
+                            onPressed: addData,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                  child: Container(
+                                    height: 48.0,
+                                    child: Material(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                      elevation: 7.0,
+                                      child: Center(
+                                        child: Text(
+                                          'Submit',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                           SizedBox(

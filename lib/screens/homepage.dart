@@ -62,7 +62,7 @@ class _HomepageState extends State<Homepage> {
                 //   backgroundColor: Colors.blue[100],
                 // ),
                 accountName: Text(
-                  'Nakshatra iCare.',
+                  'Nakshatra Eye Care.',
                   style:GoogleFonts.roboto(
                     textStyle: TextStyle(
                       color: Colors.white70,

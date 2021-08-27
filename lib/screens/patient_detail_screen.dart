@@ -281,7 +281,13 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                       BouncingWidget(
                         scaleFactor: _scaleFactor,
                         stayOnBottom: stayOnBottom,
-                        onPressed: () {  },
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      NewReportScreen(widget.post)));
+                        },
                         child: Column(
                           children: [
                             Padding(
@@ -292,26 +298,15 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                 child: Material(
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor:
-                                  Colors.greenAccent.withOpacity(0.8),
+                                  shadowColor: Colors.greenAccent.withOpacity(0.8),
                                   elevation: 7.0,
-                                  child: InkWell(
-                                    splashColor: Colors.indigo[200],
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NewReportScreen(widget.post)));
-                                    },
-                                    child: Center(
-                                      child: Text(
-                                        'New Report',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.0,
-                                          color: Colors.white,
-                                        ),
+                                  child: Center(
+                                    child: Text(
+                                      'New Report',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
@@ -327,7 +322,13 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                       BouncingWidget(
                         scaleFactor: _scaleFactor,
                         stayOnBottom: stayOnBottom,
-                        onPressed: () {  },
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ViewReports(widget.post)));
+                        },
                         child: Column(
                           children: [
                             Padding(
@@ -338,26 +339,15 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                 child: Material(
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor:
-                                  Colors.greenAccent.withOpacity(0.8),
+                                  shadowColor: Colors.greenAccent.withOpacity(0.8),
                                   elevation: 7.0,
-                                  child: InkWell(
-                                    splashColor: Colors.indigo[200],
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewReports(widget.post)));
-                                    },
-                                    child: Center(
-                                      child: Text(
-                                        'Old Reports',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.0,
-                                          color: Colors.white,
-                                        ),
+                                  child: Center(
+                                    child: Text(
+                                      'Old Reports',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
