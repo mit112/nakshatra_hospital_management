@@ -73,14 +73,14 @@ class _SearchPatientsState extends State<SearchPatients> {
             child: ListTile(
               leading: Icon(Icons.person),
               title: Text(
-                snapshotData.docs[index].data()['Name'],
+                snapshotData.docs[index].data()['Name'] ?? 'N/A',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 22.0),
               ),
               subtitle: Text(
-                snapshotData.docs[index].data()['Address'],
+                snapshotData.docs[index].data()['Address'] ?? 'N/A',
                 style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,

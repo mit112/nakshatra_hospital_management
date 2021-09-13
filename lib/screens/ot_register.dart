@@ -1,3 +1,4 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +16,32 @@ class ot_register extends StatefulWidget {
 
 class _ot_registerState extends State<ot_register> {
   final formKey = GlobalKey<FormState>();
-  String _flu, swabResults, _feeDetails, _otherExpenses, _feeAmount;
-  String pTemp, pNumber, pAddress,pOTDisinfectant,pOTarea,pOTEquipment,pOTNonaccessible,pOTfumigation,pWashroom,pWashroom_area,pWashroomNon_accessible,pWashroom_chemical,pSwab_sample,pSwab_result, pManual_started,
-      pManual_completed,pFumigation_started,pFumigation_completed,pWashroom_started,pWashroom_completed,pWfumigation_started,pWfumigation_completed,
-  pSwab_takentime;
+  String swabResults;
+  double _scaleFactor = 1.0;
+  bool stayOnBottom = false;
+  String pTemp,
+      pNumber,
+      pAddress,
+      pOTDisinfectant,
+      pOTarea,
+      pOTEquipment,
+      pOTNonaccessible,
+      pOTfumigation,
+      pWashroom,
+      pWashroom_area,
+      pWashroomNon_accessible,
+      pWashroom_chemical,
+      pSwab_sample,
+      pSwab_result,
+      pManual_started,
+      pManual_completed,
+      pFumigation_started,
+      pFumigation_completed,
+      pWashroom_started,
+      pWashroom_completed,
+      pWfumigation_started,
+      pWfumigation_completed,
+      pSwab_takentime;
   String _selectedDate;
   String infecto;
 
@@ -358,15 +381,59 @@ class _ot_registerState extends State<ot_register> {
     }
   }
 
-  void addData() {
+  void addOTData() {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('otregister');
+    int docuName;
 
     //String makers fun
+    disinfectantsForManualCleaningStringMaker();
+    otAreaWipedCleanStringMaker();
+    otEquipmentWipedCleanStringMaker();
+    otFumigationChemicalsStringMaker();
+    otNonAccessibleAreaSprayedWithDisinfectantStringMaker();
+    swabSampleLocationsStringMaker();
+    washroomAreaWipedCleanStringMaker();
+    washroomChemicalForManualCleaningStringMaker();
+    washroomChemicalForFumigationStringMaker();
+    washroomNonAccessibleAreaSprayedWithDisinfectantStringMaker();
 
     collectionReference.add({
       //OT details
+      'ot id': docuName,
+      'date': _selectedDate,
+      'manual cleaning start': pManual_started,
+      'manual cleaning end': pManual_completed,
+      'disinfectant for manual cleaning': disinfectantsForManualCleaningString,
+      'ot area wiped clean': otAreaWipedCleanString,
+      'ot equipment wiped clean': otEquipmentWipedCleanString,
+      'non accessible area sprayed with disinfectant':
+          otNonAccessibleAreaSprayedWithDisinfectantString,
+      'ot fumigation date': _selectedDate,
+      'ot fumigation started': pFumigation_started,
+      'ot fumigation completed': pFumigation_completed,
+      'ot fumigation chemicals used': otFumigationChemicalsString,
+      'washroom manual cleaning date': _selectedDate,
+      'washroom manual cleaning started': pWashroom_started,
+      'washroom manual cleaning ended': pWashroom_completed,
+      'washroom-chemical used for manual cleaning':
+          washroomChemicalForManualCleaningString,
+      'washroom area furniture wiped clean': washroomAreaWipedCleanString,
+      'washroom non accessible area sprayed':
+          washroomNonAccessibleAreaSprayedWithDisinfectantString,
+      'washroom fumigation date': _selectedDate,
+      'washroom fumigation started': pWfumigation_started,
+      'washroom fumigation ended': pWfumigation_completed,
+      'washroom chemicals used for fumigation':
+          washroomChemicalForFumigationString,
+      'notes': 'remaining',
+      'swab taken on': _selectedDate,
+      'swab taken time': pSwab_takentime,
+      'swab sample locations': swabSampleLocationsList,
+      'swab result date': _selectedDate,
+      'swab results': swabResults,
     });
+    docuName = docuName + 1;
   }
 
   @override
@@ -467,10 +534,11 @@ class _ot_registerState extends State<ot_register> {
                             TextFormField(
                               validator: (val) {
                                 return val.isNotEmpty ? null : "Enter Time";
-                              }, onChanged: (val) {
-                              pManual_completed = val;
-                              setState(() {});
-                            },
+                              },
+                              onChanged: (val) {
+                                pManual_completed = val;
+                                setState(() {});
+                              },
                               keyboardType: TextInputType.number,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
@@ -983,12 +1051,10 @@ class _ot_registerState extends State<ot_register> {
                                   height: 10.0,
                                 ),
                                 TextFormField(
-                                   onChanged: (val) {
-                                     pOTfumigation = val;
-                                     setState(() {}
-                                     );
-                                                                   },
-
+                                  onChanged: (val) {
+                                    pOTfumigation = val;
+                                    setState(() {});
+                                  },
                                   keyboardType: TextInputType.name,
                                   textInputAction: TextInputAction.next,
                                   decoration: InputDecoration(
@@ -1539,7 +1605,7 @@ class _ot_registerState extends State<ot_register> {
                                         },
                                         //
                                         onChanged: (val) {
-                                          pWashroom_chemical= val;
+                                          pWashroom_chemical = val;
                                           setState(() {});
                                         },
                                         keyboardType: TextInputType.name,
@@ -1793,7 +1859,7 @@ class _ot_registerState extends State<ot_register> {
                                           },
                                           //
                                           onChanged: (val) {
-                                            pSwab_sample= val;
+                                            pSwab_sample = val;
                                             setState(() {});
                                           },
                                           keyboardType: TextInputType.name,
@@ -1893,7 +1959,7 @@ class _ot_registerState extends State<ot_register> {
                                             },
                                             //
                                             onChanged: (val) {
-                                              pSwab_result= val;
+                                              pSwab_result = val;
                                               setState(() {});
                                             },
                                             keyboardType: TextInputType.name,
@@ -1917,22 +1983,26 @@ class _ot_registerState extends State<ot_register> {
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.symmetric(horizontal: 60.0),
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 60.0),
                                                 child: Container(
                                                   height: 40.0,
                                                   child: Material(
                                                     color: Colors.green,
-                                                    borderRadius: BorderRadius.circular(15.0),
-                                                    shadowColor:
-                                                    Colors.greenAccent.withOpacity(0.8),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                    shadowColor: Colors
+                                                        .greenAccent
+                                                        .withOpacity(0.8),
                                                     elevation: 7.0,
                                                     child: GestureDetector(
-
                                                       child: Center(
                                                         child: Text(
                                                           'Upload Files',
                                                           style: TextStyle(
-                                                            fontWeight: FontWeight.bold,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16.0,
                                                             color: Colors.white,
                                                           ),
@@ -1952,35 +2022,76 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                           Column(
                                             children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 100.0),
-                                                child: Container(
-                                                  height: 40.0,
-                                                  child: Material(
-                                                    color: Colors.green,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            30.0),
-                                                    shadowColor: Colors
-                                                        .greenAccent
-                                                        .withOpacity(0.8),
-                                                    elevation: 5.0,
-                                                    child: Center(
-                                                      child: Text(
-                                                        'Submit',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 15.0,
-                                                          color: Colors.white,
+                                              BouncingWidget(
+                                                scaleFactor: _scaleFactor,
+                                                stayOnBottom: stayOnBottom,
+                                                onPressed: addOTData,
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 60.0),
+                                                      child: Container(
+                                                        height: 48.0,
+                                                        child: Material(
+                                                          color: Colors.green,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0),
+                                                          shadowColor: Colors
+                                                              .greenAccent
+                                                              .withOpacity(0.8),
+                                                          elevation: 7.0,
+                                                          child: Center(
+                                                            child: Text(
+                                                              'Submit',
+                                                              style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 18.0,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
+                                              // Padding(
+                                              //   padding:
+                                              //       const EdgeInsets.symmetric(
+                                              //           horizontal: 100.0),
+                                              //   child: Container(
+                                              //     height: 40.0,
+                                              //     child: Material(
+                                              //       color: Colors.green,
+                                              //       borderRadius:
+                                              //           BorderRadius.circular(
+                                              //               30.0),
+                                              //       shadowColor: Colors
+                                              //           .greenAccent
+                                              //           .withOpacity(0.8),
+                                              //       elevation: 5.0,
+                                              //       child: Center(
+                                              //         child: Text(
+                                              //           'Submit',
+                                              //           style: TextStyle(
+                                              //             fontWeight:
+                                              //                 FontWeight.bold,
+                                              //             fontSize: 15.0,
+                                              //             color: Colors.white,
+                                              //           ),
+                                              //         ),
+                                              //       ),
+                                              //     ),
+                                              //   ),
+                                              // ),
                                               SizedBox(
                                                 height: 30,
                                               ),
