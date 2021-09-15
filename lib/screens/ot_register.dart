@@ -381,6 +381,7 @@ class _ot_registerState extends State<ot_register> {
     }
   }
 
+//ADD FORM TO THE DATABASE
   void addOTData() {
     CollectionReference collectionReference =
         FirebaseFirestore.instance.collection('otregister');
@@ -553,6 +554,7 @@ class _ot_registerState extends State<ot_register> {
                             SizedBox(
                               height: 30.0,
                             ),
+                            //OT-Disinfectant(s) used for manual cleaning?
                             Column(
                               children: [
                                 Row(
@@ -623,6 +625,7 @@ class _ot_registerState extends State<ot_register> {
                               ],
                             ),
                             SizedBox(height: 30),
+                            //OT area wiped clean
                             Column(
                               children: [
                                 Row(
@@ -727,6 +730,7 @@ class _ot_registerState extends State<ot_register> {
                               ],
                             ),
                             SizedBox(height: 25),
+                            //OT Equipment wiped clean
                             Column(
                               children: [
                                 Row(
@@ -821,6 +825,7 @@ class _ot_registerState extends State<ot_register> {
                               ],
                             ),
                             SizedBox(height: 30),
+                            //OT-Non accessible area sprayed with disinfectant AND SO ON
                             Column(children: [
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
