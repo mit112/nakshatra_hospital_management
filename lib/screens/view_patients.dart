@@ -41,11 +41,12 @@ class _ViewPatientsState extends State<ViewPatients> {
     return qn.docs;
   }
   Future get() async {
-    QuerySnapshot qn = collectionReference.where("FirstName", isEqualTo:searchController.text).snapshots() as QuerySnapshot;
+    QuerySnapshot qn = collectionReference.where(
+        "FirstName", isGreaterThanOrEqualTo:searchController.text,
+    ).snapshots() as QuerySnapshot;
     return qn.docs;
   }
-  Future<Stream<QuerySnapshot>> getUserByUserName(String username) async {
-    print(username);
+  Future getUserByUserName(String username) async {
     return FirebaseFirestore.instance
         .collection("patients")
         .where("Firstname", isEqualTo: username)
@@ -154,7 +155,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                     itemCount:snapshots.data.docs.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
-                      // final name = '${snapshots.data[index].data()["Firstname"]} ${snapshots.data[index].data()["Surname"]}';
+                      final name = '${ snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}';
                       return Slidable(
                         actionPane: SlidableDrawerActionPane(),
                         actionExtentRatio: 0.2,
@@ -172,7 +173,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                                 ),
                                 child: ListTile(
                                     title: Text(
-                                      snapshots.data.docs[index]['Firstname'],
+                                      '${ snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}',
                                       style: GoogleFonts.inter(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
@@ -206,7 +207,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                             onTap: () {
                               delete();
                               ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(content: Text('name dismissed')));
+                                  .showSnackBar(SnackBar(content: Text('$name dismissed')));
                             },
 
                           )
@@ -305,19 +306,18 @@ class _ViewPatientsState extends State<ViewPatients> {
     );
   }
   Widget searchUsersList() {
-    print("chck");
     return Container(
       height:460,
       child: StreamBuilder(
         stream:usersStream,
         builder:(context, AsyncSnapshot snapshots){
-          if(snapshots.data == null) return Container(child: Center(child: CircularProgressIndicator()));
+          if(snapshots.data == null) return Container(child: Center(child: Text("No data")));
           return ListView.builder(
             cacheExtent: 9999,
             itemCount:snapshots.data.docs.length,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              // final name = '${snapshots.data[index].data()["Firstname"]} ${snapshots.data[index].data()["Surname"]}';
+              final name = '${ snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}';
               return Slidable(
                 actionPane: SlidableDrawerActionPane(),
                 actionExtentRatio: 0.2,
@@ -335,7 +335,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                         ),
                         child: ListTile(
                             title: Text(
-                              snapshots.data.docs[index]['Firstname'],
+                              '${ snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}',
                               style: GoogleFonts.inter(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w500,
@@ -369,7 +369,7 @@ class _ViewPatientsState extends State<ViewPatients> {
                     onTap: () {
                       delete();
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text('name dismissed')));
+                          .showSnackBar(SnackBar(content: Text('$name dismissed')));
                     },
 
                   )
