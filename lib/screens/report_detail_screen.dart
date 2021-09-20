@@ -74,7 +74,7 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
     otherFees = widget.post.data()['other fees'] ?? 'N/A';
 
   }
-  @override
+  @override 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,

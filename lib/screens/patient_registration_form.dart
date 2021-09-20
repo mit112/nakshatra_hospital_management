@@ -35,7 +35,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
     print(dateFormat);
     String docName;
     if (formKey.currentState.validate()) {
-      docName = '$pNumber$pName';
+      docName = '$pName$pBirthDate';
       await collectionReference.doc(docName).set({
         'Firstname': pName,
         'Surname': sName,

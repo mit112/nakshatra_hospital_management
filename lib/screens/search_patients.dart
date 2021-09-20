@@ -35,9 +35,7 @@ class _SearchPatientsState extends State<SearchPatients> {
   //       patientMap = value.docs[0].data();
   //       isLoading = false;
   //     });
-  //     print('*********************************');
-  //     print(patientMap);
-  //     print('*********************************');
+  //     print('*********************************');n
   //     print('*********************************');
   //   });
   // }
