@@ -49,7 +49,7 @@ class _ViewPatientsState extends State<ViewPatients> {
   Future getUserByUserName(String username) async {
     return FirebaseFirestore.instance
         .collection("patients")
-        .where("Firstname", isEqualTo: username)
+        .where("PatientId", isGreaterThanOrEqualTo: username)
         .snapshots();
   }
   onSearchBtnClick() async {

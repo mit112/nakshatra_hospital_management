@@ -35,7 +35,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
       otherFees,
       fileName,
       notes;
-  String pTemp = '90';
+  String pTemp = '';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
@@ -242,7 +242,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: DropdownButton<String>(
-                      value: pTemp,
+                      value: 'Choose your temp',
                       icon: const Icon(Icons.arrow_drop_down_outlined),
                       iconSize: 24,
                       elevation: 16,

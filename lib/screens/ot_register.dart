@@ -4,6 +4,8 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'homepage.dart';
+
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ot_register(),
@@ -441,6 +443,7 @@ class _ot_registerState extends State<ot_register> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           'Operation Theatre',
           style: GoogleFonts.poppins(
@@ -450,6 +453,17 @@ class _ot_registerState extends State<ot_register> {
               letterSpacing: 0.5,
               //fontWeight:FontWeight.normal,
             ),
+          ),
+        ),
+        leading: GestureDetector(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (ctx) =>Alert()
+            );
+          },
+          child: Icon(
+              Icons.arrow_back// add custom icons also
           ),
         ),
         elevation: 8.0,
@@ -2146,4 +2160,47 @@ class _ot_registerState extends State<ot_register> {
       ),
     );
   }
+
 }
+
+class Alert extends StatefulWidget {
+
+  @override
+  _AlertState createState() => _AlertState();
+}
+
+class _AlertState extends State<Alert> {
+  @override
+  Widget build(BuildContext context) {
+    return
+      AlertDialog(
+        title: Text("Alert Dialog Box"),
+        content: Text("Arey you sure you want to exit form"),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Homepage()));
+    },
+
+            child: Text("Yes"),
+          ),FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("No",style: TextStyle(color:Colors.grey),),
+          ),
+        ],
+      );
+
+
+
+  }
+  }
+
+
+
+
+
