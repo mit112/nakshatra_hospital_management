@@ -19,14 +19,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final firebaseuser = context.watch<User>();
-//     if (firebaseuser != null) {
-//       return Homepage();
-//     }
-//     return Authenticate();
-//   }
-// }
-
     return MultiProvider(
       providers: [
         Provider<AuthService>(
@@ -39,10 +31,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Nakshatra Hospital',
+        title: 'Nakshatra Eye Care',
         theme: ThemeData(
-
-            appBarTheme: AppBarTheme(
+          appBarTheme: AppBarTheme(
           brightness: Brightness.dark,
         ),
         ),
@@ -53,13 +44,13 @@ class MyApp extends StatelessWidget {
 }
 
 class AuthenticationWrapper extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
     final firebaseUser = context.watch<User>();
-
     if (firebaseUser != null) {
       return Homepage();
     }

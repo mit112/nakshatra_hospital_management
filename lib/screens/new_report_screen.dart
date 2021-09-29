@@ -1,8 +1,15 @@
+import 'dart:io';
+
+import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class NewReportScreen extends StatefulWidget {
 
@@ -15,21 +22,97 @@ class NewReportScreen extends StatefulWidget {
 
 class _NewReportScreenState extends State<NewReportScreen> {
   final formKey = GlobalKey<FormState>();
+  double _scaleFactor = 1.0;
+  bool stayOnBottom = false;
   bool check = false;
-  bool value = false,value2 = false,value3 = false,value4 = false,
-      value5 = false,
-      value6 = false;
+  bool octMachine = false,perimeter = false,medicine = false,externalDoctor = false,
+      nurse = false,
+      attendant = false;
   String flu,
       feeDetails,
       otherExpenses,
       feeAmount,
-      other,
+      otherFees,
+      fileName,
       notes;
-  String pTemp = '90';
+  String pTemp = '';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
+  File file;
+  String expensesString = '';
+  List <String> expensesList = [];
 
+  void expensesStringMaker() {
+      if(octMachine)
+        expensesList.add('Oct Machine');
+      if(perimeter)
+        expensesList.add('Perimeter');
+      if(medicine)
+        expensesList.add('Medicine');
+      if(externalDoctor)
+        expensesList.add('External Doctor');
+      if(nurse)
+        expensesList.add('Nurse');
+      if(attendant)
+        expensesList.add('Attendant');
+
+      if(expensesList.isNotEmpty){
+        expensesString = expensesList[0];
+        int length = expensesList.length;
+        if(length > 1)
+          for(int i = 1; i < length; i++)
+            expensesString += ', ' + expensesList[i];
+      }
+
+  }
+
+  Future<void> uploadFile() async {
+    // try {
+    //   String fileExtension = file.path.split('.').last;
+    //   fileName = 'files'
+    //       '/${widget.post.data()['PatientId']}'
+    //       '/ReportNo${widget.post.data()['Visits'] + 1}'
+    //       '.$fileExtension';
+    //
+    //    await firebase_storage.FirebaseStorage.instance
+    //   .ref(fileName).putFile(file);
+    //
+    //   print('Upload Successful');
+    //   print(fileName);
+    //
+    // } catch (e) {
+    //   print(e);
+    // }
+    try {
+      //String fileExtension = file.path.split('.').last;
+      fileName = 'files'
+          '/${widget.post.data()['PatientId']}'
+          '/ReportNo${widget.post.data()['Visits'] + 1}';
+
+      String fileExtension = file.path.split('.').last;
+      fileName += '.$fileExtension';
+
+      await firebase_storage.FirebaseStorage.instance
+          .ref(fileName)
+          .putFile(file);
+    } catch (e) {
+      print(e);
+    }
+  }
+  Future<void> selectFile() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['jpg', 'pdf', 'doc'],
+    );
+
+    if(result != null) {
+      file = File(result.files.single.path);
+      print(result.files.single.path);
+    } else {
+      // User canceled the picker
+    }
+  }
 
   // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
   // CollectionReference get personaldetails =>
@@ -42,14 +125,22 @@ class _NewReportScreenState extends State<NewReportScreen> {
 
   void addData() async{
 
+    await uploadFile();
 
     if (formKey.currentState.validate()) {
+
       CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
+
+      print(fileName);
+
+      expensesStringMaker();
 
       await collectionReference.doc(widget.post.data()['PatientId']).update({
           'Visits': widget.post.data()['Visits'] + 1,
       });
+
+
       collectionReference =
           FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
       String docName;
@@ -58,13 +149,15 @@ class _NewReportScreenState extends State<NewReportScreen> {
       await collectionReference.doc(docName).set({
         'report id': docName,
         'date': selectedDate,
+        'expenses': expensesString,
         'fee details': feeDetails,
         'fee collected': feeAmount,
         'body temp': pTemp,
         'flu symptoms': flu,
         'other expenses': otherExpenses,
-        'other': other,
+        'other fees': otherFees,
         'notes': notes,
+        'file name': fileName,
       });
       Navigator.pop(context);
     }
@@ -95,9 +188,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 10,
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
@@ -106,69 +196,80 @@ class _NewReportScreenState extends State<NewReportScreen> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       SizedBox(
-                        height: 50.0,
+                        height: 30.0,
                       ),
-                      DateTimePicker(
-                        initialValue: '',
-                        type: DateTimePickerType.date,
-                        dateLabelText: 'Select Date',
-                        firstDate: DateTime(1995),
-                        lastDate: DateTime.now().add(Duration(days: 365)),
-                        validator: (value) {
-                          return null;
-                        },
-                        onChanged: (value) {
-                          if (value.isNotEmpty) {
-                            setState(() {
+                      Text("Date of visit",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: DateTimePicker(
+                          initialValue: '',
+                          type: DateTimePickerType.date,
+                          dateLabelText: 'Select Date',
+
+                          firstDate: DateTime(1995),
+                          lastDate: DateTime.now().add(Duration(days: 365)),
+                          validator: (value) {
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              setState(() {
+                                selectedDate = value;
+                              });
+                            }
+                          },
+                          onSaved: (value) {
+                            if (value.isNotEmpty) {
                               selectedDate = value;
-                            });
-                          }
-                        },
-                        onSaved: (value) {
-                          if (value.isNotEmpty) {
-                            selectedDate = value;
-                          }
-                        },
+                            }
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 20.0,
                       ),
                       Text("Patient body temp. in deg.C",
                         style: TextStyle(
-                         color: Colors.grey[700],
+                         color: Colors.black,
                           fontSize: 18.0,
                         ),
                       ),
-                    DropdownButton<String>(
-                    value: pTemp,
-                    icon: const Icon(Icons.arrow_drop_down_outlined),
-                    iconSize: 24,
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
-                      fontSize: 18.0,),
-                    underline: Container(
-                    height: 2,
-                    color: Colors.grey,
-                    ),
-                    onChanged: (newValue) {
-                    setState(() {
-                    pTemp = newValue;
-                    });
-                    },
-                    items: <String>['90', '91', '92', '93','94', '95', '96',
-                      '97','98', '99', '100', '101','102', '103', '104', '105',
-                      '106', '107', '108', '109','110']
-                        .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                    );
-                    }).toList(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: DropdownButton<String>(
+                      value: 'Choose your temp',
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
+                        fontSize: 18.0,),
+                      underline: Container(
+                      height: 2,
+                      color: Colors.grey,
+                      ),
+                      onChanged: (newValue) {
+                      setState(() {
+                      pTemp = newValue;
+                      });
+                      },
+                      items: <String>['Choose your temp','90', '91', '92', '93','94', '95', '96',
+                        '97','98', '99', '100', '101','102', '103', '104', '105',
+                        '106', '107', '108', '109','110']
+                          .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                      );
+                      }).toList(),
+                      ),
                     ),
 
-                      SizedBox(
-                        height: 20.0,
-                      ),
+
                       Column(
                         children: [
                           SizedBox(
@@ -359,7 +460,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             padding:
                             const EdgeInsets.symmetric(horizontal: 20.0),
                             child: TextFormField(
-                              keyboardType: TextInputType.text,
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
                                 labelText: 'Others',
@@ -369,6 +469,11 @@ class _NewReportScreenState extends State<NewReportScreen> {
                                   fontSize: 18.0,
                                 ),
                               ),
+                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,]+')),],
+                              onChanged: (val) {
+                                otherFees = val ?? '0';
+                              },
                             ),
                           ),
                         ],
@@ -391,10 +496,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('OCT machine'),
-                        value: this.value,
+                        value: this.octMachine,
                         onChanged: (bool value) {
                           setState(() {
-                            this.value = value;
+                            this.octMachine = value;
                           });
                         },
                       ),
@@ -402,10 +507,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           controlAffinity: ListTileControlAffinity.leading,
                           title:
                         Text('Perimeter'),
-                        value: this.value2,
+                        value: this.perimeter,
                         onChanged: (bool value) {
                           setState(() {
-                            this.value2 = value;
+                            this.perimeter = value;
                           });
                         },
                       ),
@@ -413,10 +518,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           controlAffinity: ListTileControlAffinity.leading,
                           title:
                         Text('Medicine'),
-                        value: this.value3,
+                        value: this.medicine,
                         onChanged: (bool check) {
                           setState(() {
-                            this.value3 = check;
+                            this.medicine = check;
                           });
                         },
                       ),
@@ -424,10 +529,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           controlAffinity: ListTileControlAffinity.leading,
                           title:
                         Text('External doctor'),
-                        value: this.value4,
+                        value: this.externalDoctor,
                         onChanged: (bool check) {
+                          this.externalDoctor = check;
                           setState(() {
-                            this.value4 = check;
                           });
                         },
                       ),
@@ -435,10 +540,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('Nurse'),
-                        value: this.value5,
+                        value: this.nurse,
                         onChanged: (bool check) {
                           setState(() {
-                            this.value5 = check;
+                            this.nurse = check;
                           });
                         },
                       ),
@@ -446,10 +551,10 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         controlAffinity: ListTileControlAffinity.leading,
                         title:
                         Text('Attendant'),
-                        value: this.value6,
+                        value: this.attendant,
                         onChanged: (bool check) {
                           setState(() {
-                            this.value6 = check;
+                            this.attendant = check;
                           });
                         },
                       ),
@@ -459,7 +564,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           onChanged: (val) {
-                            other = val ?? ' ';
+                            otherExpenses = val;
                             setState(() {});
                           },
                           keyboardType: TextInputType.text,
@@ -479,9 +584,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       Text("Enter additional details:",
                         style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w400
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.w400,
                         ),),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -502,37 +606,81 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                         ),
                       ),
-
                       SizedBox(
                         height: 20,
                       ),
                       Column(
                         children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
-                              child: Material(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor:
-                                Colors.greenAccent.withOpacity(0.8),
-                                elevation: 7.0,
-                                child: GestureDetector(
-                                  onTap: addData,
-                                  child: Center(
-                                    child: Text(
-                                      'Submit',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Colors.white,
+                          BouncingWidget(
+                            scaleFactor: _scaleFactor,
+                            stayOnBottom: stayOnBottom,
+                            onPressed: selectFile,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                  child: Container(
+                                    height: 48.0,
+                                    child: Material(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                      elevation: 7.0,
+                                      child: Center(
+                                        child: Text(
+                                          'Select file',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        children: [
+                          BouncingWidget(
+                            scaleFactor: _scaleFactor,
+                            stayOnBottom: stayOnBottom,
+                            onPressed: addData,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                  child: Container(
+                                    height: 48.0,
+                                    child: Material(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                      elevation: 7.0,
+                                      child: Center(
+                                        child: Text(
+                                          'Submit',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(

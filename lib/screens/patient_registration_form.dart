@@ -1,21 +1,26 @@
+import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
-
+import 'package:intl/intl.dart';
 class PatientRegistrationForm extends StatefulWidget {
   const PatientRegistrationForm({Key key}) : super(key: key);
 
   @override
-  _PatientRegistrationFormState createState() => _PatientRegistrationFormState();
+  _PatientRegistrationFormState createState() =>
+      _PatientRegistrationFormState();
 }
 
 class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
-
   final formKey = GlobalKey<FormState>();
-
-  String pName;
+  String dtoday = DateTime.now().toString();
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+  DateTime today = new DateTime.now();
+  double _scaleFactor = 1.0;
+  bool stayOnBottom = false;
+  String pName,sName;
   String pAddress;
   String pNumber;
   String pBirthDate;
@@ -26,12 +31,14 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
 
-  void addData() async{
+  void addData() async {
+    print(dateFormat);
     String docName;
-    if(formKey.currentState.validate()) {
-      docName = '$pNumber$pName';
+    if (formKey.currentState.validate()) {
+      docName = '$pName$pBirthDate';
       await collectionReference.doc(docName).set({
-        'Name': pName,
+        'Firstname': pName,
+        'Surname': sName,
         'Number': pNumber,
         'Address': pAddress,
         'BirthDate': pBirthDate,
@@ -49,12 +56,11 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
         title: Text(
           'Patient Registration',
           style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 18.0,
-              letterSpacing: 0.5,
-            )
-          ),
+              textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 18.0,
+            letterSpacing: 0.5,
+          )),
         ),
         elevation: 8.0,
         backgroundColor: Colors.green[500],
@@ -62,7 +68,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
-          },
+        },
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -70,7 +76,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                 height: 10.0,
               ),
               Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Form(
                   key: formKey,
                   child: Column(
@@ -88,12 +94,33 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                           setState(() {});
                         },
                         keyboardType: TextInputType.name,
-                         textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                          labelText: 'Name',
+                          labelText: 'Firstname',
                           labelStyle: TextStyle(
                             height: 1.2,
-                            fontStyle: FontStyle.italic,
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      TextFormField(
+                        validator: (val) {
+                          return val.isNotEmpty ? null : "Enter Surname";
+                        },
+                        //
+                        onChanged: (val) {
+                          sName = val;
+                          setState(() {});
+                        },
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: 'Surname',
+                          labelStyle: TextStyle(
+                            height: 1.2,
                             fontSize: 18.0,
                           ),
                         ),
@@ -102,16 +129,17 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         height: 20.0,
                       ),
                       DateTimePicker(
+                        validator: (val) {
+                          return val.isNotEmpty ? null : "Enter Date";
+                        },
                         initialValue: '',
                         type: DateTimePickerType.date,
                         dateLabelText: 'Date of Birth',
-                        firstDate: DateTime.now().subtract(Duration(days: 36500)),
+                        firstDate:
+                            DateTime.now().subtract(Duration(days: 36500)),
                         lastDate: DateTime.now().add(Duration(days: 365)),
-                        validator: (value) {
-                          return null;
-                        },
                         onChanged: (value) {
-                          if(value.isNotEmpty) {
+                          if (value.isNotEmpty) {
                             setState(() {
                               pBirthDate = value;
                             });
@@ -128,7 +156,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                       ),
                       TextFormField(
                         validator: (val) {
-                          return val.isNotEmpty ? null : "Enter name";
+                          return null;
                         },
                         //
                         onChanged: (val) {
@@ -146,14 +174,10 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.0,),
                       SizedBox(
                         height: 20.0,
                       ),
                       TextFormField(
-                        validator: (val) {
-                          return val.isNotEmpty ? null : "Enter number";
-                        },
                         onChanged: (val) {
                           pNumber = val;
                           setState(() {});
@@ -173,41 +197,42 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         height: 20.0,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
-                              child: Material(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shadowColor:
-                                Colors.greenAccent.withOpacity(0.8),
-                                elevation: 7.0,
-                                child: GestureDetector(
-                                  onTap: addData,
-                                  child: Center(
-                                    child: Text(
-                                      'Submit',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Colors.white,
+                      BouncingWidget(
+                        scaleFactor: _scaleFactor,
+                        stayOnBottom: stayOnBottom,
+                        onPressed: addData,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                              child: Container(
+                                height: 48.0,
+                                child: InkWell(
+                                  splashColor: Colors.blue[100],
+                                  child: Material(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    shadowColor:
+                                    Colors.greenAccent.withOpacity(0.8),
+                                    elevation: 7.0,
+                                    child: Center(
+                                      child: Text(
+                                        'Submit',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 25,
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

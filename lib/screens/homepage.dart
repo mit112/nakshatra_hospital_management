@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/screens/patient_registration_form.dart';
+import 'package:nakshatra_hospital_management/screens/search_patients.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:nakshatra_hospital_management/screens/view_patients.dart';
 import 'package:nakshatra_hospital_management/screens/ot_register.dart';
@@ -14,16 +16,14 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         elevation: 8.0,
-         backgroundColor: Colors.green[500],
+        backgroundColor: Colors.green[500],
         title: Text(
           'Homepage',
           style: GoogleFonts.poppins(
@@ -36,152 +36,261 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
+
+      // body: Center(
+      //   child: Column(
+      //     children: <Widget>[
+      //       Image.asset('assets/homepagelogo.jpeg'),
+      //     ],
+      //   ),
+      // ),
       drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+                // currentAccountPicture: CircleAvatar(
+                //   radius: 40.0,
+                //   backgroundImage: NetworkImage(""),
+                //   backgroundColor: Colors.blue[100],
+                // ),
+                accountName: Text(
+                  'Nakshatra Eye Care.',
+                  style:GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 19.0,
+                      fontWeight:FontWeight.w600,
+                    ),
+                  ),
+                ),
+                accountEmail: Text(
+                  'Nakshatra@ac.in',
+                   style:GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                  color: Colors.white60,
+                  fontSize: 18.0, fontWeight:FontWeight.w600,
 
-    child: ListView(
-    padding: EdgeInsets.zero,
-      children: <Widget>[
-        DrawerHeader(
-          decoration: BoxDecoration(
-            color: Colors.blue,
-          ),
-          child: UserAccountsDrawerHeader(
-            // currentAccountPicture: CircleAvatar(
-            //   radius: 40.0,
-            //   backgroundImage: NetworkImage(""),
-            //   backgroundColor: Colors.blue[100],
-            // ),
-            accountName: Text(
-              'Nakshatra Hospital.',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 19.0,
-                fontWeight: FontWeight.w600,
+                  ),
+              ),
+                ),
               ),
             ),
-            accountEmail: Text(
-              'hello@ac.in',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18.0,
+            SizedBox(
+              height:20,
+            ),
+            Container(
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PatientRegistrationForm()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      'Patient Form',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 3,
+
+                ),
               ),
             ),
-          ),
-      ),
-        Divider(
-          color: Colors.grey[200],
-          thickness: 3,
-        ),
-        ListTile(
-          title: Row(
-            children: [
-              Icon(
-                Icons.format_align_center,
-                color: Colors.black54,
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              InkWell(
-                splashColor: Colors.blue[100],
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              PatientRegistrationForm()));
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ot_register()));
                 },
-                child: Text(
-                  'Patient Form',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:FontStyle.italic,
-                    fontSize: 18.0,
-                    color: Colors.black,
-                  ),
+                child: Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      'OT Register',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 3,
 
-        ListTile(
-          title:Row(
-            children: [
-              Icon(
-                Icons.format_align_center,
-                color: Colors.black54,
+                ),
               ),
-              SizedBox(
-                width: 30,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ViewPatients()));
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      'Registered Patients',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
+                    ),
+                    ),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 3,
+
+                ),
               ),
-              InkWell(
-                splashColor: Colors.blue[100],
-                onTap: () {
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              ot_register()));
+                          builder: (context) => SearchPatients()));
                 },
-                child: Text(
-                  'OT Register',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:FontStyle.italic,
-                    fontSize: 18.0,
-                    color: Colors.black,
-                  ),
+                child: Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.chevronCircleDown,
+                      color: Colors.indigo[300],
+                    ),
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      'Search Patients',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18.0,
+                          fontWeight:FontWeight.w500,
+                        ),
+                    ),
+                    ),
+                  ],
+                ),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  elevation: 3,
+
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        ListTile(
-          title: Row(
-            children: [
-              Icon(
-                Icons.format_align_center,
-                color: Colors.black54,
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              InkWell(
-                splashColor: Colors.blue[100],
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ViewPatients()));
-                },
-                child: Text(
-                  'View Patients',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontStyle:FontStyle.italic,
-                    fontSize: 18.0,
-                    color: Colors.black,
-                  ),
+      ),
+      body: SingleChildScrollView(
+        // child: Image.asset(
+        //   'assets/homepagelogo.jpeg',
+        //   height: 200,
+        //   color: Colors.black.withOpacity(0.80),
+        // ),
+
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            //image code
+            Container(
+              height: 250,
+              width: 250,
+              decoration: BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage("assets/homepagelogo.jpeg"),
+                  fit: BoxFit.fill,
                 ),
               ),
-            ],
-          ),
-        ),
-      ],
-      ),
-      ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 40.0, 0.0, 0.0),
+            ),
+            Stack(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.fromLTRB(15.0, 40.0, 0.0, 0.0),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
                     child: Text(
                       'Nakshatra',
-                      style: GoogleFonts.lato(
+                      style: GoogleFonts.openSans(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 80.0,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                    ),
+                  ),
+      ),
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(15.0, 120.0, 0.0, 0.0),
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'Eye Care',
+                      style: GoogleFonts.openSans(
                         textStyle: TextStyle(
                           fontSize: 80.0,
                           fontWeight: FontWeight.w300,
@@ -189,194 +298,200 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(15.0, 120.0, 0.0, 0.0),
-                    child: Text(
-                      'Hospital',
-                      style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontSize: 80.0,
-                          fontWeight: FontWeight.w300,
+                ),
+              ],
+            ),
+
+            SizedBox(
+              height: 60,
+            ),
+            Container(
+              child: Column(
+                children: [
+                  BouncingWidget(
+                    scaleFactor: _scaleFactor,
+                    stayOnBottom: stayOnBottom,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PatientRegistrationForm()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: Container(
+                            height: 48.0,
+                            child: Material(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Colors.greenAccent.withOpacity(0.8),
+                              elevation: 7.0,
+                              child: Center(
+                                child: Text(
+                                  'Patient Form',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(294.0, 90.0, 0.0, 0.0),
-                    child: Text(
-                      '.',
-                      style: TextStyle(
-                          fontSize: 120.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  BouncingWidget(
+                    scaleFactor: _scaleFactor,
+                    stayOnBottom: stayOnBottom,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ot_register()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: Container(
+                            height: 48.0,
+                            child: Material(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Colors.greenAccent.withOpacity(0.8),
+                              elevation: 7.0,
+                              child: Center(
+                                child: Text(
+                                  'OT Register',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              Container(
-                child: Column(
-                  children: [
-                    BouncingWidget(
-                      scaleFactor: _scaleFactor,
-                      stayOnBottom: stayOnBottom,
-                      onPressed: () {  },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
+                  SizedBox(
+                    height: 40,
+                  ),
+                  BouncingWidget(
+                    scaleFactor: _scaleFactor,
+                    stayOnBottom: stayOnBottom,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewPatients()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: Container(
+                            height: 48.0,
+                            child: InkWell(
+                              splashColor: Colors.blue[100],
                               child: Material(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(20.0),
                                 shadowColor:
                                     Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
-                                child: InkWell(
-                                  splashColor: Colors.blue[100],
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                PatientRegistrationForm()));
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'Patient Form',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18.0,
-                                        color: Colors.white,
-                                      ),
+                                child: Center(
+                                  child: Text(
+                                    'Registered Patients',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    BouncingWidget(
-                      scaleFactor: _scaleFactor,
-                      stayOnBottom: stayOnBottom,
-                      onPressed: () {  },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  BouncingWidget(
+                    scaleFactor: _scaleFactor,
+                    stayOnBottom: stayOnBottom,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SearchPatients()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: Container(
+                            height: 48.0,
+                            child: InkWell(
+                              splashColor: Colors.blue[100],
                               child: Material(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(20.0),
                                 shadowColor:
                                 Colors.greenAccent.withOpacity(0.8),
                                 elevation: 7.0,
-                                child: InkWell(
-                                  splashColor: Colors.indigo[200],
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ot_register()));
-                                  },
-                                  child: Center(
-                                    child: Text(
-                                      'OT Register',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18.0,
-                                        color: Colors.white,
-                                      ),
+                                child: Center(
+                                  child: Text(
+                                    'Search Patients',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-
-                    BouncingWidget(
-                      scaleFactor: _scaleFactor,
-                      stayOnBottom: stayOnBottom,
-                      onPressed: () {  },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding:
-                            const EdgeInsets.symmetric(horizontal: 60.0),
-                            child: Container(
-                              height: 48.0,
-                              child: InkWell(
-                                splashColor: Colors.blue[100],
-                                child: Material(
-                                  color: Colors.green,
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor:
-                                  Colors.greenAccent.withOpacity(0.8),
-                                  elevation: 7.0,
-                                  child: InkWell(
-                                    splashColor: Colors.blue[100],
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewPatients()));
-                                    },
-                                    child: Center(
-                                      child: Text(
-                                        'View Patients',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18.0,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 140,)
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 140,
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          //Icons.exit_to_app,
+          FontAwesomeIcons.times,
+              color: Colors.white,
         ),
 
-        floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.exit_to_app,
-          ),
-          backgroundColor: Colors.green,
-          elevation: 8.0,
-          onPressed: () {
-            context.read<AuthService>().signOut();
-          },
-        ),
-
+        backgroundColor: Colors.green,
+        elevation: 8.0,
+        onPressed: () {
+          context.read<AuthService>().signOut();
+        },
+      ),
     );
   }
 }
