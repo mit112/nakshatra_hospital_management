@@ -68,22 +68,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
   }
 
   Future<void> uploadFile() async {
-    // try {
-    //   String fileExtension = file.path.split('.').last;
-    //   fileName = 'files'
-    //       '/${widget.post.data()['PatientId']}'
-    //       '/ReportNo${widget.post.data()['Visits'] + 1}'
-    //       '.$fileExtension';
-    //
-    //    await firebase_storage.FirebaseStorage.instance
-    //   .ref(fileName).putFile(file);
-    //
-    //   print('Upload Successful');
-    //   print(fileName);
-    //
-    // } catch (e) {
-    //   print(e);
-    // }
     try {
       //String fileExtension = file.path.split('.').last;
       fileName = 'files'
@@ -113,15 +97,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
       // User canceled the picker
     }
   }
-
-  // CollectionReference personaldetails = collectionReference.doc(uid).collection('personal details');
-  // CollectionReference get personaldetails =>
-  //     collectionReference.doc(currentid).collection('personal details');
-  // CollectionReference get report =>
-  //     collectionReference.doc(currentid).collection('patient report');
-  // CollectionReference get feedetails =>
-  //     collectionReference.doc(uid).collection('fee details');
-
 
   void addData() async{
 

@@ -435,6 +435,17 @@ class _ot_registerState extends State<ot_register> {
       'swab sample locations': swabSampleLocationsList,
       'swab result date': _selectedDate,
       'swab results': swabResults,
+      'Other Disinfectant': pOTDisinfectant,
+      'Other Area': pOTarea,
+      'Other Equipment': pOTEquipment,
+      'Other Non-accessible Area': pOTNonaccessible,
+      'Other fumigation Chemical': pOTfumigation,
+      'Other Chemical': pWashroom,
+      'Other Washroom Area': pWashroom_area,
+      'Other Washroom non-accessible': pWashroomNon_accessible,
+      'Other Washroom Chemicals' :pWashroom_chemical,
+      'Other Swab Sample': pSwab_sample,
+      'Other tests': pSwab_result,
     });
     docuName = docuName + 1;
   }
