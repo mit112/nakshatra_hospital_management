@@ -1,18 +1,16 @@
 import 'dart:io';
 
 import 'package:bouncing_widget/bouncing_widget.dart';
-import 'package:flutter/services.dart';
-
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nakshatra_hospital_management/services/auth.dart';
 
 class NewReportScreen extends StatefulWidget {
-
   final DocumentSnapshot post;
   NewReportScreen(this.post);
 
@@ -25,46 +23,36 @@ class _NewReportScreenState extends State<NewReportScreen> {
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
   bool check = false;
-  bool octMachine = false,perimeter = false,medicine = false,externalDoctor = false,
+  bool octMachine = false,
+      perimeter = false,
+      medicine = false,
+      externalDoctor = false,
       nurse = false,
       attendant = false;
-  String flu,
-      feeDetails,
-      otherExpenses,
-      feeAmount,
-      otherFees,
-      fileName,
-      notes;
+  String flu, feeDetails, otherExpenses, feeAmount, otherFees, fileName, notes;
   String pTemp = '';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
   File file;
   String expensesString = '';
-  List <String> expensesList = [];
+  List<String> expensesList = [];
 
   void expensesStringMaker() {
-      if(octMachine)
-        expensesList.add('Oct Machine');
-      if(perimeter)
-        expensesList.add('Perimeter');
-      if(medicine)
-        expensesList.add('Medicine');
-      if(externalDoctor)
-        expensesList.add('External Doctor');
-      if(nurse)
-        expensesList.add('Nurse');
-      if(attendant)
-        expensesList.add('Attendant');
+    if (octMachine) expensesList.add('Oct Machine');
+    if (perimeter) expensesList.add('Perimeter');
+    if (medicine) expensesList.add('Medicine');
+    if (externalDoctor) expensesList.add('External Doctor');
+    if (nurse) expensesList.add('Nurse');
+    if (attendant) expensesList.add('Attendant');
 
-      if(expensesList.isNotEmpty){
-        expensesString = expensesList[0];
-        int length = expensesList.length;
-        if(length > 1)
-          for(int i = 1; i < length; i++)
-            expensesString += ', ' + expensesList[i];
-      }
-
+    if (expensesList.isNotEmpty) {
+      expensesString = expensesList[0];
+      int length = expensesList.length;
+      if (length > 1)
+        for (int i = 1; i < length; i++)
+          expensesString += ', ' + expensesList[i];
+    }
   }
 
   Future<void> uploadFile() async {
@@ -84,13 +72,14 @@ class _NewReportScreenState extends State<NewReportScreen> {
       print(e);
     }
   }
+
   Future<void> selectFile() async {
     FilePickerResult result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['jpg', 'pdf', 'doc'],
     );
 
-    if(result != null) {
+    if (result != null) {
       file = File(result.files.single.path);
       print(result.files.single.path);
     } else {
@@ -98,26 +87,25 @@ class _NewReportScreenState extends State<NewReportScreen> {
     }
   }
 
-  void addData() async{
-
+  void addData() async {
     await uploadFile();
 
     if (formKey.currentState.validate()) {
-
       CollectionReference collectionReference =
-      FirebaseFirestore.instance.collection('patients');
+          FirebaseFirestore.instance.collection('patients');
 
       print(fileName);
 
       expensesStringMaker();
 
       await collectionReference.doc(widget.post.data()['PatientId']).update({
-          'Visits': widget.post.data()['Visits'] + 1,
+        'Visits': widget.post.data()['Visits'] + 1,
       });
 
-
-      collectionReference =
-          FirebaseFirestore.instance.collection('patients').doc(widget.post.data()['PatientId']).collection('reports');
+      collectionReference = FirebaseFirestore.instance
+          .collection('patients')
+          .doc(widget.post.data()['PatientId'])
+          .collection('reports');
       String docName;
 
       docName = 'ReportNo${widget.post.data()['Visits'] + 1}';
@@ -173,7 +161,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 30.0,
                       ),
-                      Text("Date of visit",
+                      Text(
+                        "Date of visit",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18.0,
@@ -185,7 +174,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           initialValue: '',
                           type: DateTimePickerType.date,
                           dateLabelText: 'Select Date',
-
                           firstDate: DateTime(1995),
                           lastDate: DateTime.now().add(Duration(days: 365)),
                           validator: (value) {
@@ -208,43 +196,65 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Text("Patient body temp. in deg.C",
+                      Text(
+                        "Patient body temp. in deg.C",
                         style: TextStyle(
-                         color: Colors.black,
+                          color: Colors.black,
                           fontSize: 18.0,
                         ),
                       ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: DropdownButton<String>(
-                      value: 'Choose your temp',
-                      icon: const Icon(Icons.arrow_drop_down_outlined),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black,fontStyle: FontStyle.italic,
-                        fontSize: 18.0,),
-                      underline: Container(
-                      height: 2,
-                      color: Colors.grey,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: DropdownButton<String>(
+                          value: 'Choose your temp',
+                          icon: const Icon(Icons.arrow_drop_down_outlined),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 18.0,
+                          ),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.grey,
+                          ),
+                          onChanged: (newValue) {
+                            setState(() {
+                              pTemp = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'Choose your temp',
+                            '90',
+                            '91',
+                            '92',
+                            '93',
+                            '94',
+                            '95',
+                            '96',
+                            '97',
+                            '98',
+                            '99',
+                            '100',
+                            '101',
+                            '102',
+                            '103',
+                            '104',
+                            '105',
+                            '106',
+                            '107',
+                            '108',
+                            '109',
+                            '110'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
                       ),
-                      onChanged: (newValue) {
-                      setState(() {
-                      pTemp = newValue;
-                      });
-                      },
-                      items: <String>['Choose your temp','90', '91', '92', '93','94', '95', '96',
-                        '97','98', '99', '100', '101','102', '103', '104', '105',
-                        '106', '107', '108', '109','110']
-                          .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                      );
-                      }).toList(),
-                      ),
-                    ),
-
-
                       Column(
                         children: [
                           SizedBox(
@@ -293,7 +303,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 15,
                       ),
-
                       Column(
                         children: [
                           Row(
@@ -433,7 +442,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                           Padding(
                             padding:
-                            const EdgeInsets.symmetric(horizontal: 20.0),
+                                const EdgeInsets.symmetric(horizontal: 20.0),
                             child: TextFormField(
                               textInputAction: TextInputAction.done,
                               decoration: InputDecoration(
@@ -444,8 +453,12 @@ class _NewReportScreenState extends State<NewReportScreen> {
                                   fontSize: 18.0,
                                 ),
                               ),
-                              keyboardType: TextInputType.numberWithOptions(decimal: true),
-                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9,]+')),],
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9,]+')),
+                              ],
                               onChanged: (val) {
                                 otherFees = val ?? '0';
                               },
@@ -453,7 +466,9 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -466,11 +481,12 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        title:
-                        Text('OCT machine'),
+                        title: Text('OCT machine'),
                         value: this.octMachine,
                         onChanged: (bool value) {
                           setState(() {
@@ -479,9 +495,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          title:
-                        Text('Perimeter'),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Text('Perimeter'),
                         value: this.perimeter,
                         onChanged: (bool value) {
                           setState(() {
@@ -490,9 +505,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          title:
-                        Text('Medicine'),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Text('Medicine'),
                         value: this.medicine,
                         onChanged: (bool check) {
                           setState(() {
@@ -501,20 +515,17 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         },
                       ),
                       CheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          title:
-                        Text('External doctor'),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        title: Text('External doctor'),
                         value: this.externalDoctor,
                         onChanged: (bool check) {
                           this.externalDoctor = check;
-                          setState(() {
-                          });
+                          setState(() {});
                         },
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        title:
-                        Text('Nurse'),
+                        title: Text('Nurse'),
                         value: this.nurse,
                         onChanged: (bool check) {
                           setState(() {
@@ -524,8 +535,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       ),
                       CheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
-                        title:
-                        Text('Attendant'),
+                        title: Text('Attendant'),
                         value: this.attendant,
                         onChanged: (bool check) {
                           setState(() {
@@ -533,10 +543,8 @@ class _NewReportScreenState extends State<NewReportScreen> {
                           });
                         },
                       ),
-
                       Padding(
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextFormField(
                           onChanged: (val) {
                             otherExpenses = val;
@@ -557,11 +565,13 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       SizedBox(
                         height: 18.0,
                       ),
-                      Text("Enter additional details:",
+                      Text(
+                        "Enter additional details:",
                         style: TextStyle(
                           fontSize: 17.0,
                           fontWeight: FontWeight.w400,
-                        ),),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextFormField(
@@ -593,13 +603,15 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 60.0),
                                   child: Container(
                                     height: 48.0,
                                     child: Material(
                                       color: Colors.green,
                                       borderRadius: BorderRadius.circular(20.0),
-                                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                      shadowColor:
+                                          Colors.greenAccent.withOpacity(0.8),
                                       elevation: 7.0,
                                       child: Center(
                                         child: Text(
@@ -634,13 +646,15 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 60.0),
                                   child: Container(
                                     height: 48.0,
                                     child: Material(
                                       color: Colors.green,
                                       borderRadius: BorderRadius.circular(20.0),
-                                      shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                      shadowColor:
+                                          Colors.greenAccent.withOpacity(0.8),
                                       elevation: 7.0,
                                       child: Center(
                                         child: Text(
@@ -675,7 +689,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
   }
 }
 
-
 String currentid;
 
 // String reportid;
@@ -688,9 +701,8 @@ String feedetails;
 String firstvisit;
 Future<void> getName() async {
   DocumentSnapshot ds =
-  await FirebaseFirestore.instance.collection('users').doc(currentid).get();
+      await FirebaseFirestore.instance.collection('users').doc(currentid).get();
   feedetails = ds.data()['fee details'];
   firstvisit = ds.data()['first visit'];
   //hello world
-
 }

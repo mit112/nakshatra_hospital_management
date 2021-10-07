@@ -1,17 +1,15 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../constants/constants.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+
+import '../constants/constants.dart';
 
 const kFieldStyle = TextStyle(
   fontFamily: kFont,
@@ -22,7 +20,6 @@ const kFieldStyle = TextStyle(
 );
 
 class ReportDetailScreen extends StatefulWidget {
-
   final patientId;
   final DocumentSnapshot post;
   ReportDetailScreen({this.patientId, this.post});
@@ -32,7 +29,6 @@ class ReportDetailScreen extends StatefulWidget {
 }
 
 class _ReportDetailScreenState extends State<ReportDetailScreen> {
-
   String notes;
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
@@ -41,27 +37,25 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
   String otherFees;
   String otherExpenses;
 
-
   Future<String> downloadFile(String firebaseReference) async {
-
     Directory appDocDir = await getApplicationDocumentsDirectory();
-     filePath = '${appDocDir.path}/${firebaseReference.split('/').last}';
-     File downloadToFile = File(filePath);
+    filePath = '${appDocDir.path}/${firebaseReference.split('/').last}';
+    File downloadToFile = File(filePath);
     if (downloadToFile.existsSync()) {
       await downloadToFile.delete();
     }
     await downloadToFile.create();
 
-     try {
+    try {
       await firebase_storage.FirebaseStorage.instance
-          .ref(firebaseReference).writeToFile(downloadToFile);
+          .ref(firebaseReference)
+          .writeToFile(downloadToFile);
       return filePath;
     } catch (e) {
       print(e);
       return 'no file found';
     }
   }
-
 
   @override
   void initState() {
@@ -72,9 +66,9 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
     expenses = widget.post.data()['expenses'] ?? 'N/A';
     otherExpenses = widget.post.data()['other expenses'] ?? 'N/A';
     otherFees = widget.post.data()['other fees'] ?? 'N/A';
-
   }
-  @override 
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,
@@ -92,10 +86,10 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
             child: Column(
               children: [
                 Card(
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                   child: Container(
                     margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
                     width: double.infinity,
@@ -125,7 +119,7 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -147,19 +141,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               widget.post.data()['body temp'],
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -174,19 +169,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               '${widget.post.data()['flu symptoms']}',
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -201,19 +197,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               widget.post.data()['fee collected'],
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -228,19 +225,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               otherFees,
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -255,19 +253,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               widget.post.data()['fee details'],
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -282,19 +281,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               widget.post.data()['expenses'],
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -312,19 +312,20 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
                               otherExpenses,
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         Column(
@@ -336,69 +337,69 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
                                 textStyle: TextStyle(
                                   color: Colors.black,
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              ),                            ),
+                              ),
+                            ),
                             Text(
-                                notes,
+                              notes,
                               style: GoogleFonts.roboto(
                                 textStyle: TextStyle(
                                     color: Colors.grey[600],
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                ),
-                              ),                            ),
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: 0.5),
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(
                           height: 20.0,
                         ),
-          BouncingWidget(
-            scaleFactor: _scaleFactor,
-            stayOnBottom: stayOnBottom,
-            onPressed: () async {
-              await downloadFile('${widget.post.data()['file name']}');
-              print(filePath);
-              if(filePath != null) {
-                OpenFile.open(filePath);
-              }
-            },
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 60.0),
-                  child: Container(
-                    height: 48.0,
-                    child: Material(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(20.0),
-                      shadowColor:
-                      Colors.greenAccent.withOpacity(0.8),
-                      elevation: 7.0,
-                      child: InkWell(
-                        splashColor: Colors.indigo[200],
-                        onTap: () async {
-
-                        },
-                        child: Center(
-                          child: Text(
-                            'Show File',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                              color: Colors.white,
-                            ),
+                        BouncingWidget(
+                          scaleFactor: _scaleFactor,
+                          stayOnBottom: stayOnBottom,
+                          onPressed: () async {
+                            await downloadFile(
+                                '${widget.post.data()['file name']}');
+                            print(filePath);
+                            if (filePath != null) {
+                              OpenFile.open(filePath);
+                            }
+                          },
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 60.0),
+                                child: Container(
+                                  height: 48.0,
+                                  child: Material(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    shadowColor:
+                                        Colors.greenAccent.withOpacity(0.8),
+                                    elevation: 7.0,
+                                    child: InkWell(
+                                      splashColor: Colors.indigo[200],
+                                      onTap: () async {},
+                                      child: Center(
+                                        child: Text(
+                                          'Show File',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
                       ],
                     ),
                   ),
@@ -411,4 +412,3 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
     );
   }
 }
-

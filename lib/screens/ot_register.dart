@@ -7,9 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'homepage.dart';
 
 void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: ot_register(),
-));
+      debugShowCheckedModeBanner: false,
+      home: ot_register(),
+    ));
 
 class ot_register extends StatefulWidget {
   @override
@@ -133,7 +133,7 @@ class _ot_registerState extends State<ot_register> {
 
     if (disinfectantsForManualCleaningList.isNotEmpty) {
       disinfectantsForManualCleaningString =
-      disinfectantsForManualCleaningList[0];
+          disinfectantsForManualCleaningList[0];
       int length = disinfectantsForManualCleaningList.length;
       if (length > 1)
         for (int i = 1; i < length; i++)
@@ -215,7 +215,7 @@ class _ot_registerState extends State<ot_register> {
 
     if (otEquipmentWipedCleanList.isNotEmpty) {
       otNonAccessibleAreaSprayedWithDisinfectantString =
-      otNonAccessibleAreaSprayedWithDisinfectantList[0];
+          otNonAccessibleAreaSprayedWithDisinfectantList[0];
       int length = otNonAccessibleAreaSprayedWithDisinfectantList.length;
       if (length > 1)
         for (int i = 1; i < length; i++)
@@ -251,7 +251,7 @@ class _ot_registerState extends State<ot_register> {
 
     if (washroomChemicalForManualCleaningList.isNotEmpty) {
       washroomChemicalForManualCleaningString =
-      washroomChemicalForManualCleaningList[0];
+          washroomChemicalForManualCleaningList[0];
       int length = washroomChemicalForManualCleaningList.length;
       if (length > 1)
         for (int i = 1; i < length; i++)
@@ -325,7 +325,7 @@ class _ot_registerState extends State<ot_register> {
 
     if (washroomNonAccessibleAreaSprayedWithDisinfectantList.isNotEmpty) {
       washroomNonAccessibleAreaSprayedWithDisinfectantString =
-      washroomNonAccessibleAreaSprayedWithDisinfectantList[0];
+          washroomNonAccessibleAreaSprayedWithDisinfectantList[0];
       int length = washroomNonAccessibleAreaSprayedWithDisinfectantList.length;
       if (length > 1)
         for (int i = 1; i < length; i++)
@@ -345,7 +345,7 @@ class _ot_registerState extends State<ot_register> {
 
     if (washroomChemicalForFumigationList.isNotEmpty) {
       washroomChemicalForFumigationString =
-      washroomChemicalForFumigationList[0];
+          washroomChemicalForFumigationList[0];
       int length = washroomChemicalForFumigationList.length;
       if (length > 1)
         for (int i = 1; i < length; i++)
@@ -386,7 +386,7 @@ class _ot_registerState extends State<ot_register> {
 //ADD FORM TO THE DATABASE
   void addOTData() {
     CollectionReference collectionReference =
-    FirebaseFirestore.instance.collection('otregister');
+        FirebaseFirestore.instance.collection('otregister');
     int docuName;
 
     //String makers fun
@@ -411,7 +411,7 @@ class _ot_registerState extends State<ot_register> {
       'ot area wiped clean': otAreaWipedCleanString,
       'ot equipment wiped clean': otEquipmentWipedCleanString,
       'non accessible area sprayed with disinfectant':
-      otNonAccessibleAreaSprayedWithDisinfectantString,
+          otNonAccessibleAreaSprayedWithDisinfectantString,
       'ot fumigation date': _selectedDate,
       'ot fumigation started': pFumigation_started,
       'ot fumigation completed': pFumigation_completed,
@@ -420,15 +420,15 @@ class _ot_registerState extends State<ot_register> {
       'washroom manual cleaning started': pWashroom_started,
       'washroom manual cleaning ended': pWashroom_completed,
       'washroom-chemical used for manual cleaning':
-      washroomChemicalForManualCleaningString,
+          washroomChemicalForManualCleaningString,
       'washroom area furniture wiped clean': washroomAreaWipedCleanString,
       'washroom non accessible area sprayed':
-      washroomNonAccessibleAreaSprayedWithDisinfectantString,
+          washroomNonAccessibleAreaSprayedWithDisinfectantString,
       'washroom fumigation date': _selectedDate,
       'washroom fumigation started': pWfumigation_started,
       'washroom fumigation ended': pWfumigation_completed,
       'washroom chemicals used for fumigation':
-      washroomChemicalForFumigationString,
+          washroomChemicalForFumigationString,
       'notes': 'remaining',
       'swab taken on': _selectedDate,
       'swab taken time': pSwab_takentime,
@@ -443,11 +443,12 @@ class _ot_registerState extends State<ot_register> {
       'Other Chemical': pWashroom,
       'Other Washroom Area': pWashroom_area,
       'Other Washroom non-accessible': pWashroomNon_accessible,
-      'Other Washroom Chemicals' :pWashroom_chemical,
+      'Other Washroom Chemicals': pWashroom_chemical,
       'Other Swab Sample': pSwab_sample,
       'Other tests': pSwab_result,
     });
     docuName = docuName + 1;
+    Navigator.pop(context);
   }
 
   @override
@@ -468,14 +469,10 @@ class _ot_registerState extends State<ot_register> {
         ),
         leading: GestureDetector(
           onTap: () {
-            showDialog(
-                context: context,
-                builder: (ctx) =>Alert()
-            );
+            showDialog(context: context, builder: (ctx) => Alert());
           },
-          child: Icon(
-              Icons.arrow_back// add custom icons also
-          ),
+          child: Icon(Icons.arrow_back // add custom icons also
+              ),
         ),
         elevation: 8.0,
         backgroundColor: Colors.green[500],
@@ -507,13 +504,13 @@ class _ot_registerState extends State<ot_register> {
                   child: Form(
                       key: formKey,
                       child: Column(
-                        //crossAxisAlignment: CrossAxisAlignment.end,
-                        //mainAxisAlignment: MainAxisAlignment.start,
+                          //crossAxisAlignment: CrossAxisAlignment.end,
+                          //mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(height:60),
+                                SizedBox(height: 60),
                                 Text(
                                   'OT',
                                   style: TextStyle(
@@ -546,9 +543,11 @@ class _ot_registerState extends State<ot_register> {
                                     DateTimePicker(
                                       initialValue: '',
                                       type: DateTimePickerType.date,
-                                      dateLabelText: ' OT-date of manual cleaning',
+                                      dateLabelText:
+                                          ' OT-date of manual cleaning',
                                       firstDate: DateTime(1995),
-                                      lastDate: DateTime.now().add(Duration(days: 365)),
+                                      lastDate: DateTime.now()
+                                          .add(Duration(days: 365)),
                                       validator: (value) {
                                         return null;
                                       },
@@ -565,27 +564,27 @@ class _ot_registerState extends State<ot_register> {
                                         }
                                       },
                                     ),
-                                    
                                   ],
                                 ),
                               ),
-
                             ),
-                            SizedBox(height: 20.0,),
+                            SizedBox(
+                              height: 20.0,
+                            ),
                             Container(
                               decoration: BoxDecoration(
                                 // color: Colors.grey[400].withOpacity(0.5),
                                 color: Colors.grey[100].withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(16),
                                 // boxShadow: [
-                                  //background color of box
-                                  // BoxShadow(
-                                  //   color: Colors.white70,
-                                  //   offset: Offset(
-                                  //     2.0, // Move to right 10  horizontally
-                                  //     2.0, // Move to bottom 10 Vertically
-                                  //   ),
-                                  // )
+                                //background color of box
+                                // BoxShadow(
+                                //   color: Colors.white70,
+                                //   offset: Offset(
+                                //     2.0, // Move to right 10  horizontally
+                                //     2.0, // Move to bottom 10 Vertically
+                                //   ),
+                                // )
                                 // ],
                               ),
                               child: Padding(
@@ -611,14 +610,16 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20.0,),
+                            SizedBox(
+                              height: 20.0,
+                            ),
                             Container(
                               decoration: BoxDecoration(
                                 // color: Colors.grey[400].withOpacity(0.5),
                                 color: Colors.white.withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(16),
                                 boxShadow: [
-                                   //background color of box
+                                  //background color of box
                                   BoxShadow(
                                     color: Colors.green[200],
                                     offset: Offset(
@@ -634,7 +635,9 @@ class _ot_registerState extends State<ot_register> {
                                   children: [
                                     TextFormField(
                                       validator: (val) {
-                                        return val.isNotEmpty ? null : "Enter Time";
+                                        return val.isNotEmpty
+                                            ? null
+                                            : "Enter Time";
                                       },
                                       onChanged: (val) {
                                         pManual_completed = val;
@@ -643,7 +646,8 @@ class _ot_registerState extends State<ot_register> {
                                       keyboardType: TextInputType.number,
                                       textInputAction: TextInputAction.next,
                                       decoration: InputDecoration(
-                                        labelText: ' OT manual cleaning completed at',
+                                        labelText:
+                                            ' OT manual cleaning completed at',
                                         // labelStyle: TextStyle(
                                         //   height: 1.2,
                                         //   fontStyle: FontStyle.italic,
@@ -658,7 +662,9 @@ class _ot_registerState extends State<ot_register> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20.0,),
+                            SizedBox(
+                              height: 20.0,
+                            ),
                             //OT-Disinfectant(s) used for manual cleaning?
                             Container(
                               decoration: BoxDecoration(
@@ -681,9 +687,9 @@ class _ot_registerState extends State<ot_register> {
                                 child: Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
-
                                         Flexible(
                                           child: Text(
                                             'OT-Disinfectant(s) used for manual cleaning?',
@@ -709,15 +715,15 @@ class _ot_registerState extends State<ot_register> {
                                       },
                                     ),
                                     CheckboxListTile(
-                                      title:
-                                      Text('Infecto-Cide N 20 ml/1 ltr water'),
+                                      title: Text(
+                                          'Infecto-Cide N 20 ml/1 ltr water'),
                                       value: this.valueinfecto,
                                       onChanged: (bool value) {
                                         setState(() {
                                           this.valueinfecto = value;
                                           if (valueinfecto == true) {
                                             infecto =
-                                            "Infecto-Cide N 20 ml/1 ltr water";
+                                                "Infecto-Cide N 20 ml/1 ltr water";
                                           }
                                         });
                                       },
@@ -776,7 +782,8 @@ class _ot_registerState extends State<ot_register> {
                                   children: [
                                     SizedBox(height: 20),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Text(
                                           'OT area wiped clean',
@@ -856,7 +863,9 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                     TextFormField(
                                       validator: (val) {
-                                        return val.isNotEmpty ? null : "Enter text";
+                                        return val.isNotEmpty
+                                            ? null
+                                            : "Enter text";
                                       },
                                       //
                                       onChanged: (val) {
@@ -902,7 +911,8 @@ class _ot_registerState extends State<ot_register> {
                                 child: Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Text(
                                           'OT Equipment wiped clean',
@@ -972,7 +982,9 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                     TextFormField(
                                       validator: (val) {
-                                        return val.isNotEmpty ? null : "Enter text";
+                                        return val.isNotEmpty
+                                            ? null
+                                            : "Enter text";
                                       },
                                       //
                                       onChanged: (val) {
@@ -1017,9 +1029,12 @@ class _ot_registerState extends State<ot_register> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: Column(
                                     children: [
-                                      SizedBox(height: 20,),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Flexible(
                                             child: Text(
@@ -1032,122 +1047,127 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ],
                                       ),
-
-                                  CheckboxListTile(
-                                    title: Text('4 corners of upper ceiling'),
-                                    value: this.value4corner,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.value4corner = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text('2 corners of lower ceiling'),
-                                    value: this.value2corner,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.value2corner = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text('4 corners of floor'),
-                                    value: this.value4cornerfloor,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.value4cornerfloor = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text('AC'),
-                                    value: this.valueAC,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.valueAC = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text(
-                                        'Intricate geometry area of OT table bottom'),
-                                    value: this.valuebottom,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.valuebottom = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text(
-                                        'Intricate geometry area of instrument trolley bottom'),
-                                    value: this.valuetrolleybottom,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.valuetrolleybottom = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text(
-                                        'Intricate geometry area of additional storage tray'),
-                                    value: this.valuetray,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.valuetray = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text(
-                                        'Intricate geometry area of additional stool'),
-                                    value: this.valueintristool,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.valueintristool = value;
-                                      });
-                                    },
-                                  ),
-                                  CheckboxListTile(
-                                    title: Text(
-                                        'Intricate geometry area of surgeons chair'),
-                                    value: this.valueintrichair,
-                                    onChanged: (bool value) {
-                                      setState(() {
-                                        this.valueintrichair = value;
-                                      });
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 10.0,
-                                  ),
-                                  TextFormField(
-                                    validator: (val) {
-                                      return val.isNotEmpty ? null : "Enter text";
-                                    },
-                                    //
-                                    onChanged: (val) {
-                                      pOTNonaccessible = val;
-                                      setState(() {});
-                                    },
-                                    keyboardType: TextInputType.name,
-                                    textInputAction: TextInputAction.next,
-                                    decoration: InputDecoration(
-                                      labelText: 'Others ',
-                                      labelStyle: TextStyle(
-                                        height: 1.2,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 18.0,
+                                      CheckboxListTile(
+                                        title:
+                                            Text('4 corners of upper ceiling'),
+                                        value: this.value4corner,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.value4corner = value;
+                                          });
+                                        },
                                       ),
-                                    ),
-                                  ),
+                                      CheckboxListTile(
+                                        title:
+                                            Text('2 corners of lower ceiling'),
+                                        value: this.value2corner,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.value2corner = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('4 corners of floor'),
+                                        value: this.value4cornerfloor,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.value4cornerfloor = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text('AC'),
+                                        value: this.valueAC,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.valueAC = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text(
+                                            'Intricate geometry area of OT table bottom'),
+                                        value: this.valuebottom,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.valuebottom = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text(
+                                            'Intricate geometry area of instrument trolley bottom'),
+                                        value: this.valuetrolleybottom,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.valuetrolleybottom = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text(
+                                            'Intricate geometry area of additional storage tray'),
+                                        value: this.valuetray,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.valuetray = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text(
+                                            'Intricate geometry area of additional stool'),
+                                        value: this.valueintristool,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.valueintristool = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title: Text(
+                                            'Intricate geometry area of surgeons chair'),
+                                        value: this.valueintrichair,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.valueintrichair = value;
+                                          });
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      TextFormField(
+                                        validator: (val) {
+                                          return val.isNotEmpty
+                                              ? null
+                                              : "Enter text";
+                                        },
+                                        //
+                                        onChanged: (val) {
+                                          pOTNonaccessible = val;
+                                          setState(() {});
+                                        },
+                                        keyboardType: TextInputType.name,
+                                        textInputAction: TextInputAction.next,
+                                        decoration: InputDecoration(
+                                          labelText: 'Others ',
+                                          labelStyle: TextStyle(
+                                            height: 1.2,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 18.0,
+                                          ),
+                                        ),
+                                      ),
                                       SizedBox(height: 20),
                                     ],
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20,),
+                              SizedBox(
+                                height: 20,
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   // color: Colors.grey[400].withOpacity(0.5),
@@ -1172,7 +1192,7 @@ class _ot_registerState extends State<ot_register> {
                                     dateLabelText: 'OT fumigation date',
                                     firstDate: DateTime(1995),
                                     lastDate:
-                                    DateTime.now().add(Duration(days: 365)),
+                                        DateTime.now().add(Duration(days: 365)),
                                     validator: (value) {
                                       return null;
                                     },
@@ -1191,7 +1211,9 @@ class _ot_registerState extends State<ot_register> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20.0,),
+                              SizedBox(
+                                height: 20.0,
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   // color: Colors.grey[400].withOpacity(0.5),
@@ -1212,7 +1234,9 @@ class _ot_registerState extends State<ot_register> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: TextFormField(
                                     validator: (val) {
-                                      return val.isNotEmpty ? null : "Enter Time";
+                                      return val.isNotEmpty
+                                          ? null
+                                          : "Enter Time";
                                     },
                                     onChanged: (val) {
                                       pFumigation_started = val;
@@ -1231,7 +1255,9 @@ class _ot_registerState extends State<ot_register> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20.0,),
+                              SizedBox(
+                                height: 20.0,
+                              ),
                               Container(
                                 decoration: BoxDecoration(
                                   // color: Colors.grey[400].withOpacity(0.5),
@@ -1252,7 +1278,9 @@ class _ot_registerState extends State<ot_register> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: TextFormField(
                                     validator: (val) {
-                                      return val.isNotEmpty ? null : "Enter Time";
+                                      return val.isNotEmpty
+                                          ? null
+                                          : "Enter Time";
                                     },
                                     onChanged: (val) {
                                       pFumigation_completed = val;
@@ -1271,7 +1299,9 @@ class _ot_registerState extends State<ot_register> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 20.0,),
+                              SizedBox(
+                                height: 20.0,
+                              ),
                               Column(children: [
                                 Container(
                                   decoration: BoxDecoration(
@@ -1294,7 +1324,8 @@ class _ot_registerState extends State<ot_register> {
                                     child: Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Text(
                                               'OT fumigation-chemical(s) used',
@@ -1305,49 +1336,51 @@ class _ot_registerState extends State<ot_register> {
                                             ),
                                           ],
                                         ),
-
-                                    CheckboxListTile(
-                                      title: Text('Bacilloid 20ml/1 ltr'),
-                                      value: this.valuebac,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          this.valuebac = value;
-                                        });
-                                      },
-                                    ),
-                                    CheckboxListTile(
-                                      title: Text('Infecto Cide-N 20ml/1 ltr'),
-                                      value: this.valueinfect,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          this.valueinfect = value;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    TextFormField(
-                                      onChanged: (val) {
-                                        pOTfumigation = val;
-                                        setState(() {});
-                                      },
-                                      keyboardType: TextInputType.name,
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        labelText: 'Others ',
-                                        labelStyle: TextStyle(
-                                          height: 1.2,
-                                          fontStyle: FontStyle.italic,
-                                          fontSize: 18.0,
+                                        CheckboxListTile(
+                                          title: Text('Bacilloid 20ml/1 ltr'),
+                                          value: this.valuebac,
+                                          onChanged: (bool value) {
+                                            setState(() {
+                                              this.valuebac = value;
+                                            });
+                                          },
                                         ),
-                                      ),
+                                        CheckboxListTile(
+                                          title:
+                                              Text('Infecto Cide-N 20ml/1 ltr'),
+                                          value: this.valueinfect,
+                                          onChanged: (bool value) {
+                                            setState(() {
+                                              this.valueinfect = value;
+                                            });
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        TextFormField(
+                                          onChanged: (val) {
+                                            pOTfumigation = val;
+                                            setState(() {});
+                                          },
+                                          keyboardType: TextInputType.name,
+                                          textInputAction: TextInputAction.next,
+                                          decoration: InputDecoration(
+                                            labelText: 'Others ',
+                                            labelStyle: TextStyle(
+                                              height: 1.2,
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 18.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    ],
-                              ),
                                   ),
                                 ),
-                                SizedBox(height: 60.0,),
+                                SizedBox(
+                                  height: 60.0,
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -1360,7 +1393,7 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height:10),
+                                SizedBox(height: 10),
                                 Container(
                                   decoration: BoxDecoration(
                                     // color: Colors.grey[400].withOpacity(0.5),
@@ -1383,10 +1416,10 @@ class _ot_registerState extends State<ot_register> {
                                       initialValue: '',
                                       type: DateTimePickerType.date,
                                       dateLabelText:
-                                      'Washroom manual cleaning date',
+                                          'Washroom manual cleaning date',
                                       firstDate: DateTime(1995),
-                                      lastDate:
-                                      DateTime.now().add(Duration(days: 365)),
+                                      lastDate: DateTime.now()
+                                          .add(Duration(days: 365)),
                                       validator: (value) {
                                         return null;
                                       },
@@ -1405,7 +1438,7 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height:20),
+                                SizedBox(height: 20),
                                 Container(
                                   decoration: BoxDecoration(
                                     // color: Colors.grey[400].withOpacity(0.5),
@@ -1426,7 +1459,9 @@ class _ot_registerState extends State<ot_register> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: TextFormField(
                                       validator: (val) {
-                                        return val.isNotEmpty ? null : "Enter text";
+                                        return val.isNotEmpty
+                                            ? null
+                                            : "Enter text";
                                       },
                                       //
                                       onChanged: (val) {
@@ -1437,7 +1472,7 @@ class _ot_registerState extends State<ot_register> {
                                       textInputAction: TextInputAction.next,
                                       decoration: InputDecoration(
                                         labelText:
-                                        'Wash room manual cleaning started at',
+                                            'Wash room manual cleaning started at',
                                         // labelStyle: TextStyle(
                                         //   height: 1.2,
                                         //   fontStyle: FontStyle.italic,
@@ -1447,7 +1482,7 @@ class _ot_registerState extends State<ot_register> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height:20),
+                                SizedBox(height: 20),
                                 Container(
                                   decoration: BoxDecoration(
                                     // color: Colors.grey[400].withOpacity(0.5),
@@ -1468,7 +1503,9 @@ class _ot_registerState extends State<ot_register> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: TextFormField(
                                       validator: (val) {
-                                        return val.isNotEmpty ? null : "Enter text";
+                                        return val.isNotEmpty
+                                            ? null
+                                            : "Enter text";
                                       },
                                       //
                                       onChanged: (val) {
@@ -1479,7 +1516,7 @@ class _ot_registerState extends State<ot_register> {
                                       textInputAction: TextInputAction.next,
                                       decoration: InputDecoration(
                                         labelText:
-                                        'Wash room manual cleaning completed',
+                                            'Wash room manual cleaning completed',
                                         // labelStyle: TextStyle(
                                         //   height: 1.2,
                                         //   fontStyle: FontStyle.italic,
@@ -1510,7 +1547,8 @@ class _ot_registerState extends State<ot_register> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: Column(children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           Flexible(
                                             child: Text(
@@ -1523,48 +1561,50 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ],
                                       ),
-
-                                    CheckboxListTile(
-                                      title: Text('Bacilloid 20ml/1 ltr'),
-                                      value: this.value20mlbac,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          this.value20mlbac = value;
-                                        });
-                                      },
-                                    ),
-                                    CheckboxListTile(
-                                      title: Text('Infecto Cide-N 20ml/1 ltr'),
-                                      value: this.value20mlinfect,
-                                      onChanged: (bool value) {
-                                        setState(() {
-                                          this.value20mlinfect = value;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    TextFormField(
-                                      validator: (val) {
-                                        return val.isNotEmpty ? null : "Enter text";
-                                      },
-                                      //
-                                      onChanged: (val) {
-                                        pWashroom = val;
-                                        setState(() {});
-                                      },
-                                      keyboardType: TextInputType.name,
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        labelText: 'Others ',
-                                        labelStyle: TextStyle(
-                                          height: 1.2,
-                                          fontStyle: FontStyle.italic,
-                                          fontSize: 18.0,
+                                      CheckboxListTile(
+                                        title: Text('Bacilloid 20ml/1 ltr'),
+                                        value: this.value20mlbac,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.value20mlbac = value;
+                                          });
+                                        },
+                                      ),
+                                      CheckboxListTile(
+                                        title:
+                                            Text('Infecto Cide-N 20ml/1 ltr'),
+                                        value: this.value20mlinfect,
+                                        onChanged: (bool value) {
+                                          setState(() {
+                                            this.value20mlinfect = value;
+                                          });
+                                        },
+                                      ),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
+                                      TextFormField(
+                                        validator: (val) {
+                                          return val.isNotEmpty
+                                              ? null
+                                              : "Enter text";
+                                        },
+                                        //
+                                        onChanged: (val) {
+                                          pWashroom = val;
+                                          setState(() {});
+                                        },
+                                        keyboardType: TextInputType.name,
+                                        textInputAction: TextInputAction.next,
+                                        decoration: InputDecoration(
+                                          labelText: 'Others ',
+                                          labelStyle: TextStyle(
+                                            height: 1.2,
+                                            fontStyle: FontStyle.italic,
+                                            fontSize: 18.0,
+                                          ),
                                         ),
                                       ),
-                                    ),
                                     ]),
                                   ),
                                 ),
@@ -1580,7 +1620,8 @@ class _ot_registerState extends State<ot_register> {
                                         BoxShadow(
                                           color: Colors.green[200],
                                           offset: Offset(
-                                            2.0, // Move to right 10  horizontally
+                                            2.0,
+                                            // Move to right 10  horizontally
                                             2.0, // Move to bottom 10 Vertically
                                           ),
                                         )
@@ -1591,7 +1632,8 @@ class _ot_registerState extends State<ot_register> {
                                       child: Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
                                               Flexible(
                                                 child: Text(
@@ -1604,154 +1646,157 @@ class _ot_registerState extends State<ot_register> {
                                               ),
                                             ],
                                           ),
-
-                                      CheckboxListTile(
-                                        title: Text('Tiles on sides of wash basin'),
-                                        value: this.valuetiles,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valuetiles = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Granite around wash basin'),
-                                        value: this.valuegranite,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valuegranite = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text(
-                                            'Escape route window sill(granite)'),
-                                        value: this.valueescape,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueescape = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('OT door wall & door'),
-                                        value: this.valueotdoor,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueotdoor = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Exit door to passage'),
-                                        value: this.valueexit,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueexit = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Wooden bench'),
-                                        value: this.valuewooden,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valuewooden = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Fan'),
-                                        value: this.valueFan,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueFan = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Storage trolley outer area'),
-                                        value: this.valueouterarea,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueouterarea = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title:
-                                        Text('Storage trolley inside drawers'),
-                                        value: this.valueinsidedrawer,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueinsidedrawer = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('AC'),
-                                        value: this.valueaC,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueaC = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Floor'),
-                                        value: this.valueFloor,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valueFloor = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text('Fumigation machine'),
-                                        value: this.valuefumigation,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valuefumigation = value;
-                                          });
-                                        },
-                                      ),
-                                      CheckboxListTile(
-                                        title: Text(
-                                            'Various medicines & chemicals bottles outer side'),
-                                        value: this.valuemedicine,
-                                        onChanged: (bool value) {
-                                          setState(() {
-                                            this.valuemedicine = value;
-                                          });
-                                        },
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      TextFormField(
-                                        validator: (val) {
-                                          return val.isNotEmpty
-                                              ? null
-                                              : "Enter text";
-                                        },
-                                        //
-                                        onChanged: (val) {
-                                          pWashroom_area = val;
-                                          setState(() {});
-                                        },
-                                        keyboardType: TextInputType.name,
-                                        textInputAction: TextInputAction.next,
-                                        decoration: InputDecoration(
-                                          labelText: 'Others ',
-                                          labelStyle: TextStyle(
-                                            height: 1.2,
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 18.0,
+                                          CheckboxListTile(
+                                            title: Text(
+                                                'Tiles on sides of wash basin'),
+                                            value: this.valuetiles,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valuetiles = value;
+                                              });
+                                            },
                                           ),
-                                        ),
-                                      ),
+                                          CheckboxListTile(
+                                            title: Text(
+                                                'Granite around wash basin'),
+                                            value: this.valuegranite,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valuegranite = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(
+                                                'Escape route window sill(granite)'),
+                                            value: this.valueescape,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueescape = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('OT door wall & door'),
+                                            value: this.valueotdoor,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueotdoor = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('Exit door to passage'),
+                                            value: this.valueexit,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueexit = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('Wooden bench'),
+                                            value: this.valuewooden,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valuewooden = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('Fan'),
+                                            value: this.valueFan,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueFan = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(
+                                                'Storage trolley outer area'),
+                                            value: this.valueouterarea,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueouterarea = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(
+                                                'Storage trolley inside drawers'),
+                                            value: this.valueinsidedrawer,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueinsidedrawer = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('AC'),
+                                            value: this.valueaC,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueaC = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('Floor'),
+                                            value: this.valueFloor,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valueFloor = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text('Fumigation machine'),
+                                            value: this.valuefumigation,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valuefumigation = value;
+                                              });
+                                            },
+                                          ),
+                                          CheckboxListTile(
+                                            title: Text(
+                                                'Various medicines & chemicals bottles outer side'),
+                                            value: this.valuemedicine,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                this.valuemedicine = value;
+                                              });
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 10.0,
+                                          ),
+                                          TextFormField(
+                                            validator: (val) {
+                                              return val.isNotEmpty
+                                                  ? null
+                                                  : "Enter text";
+                                            },
+                                            //
+                                            onChanged: (val) {
+                                              pWashroom_area = val;
+                                              setState(() {});
+                                            },
+                                            keyboardType: TextInputType.name,
+                                            textInputAction:
+                                                TextInputAction.next,
+                                            decoration: InputDecoration(
+                                              labelText: 'Others ',
+                                              labelStyle: TextStyle(
+                                                height: 1.2,
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 18.0,
+                                              ),
+                                            ),
+                                          ),
                                         ],
-                                ),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(height: 20),
@@ -1759,7 +1804,8 @@ class _ot_registerState extends State<ot_register> {
                                     Container(
                                       decoration: BoxDecoration(
                                         // color: Colors.grey[400].withOpacity(0.5),
-                                        color: Colors.grey[100].withOpacity(0.5),
+                                        color:
+                                            Colors.grey[100].withOpacity(0.5),
                                         borderRadius: BorderRadius.circular(16),
                                         // boxShadow: [
                                         //background color of box
@@ -1778,123 +1824,138 @@ class _ot_registerState extends State<ot_register> {
                                           children: [
                                             Row(
                                               mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Flexible(
                                                   child: Text(
                                                     'Washroom-Non accessible area sprayed with disinfectant',
                                                     style: TextStyle(
                                                       fontSize: 16.0,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
                                                 ),
                                               ],
                                             ),
-
-                                        CheckboxListTile(
-                                          title: Text('4 corners of upper ceiling'),
-                                          value: this.value4cornerupper,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.value4cornerupper = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text('4 corners of floor'),
-                                          value: this.value4corneroffloor,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.value4corneroffloor = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text('4 corners of escape route'),
-                                          value: this.value4cornerescape,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.value4cornerescape = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text('Underneath wash basin'),
-                                          value: this.valuewashbasin,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.valuewashbasin = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text(
-                                              'Non-accessable area of water tap'),
-                                          value: this.valuewatertap,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.valuewatertap = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text('Behind water purifier'),
-                                          value: this.valuepurifier,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.valuepurifier = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text('Underneath wooden bench'),
-                                          value: this.valueunderneathbench,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.valueunderneathbench = value;
-                                            });
-                                          },
-                                        ),
-                                        CheckboxListTile(
-                                          title: Text('Underneath storage trolley'),
-                                          value: this.valueunderneathtrolley,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              this.valueunderneathtrolley = value;
-                                            });
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 10.0,
-                                        ),
-                                        TextFormField(
-                                          validator: (val) {
-                                            return val.isNotEmpty
-                                                ? null
-                                                : "Enter text";
-                                          },
-                                          //
-                                          onChanged: (val) {
-                                            pWashroomNon_accessible = val;
-                                            setState(() {});
-                                          },
-                                          keyboardType: TextInputType.name,
-                                          textInputAction: TextInputAction.next,
-                                          decoration: InputDecoration(
-                                            labelText: 'Others ',
-                                            labelStyle: TextStyle(
-                                              height: 1.2,
-                                              fontStyle: FontStyle.italic,
-                                              fontSize: 18.0,
+                                            CheckboxListTile(
+                                              title: Text(
+                                                  '4 corners of upper ceiling'),
+                                              value: this.value4cornerupper,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.value4cornerupper =
+                                                      value;
+                                                });
+                                              },
                                             ),
-                                          ),
-                                        ),
+                                            CheckboxListTile(
+                                              title: Text('4 corners of floor'),
+                                              value: this.value4corneroffloor,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.value4corneroffloor =
+                                                      value;
+                                                });
+                                              },
+                                            ),
+                                            CheckboxListTile(
+                                              title: Text(
+                                                  '4 corners of escape route'),
+                                              value: this.value4cornerescape,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.value4cornerescape =
+                                                      value;
+                                                });
+                                              },
+                                            ),
+                                            CheckboxListTile(
+                                              title:
+                                                  Text('Underneath wash basin'),
+                                              value: this.valuewashbasin,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.valuewashbasin = value;
+                                                });
+                                              },
+                                            ),
+                                            CheckboxListTile(
+                                              title: Text(
+                                                  'Non-accessable area of water tap'),
+                                              value: this.valuewatertap,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.valuewatertap = value;
+                                                });
+                                              },
+                                            ),
+                                            CheckboxListTile(
+                                              title:
+                                                  Text('Behind water purifier'),
+                                              value: this.valuepurifier,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.valuepurifier = value;
+                                                });
+                                              },
+                                            ),
+                                            CheckboxListTile(
+                                              title: Text(
+                                                  'Underneath wooden bench'),
+                                              value: this.valueunderneathbench,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.valueunderneathbench =
+                                                      value;
+                                                });
+                                              },
+                                            ),
+                                            CheckboxListTile(
+                                              title: Text(
+                                                  'Underneath storage trolley'),
+                                              value:
+                                                  this.valueunderneathtrolley,
+                                              onChanged: (bool value) {
+                                                setState(() {
+                                                  this.valueunderneathtrolley =
+                                                      value;
+                                                });
+                                              },
+                                            ),
+                                            SizedBox(
+                                              height: 10.0,
+                                            ),
+                                            TextFormField(
+                                              validator: (val) {
+                                                return val.isNotEmpty
+                                                    ? null
+                                                    : "Enter text";
+                                              },
+                                              //
+                                              onChanged: (val) {
+                                                pWashroomNon_accessible = val;
+                                                setState(() {});
+                                              },
+                                              keyboardType: TextInputType.name,
+                                              textInputAction:
+                                                  TextInputAction.next,
+                                              decoration: InputDecoration(
+                                                labelText: 'Others ',
+                                                labelStyle: TextStyle(
+                                                  height: 1.2,
+                                                  fontStyle: FontStyle.italic,
+                                                  fontSize: 18.0,
+                                                ),
+                                              ),
+                                            ),
                                           ],
-                                  ),
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(height: 20.0,),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
                                     Container(
                                       decoration: BoxDecoration(
                                         // color: Colors.grey[400].withOpacity(0.5),
@@ -1905,7 +1966,8 @@ class _ot_registerState extends State<ot_register> {
                                           BoxShadow(
                                             color: Colors.green[200],
                                             offset: Offset(
-                                              2.0, // Move to right 10  horizontally
+                                              2.0,
+                                              // Move to right 10  horizontally
                                               2.0, // Move to bottom 10 Vertically
                                             ),
                                           )
@@ -1917,7 +1979,7 @@ class _ot_registerState extends State<ot_register> {
                                           initialValue: '',
                                           type: DateTimePickerType.date,
                                           dateLabelText:
-                                          'Wash room fumigation date',
+                                              'Wash room fumigation date',
                                           firstDate: DateTime(1995),
                                           lastDate: DateTime.now()
                                               .add(Duration(days: 365)),
@@ -1939,11 +2001,14 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20.0,),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
                                     Container(
                                       decoration: BoxDecoration(
                                         // color: Colors.grey[400].withOpacity(0.5),
-                                        color: Colors.grey[100].withOpacity(0.5),
+                                        color:
+                                            Colors.grey[100].withOpacity(0.5),
                                         borderRadius: BorderRadius.circular(16),
                                         // boxShadow: [
                                         //background color of box
@@ -1973,7 +2038,7 @@ class _ot_registerState extends State<ot_register> {
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
                                             labelText:
-                                            'Washroom fumigation started',
+                                                'Washroom fumigation started',
                                             // labelStyle: TextStyle(
                                             //   height: 1.2,
                                             //   fontStyle: FontStyle.italic,
@@ -1983,7 +2048,9 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20.0,),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
                                     Container(
                                       decoration: BoxDecoration(
                                         // color: Colors.grey[400].withOpacity(0.5),
@@ -1994,7 +2061,8 @@ class _ot_registerState extends State<ot_register> {
                                           BoxShadow(
                                             color: Colors.green[200],
                                             offset: Offset(
-                                              2.0, // Move to right 10  horizontally
+                                              2.0,
+                                              // Move to right 10  horizontally
                                               2.0, // Move to bottom 10 Vertically
                                             ),
                                           )
@@ -2017,7 +2085,7 @@ class _ot_registerState extends State<ot_register> {
                                           textInputAction: TextInputAction.next,
                                           decoration: InputDecoration(
                                             labelText:
-                                            'Wash room fumigation completed',
+                                                'Wash room fumigation completed',
                                             // labelStyle: TextStyle(
                                             //   height: 1.2,
                                             //   fontStyle: FontStyle.italic,
@@ -2027,13 +2095,17 @@ class _ot_registerState extends State<ot_register> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20.0,),
+                                    SizedBox(
+                                      height: 20.0,
+                                    ),
                                     Column(children: [
                                       Container(
                                         decoration: BoxDecoration(
                                           // color: Colors.grey[400].withOpacity(0.5),
-                                          color: Colors.grey[100].withOpacity(0.5),
-                                          borderRadius: BorderRadius.circular(16),
+                                          color:
+                                              Colors.grey[100].withOpacity(0.5),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                           // boxShadow: [
                                           //background color of box
                                           // BoxShadow(
@@ -2051,98 +2123,110 @@ class _ot_registerState extends State<ot_register> {
                                             children: [
                                               Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                    MainAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     'Washroom-chemical used for fumigation',
                                                     style: TextStyle(
                                                       fontSize: 16.0,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-
-                                          CheckboxListTile(
-                                            title: Text('Bacilloid 20ml/1 ltr'),
-                                            value: this.valuechembac,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                this.valuechembac = value;
-                                              });
-                                            },
-                                          ),
-                                          CheckboxListTile(
-                                            title:
-                                            Text('Infecto Cide-N 20ml/1 ltr'),
-                                            value: this.valuecheminfect,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                this.valuecheminfect = value;
-                                              });
-                                            },
-                                          ),
-                                          SizedBox(
-                                            height: 10.0,
-                                          ),
-                                          TextFormField(
-                                            validator: (val) {
-                                              return val.isNotEmpty
-                                                  ? null
-                                                  : "Enter text";
-                                            },
-                                            //
-                                            onChanged: (val) {
-                                              pWashroom_chemical = val;
-                                              setState(() {});
-                                            },
-                                            keyboardType: TextInputType.name,
-                                            textInputAction: TextInputAction.next,
-                                            decoration: InputDecoration(
-                                              labelText: 'Other',
-                                              labelStyle: TextStyle(
-                                                height: 1.2,
-                                                fontStyle: FontStyle.italic,
-                                                fontSize: 18.0,
+                                              CheckboxListTile(
+                                                title: Text(
+                                                    'Bacilloid 20ml/1 ltr'),
+                                                value: this.valuechembac,
+                                                onChanged: (bool value) {
+                                                  setState(() {
+                                                    this.valuechembac = value;
+                                                  });
+                                                },
                                               ),
-                                            ),
-                                          ),
+                                              CheckboxListTile(
+                                                title: Text(
+                                                    'Infecto Cide-N 20ml/1 ltr'),
+                                                value: this.valuecheminfect,
+                                                onChanged: (bool value) {
+                                                  setState(() {
+                                                    this.valuecheminfect =
+                                                        value;
+                                                  });
+                                                },
+                                              ),
+                                              SizedBox(
+                                                height: 10.0,
+                                              ),
+                                              TextFormField(
+                                                validator: (val) {
+                                                  return val.isNotEmpty
+                                                      ? null
+                                                      : "Enter text";
+                                                },
+                                                //
+                                                onChanged: (val) {
+                                                  pWashroom_chemical = val;
+                                                  setState(() {});
+                                                },
+                                                keyboardType:
+                                                    TextInputType.name,
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                decoration: InputDecoration(
+                                                  labelText: 'Other',
+                                                  labelStyle: TextStyle(
+                                                    height: 1.2,
+                                                    fontStyle: FontStyle.italic,
+                                                    fontSize: 18.0,
+                                                  ),
+                                                ),
+                                              ),
                                             ],
-                                    ),
+                                          ),
                                         ),
                                       ),
-                                      SizedBox(height: 20.0,),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
                                       Column(
                                         children: [
                                           Container(
                                             decoration: BoxDecoration(
                                               // color: Colors.grey[400].withOpacity(0.5),
-                                              color: Colors.white.withOpacity(0.5),
-                                              borderRadius: BorderRadius.circular(16),
+                                              color:
+                                                  Colors.white.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
                                               boxShadow: [
                                                 //background color of box
                                                 BoxShadow(
                                                   color: Colors.green[200],
                                                   offset: Offset(
-                                                    2.0, // Move to right 10  horizontally
+                                                    2.0,
+                                                    // Move to right 10  horizontally
                                                     2.0, // Move to bottom 10 Vertically
                                                   ),
                                                 )
                                               ],
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(20.0),
+                                              padding:
+                                                  const EdgeInsets.all(20.0),
                                               child: Column(
                                                 children: [
                                                   TextFormField(
-                                                    keyboardType: TextInputType.text,
+                                                    keyboardType:
+                                                        TextInputType.text,
                                                     textInputAction:
-                                                    TextInputAction.done,
+                                                        TextInputAction.done,
                                                     decoration: InputDecoration(
                                                       labelText: 'Notes',
                                                       labelStyle: TextStyle(
                                                         height: 1.2,
-                                                        fontStyle: FontStyle.italic,
+                                                        fontStyle:
+                                                            FontStyle.italic,
                                                         fontSize: 18.0,
                                                       ),
                                                     ),
@@ -2153,10 +2237,12 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 60.0,),
+                                      SizedBox(
+                                        height: 60.0,
+                                      ),
                                       Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Swab Details',
@@ -2167,18 +2253,22 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 10.0,),
+                                      SizedBox(
+                                        height: 10.0,
+                                      ),
                                       Container(
                                         decoration: BoxDecoration(
                                           // color: Colors.grey[400].withOpacity(0.5),
                                           color: Colors.white.withOpacity(0.5),
-                                          borderRadius: BorderRadius.circular(16),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                           boxShadow: [
                                             //background color of box
                                             BoxShadow(
                                               color: Colors.green[200],
                                               offset: Offset(
-                                                2.0, // Move to right 10  horizontally
+                                                2.0,
+                                                // Move to right 10  horizontally
                                                 2.0, // Move to bottom 10 Vertically
                                               ),
                                             )
@@ -2211,12 +2301,16 @@ class _ot_registerState extends State<ot_register> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 20.0,),
+                                      SizedBox(
+                                        height: 20.0,
+                                      ),
                                       Container(
                                         decoration: BoxDecoration(
                                           // color: Colors.grey[400].withOpacity(0.5),
-                                          color: Colors.grey[100].withOpacity(0.5),
-                                          borderRadius: BorderRadius.circular(16),
+                                          color:
+                                              Colors.grey[100].withOpacity(0.5),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                           // boxShadow: [
                                           //background color of box
                                           // BoxShadow(
@@ -2242,7 +2336,8 @@ class _ot_registerState extends State<ot_register> {
                                               setState(() {});
                                             },
                                             keyboardType: TextInputType.name,
-                                            textInputAction: TextInputAction.next,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             decoration: InputDecoration(
                                               labelText: 'Swab taken time ',
                                               // labelStyle: TextStyle(
@@ -2259,14 +2354,17 @@ class _ot_registerState extends State<ot_register> {
                                         Container(
                                           decoration: BoxDecoration(
                                             // color: Colors.grey[400].withOpacity(0.5),
-                                            color: Colors.white.withOpacity(0.5),
-                                            borderRadius: BorderRadius.circular(16),
+                                            color:
+                                                Colors.white.withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                             boxShadow: [
                                               //background color of box
                                               BoxShadow(
                                                 color: Colors.green[200],
                                                 offset: Offset(
-                                                  2.0, // Move to right 10  horizontally
+                                                  2.0,
+                                                  // Move to right 10  horizontally
                                                   2.0, // Move to bottom 10 Vertically
                                                 ),
                                               )
@@ -2278,180 +2376,196 @@ class _ot_registerState extends State<ot_register> {
                                               children: [
                                                 Row(
                                                   mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       'Swab sample locations',
                                                       style: TextStyle(
                                                         fontSize: 16.0,
-                                                        fontWeight: FontWeight.w400,
+                                                        fontWeight:
+                                                            FontWeight.w400,
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-
-                                            CheckboxListTile(
-                                              title: Text('OPD wall'),
-                                              value: this.valueOPD,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueOPD = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Dead wall'),
-                                              value: this.valueDead,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueDead = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Door wall & door'),
-                                              value: this.valueDoorside,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueDoorside = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Passage wall'),
-                                              value: this.valuePassageWall,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valuePassageWall = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('AC wall'),
-                                              value: this.valueACWall,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueACWall = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Lower ceiling'),
-                                              value: this.valueLowerCeiling,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueLowerCeiling = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Upper ceiling'),
-                                              value: this.valueUpperCeiling,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueUpperCeiling = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Microscope head'),
-                                              value: this.valueStand,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueStand = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('OT table'),
-                                              value: this.valueLegs,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueLegs = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Instrument trolley'),
-                                              value: this.valueInstrument,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueInstrument = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('AC'),
-                                              value: this.valueaircondition,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueaircondition = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Air'),
-                                              value: this.valueair,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueair = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text('Culture plate'),
-                                              value: this.valueplate,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valueplate = value;
-                                                });
-                                              },
-                                            ),
-                                            CheckboxListTile(
-                                              title: Text(
-                                                  'Wash room-specify location in Other  below'),
-                                              value: this.valuebelow,
-                                              onChanged: (bool value) {
-                                                setState(() {
-                                                  this.valuebelow = value;
-                                                });
-                                              },
-                                            ),
-                                            SizedBox(
-                                              height: 10.0,
-                                            ),
-                                            TextFormField(
-                                              validator: (val) {
-                                                return val.isNotEmpty
-                                                    ? null
-                                                    : "Enter text";
-                                              },
-                                              //
-                                              onChanged: (val) {
-                                                pSwab_sample = val;
-                                                setState(() {});
-                                              },
-                                              keyboardType: TextInputType.name,
-                                              textInputAction: TextInputAction.next,
-                                              decoration: InputDecoration(
-                                                labelText: ' Other',
-                                                labelStyle: TextStyle(
-                                                  height: 1.2,
-                                                  fontStyle: FontStyle.italic,
-                                                  fontSize: 18.0,
+                                                CheckboxListTile(
+                                                  title: Text('OPD wall'),
+                                                  value: this.valueOPD,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueOPD = value;
+                                                    });
+                                                  },
                                                 ),
-                                              ),
-                                            ),
+                                                CheckboxListTile(
+                                                  title: Text('Dead wall'),
+                                                  value: this.valueDead,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueDead = value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title:
+                                                      Text('Door wall & door'),
+                                                  value: this.valueDoorside,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueDoorside =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Passage wall'),
+                                                  value: this.valuePassageWall,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valuePassageWall =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('AC wall'),
+                                                  value: this.valueACWall,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueACWall = value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Lower ceiling'),
+                                                  value: this.valueLowerCeiling,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueLowerCeiling =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Upper ceiling'),
+                                                  value: this.valueUpperCeiling,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueUpperCeiling =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title:
+                                                      Text('Microscope head'),
+                                                  value: this.valueStand,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueStand = value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('OT table'),
+                                                  value: this.valueLegs,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueLegs = value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text(
+                                                      'Instrument trolley'),
+                                                  value: this.valueInstrument,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueInstrument =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('AC'),
+                                                  value: this.valueaircondition,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueaircondition =
+                                                          value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Air'),
+                                                  value: this.valueair,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueair = value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text('Culture plate'),
+                                                  value: this.valueplate,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valueplate = value;
+                                                    });
+                                                  },
+                                                ),
+                                                CheckboxListTile(
+                                                  title: Text(
+                                                      'Wash room-specify location in Other  below'),
+                                                  value: this.valuebelow,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      this.valuebelow = value;
+                                                    });
+                                                  },
+                                                ),
+                                                SizedBox(
+                                                  height: 10.0,
+                                                ),
+                                                TextFormField(
+                                                  validator: (val) {
+                                                    return val.isNotEmpty
+                                                        ? null
+                                                        : "Enter text";
+                                                  },
+                                                  //
+                                                  onChanged: (val) {
+                                                    pSwab_sample = val;
+                                                    setState(() {});
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType.name,
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  decoration: InputDecoration(
+                                                    labelText: ' Other',
+                                                    labelStyle: TextStyle(
+                                                      height: 1.2,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                      fontSize: 18.0,
+                                                    ),
+                                                  ),
+                                                ),
                                               ],
-                                      ),
+                                            ),
                                           ),
                                         ),
-                                        SizedBox(height: 20.0,),
+                                        SizedBox(
+                                          height: 20.0,
+                                        ),
                                         Container(
                                           decoration: BoxDecoration(
                                             // color: Colors.grey[400].withOpacity(0.5),
-                                            color: Colors.grey[100].withOpacity(0.5),
-                                            borderRadius: BorderRadius.circular(16),
+                                            color: Colors.grey[100]
+                                                .withOpacity(0.5),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
                                             // boxShadow: [
                                             //background color of box
                                             // BoxShadow(
@@ -2470,7 +2584,8 @@ class _ot_registerState extends State<ot_register> {
                                                 DateTimePicker(
                                                   initialValue: '',
                                                   type: DateTimePickerType.date,
-                                                  dateLabelText: 'Swab result date',
+                                                  dateLabelText:
+                                                      'Swab result date',
                                                   firstDate: DateTime(1995),
                                                   lastDate: DateTime.now()
                                                       .add(Duration(days: 365)),
@@ -2490,85 +2605,96 @@ class _ot_registerState extends State<ot_register> {
                                                     }
                                                   },
                                                 ),
-
-                                            SizedBox(height: 30),
-                                            Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
+                                                SizedBox(height: 30),
+                                                Column(
                                                   children: [
-                                                    SizedBox(height:20),
-                                                    Flexible(
-                                                      child: Text(
-                                                        'Swab results- '
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(height: 20),
+                                                        Flexible(
+                                                          child: Text(
+                                                            'Swab results- '
                                                             'Mark only one circle',
-                                                        style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontWeight: FontWeight.w400,
+                                                            style: TextStyle(
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  children: [
-                                                    Radio(
-                                                        value: 'Yes',
-                                                        groupValue: swabResults,
-                                                        onChanged: (val) {
-                                                          swabResults = val;
-                                                          setState(() {});
-                                                        }),
-                                                    Flexible(
-                                                        child: Text(
-                                                            'Negative/acceptable for surgeries')),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                                  children: [
-                                                    Radio(
-                                                        value: 'No',
-                                                        groupValue: swabResults,
-                                                        onChanged: (val) {
-                                                          swabResults = val;
-                                                          setState(() {});
-                                                        }),
-                                                    Text(
-                                                        'Positive: Clean/refumigate as required.\n See test report for details'),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Radio(
+                                                            value: 'Yes',
+                                                            groupValue:
+                                                                swabResults,
+                                                            onChanged: (val) {
+                                                              swabResults = val;
+                                                              setState(() {});
+                                                            }),
+                                                        Flexible(
+                                                            child: Text(
+                                                                'Negative/acceptable for surgeries')),
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Radio(
+                                                            value: 'No',
+                                                            groupValue:
+                                                                swabResults,
+                                                            onChanged: (val) {
+                                                              swabResults = val;
+                                                              setState(() {});
+                                                            }),
+                                                        Text(
+                                                            'Positive: Clean/refumigate as required.\n See test report for details'),
+                                                      ],
+                                                    ),
                                                   ],
                                                 ),
                                               ],
                                             ),
-                                              ],
-                                      ),
                                           ),
                                         ),
                                         Column(children: [
-                                          SizedBox(height: 20.0,),
+                                          SizedBox(
+                                            height: 20.0,
+                                          ),
                                           Container(
                                             decoration: BoxDecoration(
                                               // color: Colors.grey[400].withOpacity(0.5),
-                                              color: Colors.white.withOpacity(0.5),
-                                              borderRadius: BorderRadius.circular(16),
+                                              color:
+                                                  Colors.white.withOpacity(0.5),
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
                                               boxShadow: [
                                                 //background color of box
                                                 BoxShadow(
                                                   color: Colors.green[200],
                                                   offset: Offset(
-                                                    2.0, // Move to right 10  horizontally
+                                                    2.0,
+                                                    // Move to right 10  horizontally
                                                     2.0, // Move to bottom 10 Vertically
                                                   ),
                                                 )
                                               ],
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.all(20.0),
+                                              padding:
+                                                  const EdgeInsets.all(20.0),
                                               child: TextFormField(
                                                 validator: (val) {
                                                   return val.isNotEmpty
@@ -2580,12 +2706,13 @@ class _ot_registerState extends State<ot_register> {
                                                   pSwab_result = val;
                                                   setState(() {});
                                                 },
-                                                keyboardType: TextInputType.name,
+                                                keyboardType:
+                                                    TextInputType.name,
                                                 textInputAction:
-                                                TextInputAction.next,
+                                                    TextInputAction.next,
                                                 decoration: InputDecoration(
                                                   labelText:
-                                                  ' OT/wash room swab & other test results'
+                                                      ' OT/wash room swab & other test results'
                                                       'Files submitted:',
                                                   labelStyle: TextStyle(
                                                     height: 1.2,
@@ -2603,15 +2730,15 @@ class _ot_registerState extends State<ot_register> {
                                             children: [
                                               Padding(
                                                 padding:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 60.0),
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 60.0),
                                                 child: Container(
                                                   height: 40.0,
                                                   child: Material(
                                                     color: Colors.green,
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        15.0),
+                                                        BorderRadius.circular(
+                                                            15.0),
                                                     shadowColor: Colors
                                                         .greenAccent
                                                         .withOpacity(0.8),
@@ -2622,7 +2749,7 @@ class _ot_registerState extends State<ot_register> {
                                                           'Upload Files',
                                                           style: TextStyle(
                                                             fontWeight:
-                                                            FontWeight.bold,
+                                                                FontWeight.bold,
                                                             fontSize: 16.0,
                                                             color: Colors.white,
                                                           ),
@@ -2650,16 +2777,16 @@ class _ot_registerState extends State<ot_register> {
                                                   children: [
                                                     Padding(
                                                       padding: const EdgeInsets
-                                                          .symmetric(
+                                                              .symmetric(
                                                           horizontal: 60.0),
                                                       child: Container(
                                                         height: 48.0,
                                                         child: Material(
                                                           color: Colors.green,
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              20.0),
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      20.0),
                                                           shadowColor: Colors
                                                               .greenAccent
                                                               .withOpacity(0.8),
@@ -2669,8 +2796,8 @@ class _ot_registerState extends State<ot_register> {
                                                               'Submit',
                                                               style: TextStyle(
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .bold,
+                                                                    FontWeight
+                                                                        .bold,
                                                                 fontSize: 18.0,
                                                                 color: Colors
                                                                     .white,
@@ -2683,70 +2810,11 @@ class _ot_registerState extends State<ot_register> {
                                                   ],
                                                 ),
                                               ),
-                                              // Padding(
-                                              //   padding:
-                                              //       const EdgeInsets.symmetric(
-                                              //           horizontal: 100.0),
-                                              //   child: Container(
-                                              //     height: 40.0,
-                                              //     child: Material(
-                                              //       color: Colors.green,
-                                              //       borderRadius:
-                                              //           BorderRadius.circular(
-                                              //               30.0),
-                                              //       shadowColor: Colors
-                                              //           .greenAccent
-                                              //           .withOpacity(0.8),
-                                              //       elevation: 5.0,
-                                              //       child: Center(
-                                              //         child: Text(
-                                              //           'Submit',
-                                              //           style: TextStyle(
-                                              //             fontWeight:
-                                              //                 FontWeight.bold,
-                                              //             fontSize: 15.0,
-                                              //             color: Colors.white,
-                                              //           ),
-                                              //         ),
-                                              //       ),
-                                              //     ),
-                                              //   ),
-                                              // ),
                                               SizedBox(
                                                 height: 30,
                                               ),
                                             ],
                                           ),
-
-                                          // Container(
-                                          //   child: ElevatedButton(
-                                          //     child: Text('submit'),
-                                          //     onPressed: () async {
-                                          //       // print(_selectedDate);
-                                          //
-                                          //       if (formKey.currentState.validate()) {
-                                          //         await collectionReference.add({
-                                          //           'patient Name': pName,
-                                          //           'phone number': pNumber,
-                                          //           'date': _selectedDate,
-                                          //           'address': pAddress,
-                                          //           'fee details': _feeDetails,
-                                          //           'fee collected': _feeAmount,
-                                          //           'body temp': pTemp,
-                                          //           'flu symptoms': _flu,
-                                          //           'first visit': _firstTime,
-                                          //           'other expenses': _otherExpenses,
-                                          //           'other': _other,
-                                          //           'notes': _notes,
-                                          //         }).then((value) {
-                                          //           currentid = value.id;
-                                          //           print(value.id);
-                                          //         });
-                                          //         Navigator.pop(context);
-                                          //       }
-                                          //     },
-                                          //   ),
-                                          // ),
                                         ]),
                                       ]),
                                     ]),
@@ -2761,11 +2829,9 @@ class _ot_registerState extends State<ot_register> {
       ),
     );
   }
-
 }
 
 class Alert extends StatefulWidget {
-
   @override
   _AlertState createState() => _AlertState();
 }
@@ -2773,34 +2839,27 @@ class Alert extends StatefulWidget {
 class _AlertState extends State<Alert> {
   @override
   Widget build(BuildContext context) {
-    return
-      AlertDialog(
-        title: Text("Alert Dialog Box"),
-        content: Text("Arey you sure you want to exit form"),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Homepage()));
-            },
-
-            child: Text("Yes"),
-          ),FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("No",style: TextStyle(color:Colors.grey),),
+    return AlertDialog(
+      title: Text("Alert Dialog Box"),
+      content: Text("Arey you sure you want to exit form"),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Homepage()));
+          },
+          child: Text("Yes"),
+        ),
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            "No",
+            style: TextStyle(color: Colors.grey),
           ),
-        ],
-      );
-
-
-
+        ),
+      ],
+    );
   }
 }
-
-
-
-

@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:intl/intl.dart';
+import 'package:nakshatra_hospital_management/services/auth.dart';
+
 class PatientRegistrationForm extends StatefulWidget {
   const PatientRegistrationForm({Key key}) : super(key: key);
 
@@ -20,7 +21,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
   DateTime today = new DateTime.now();
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
-  String pName,sName;
+  String pName, sName;
   String pAddress;
   String pNumber;
   String pBirthDate;
@@ -206,7 +207,8 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 60.0),
                               child: Container(
                                 height: 48.0,
                                 child: InkWell(
@@ -215,7 +217,7 @@ class _PatientRegistrationFormState extends State<PatientRegistrationForm> {
                                     color: Colors.green,
                                     borderRadius: BorderRadius.circular(20.0),
                                     shadowColor:
-                                    Colors.greenAccent.withOpacity(0.8),
+                                        Colors.greenAccent.withOpacity(0.8),
                                     elevation: 7.0,
                                     child: Center(
                                       child: Text(

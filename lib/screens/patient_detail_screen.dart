@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/screens/new_report_screen.dart';
 import 'package:nakshatra_hospital_management/screens/view_reports.dart';
+
 import '../constants/constants.dart';
-import 'ot_register.dart';
 
 const kFieldStyle = TextStyle(
   fontFamily: kFont,
@@ -23,7 +23,6 @@ class PatientDetailScreen extends StatefulWidget {
 }
 
 class _PatientDetailScreenState extends State<PatientDetailScreen> {
-
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
   String pNumber;
@@ -51,7 +50,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
       body: SingleChildScrollView(
         child: Container(
           color: Colors.white,
-          height:MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height,
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Column(
@@ -90,7 +89,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                     color: Colors.black,
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -100,9 +99,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: 22.0,
-                                      fontWeight:FontWeight.w500,
-                                      letterSpacing: 0.5
-                                  ),
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
                                 ),
                               ),
                             ],
@@ -124,7 +122,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                     color: Colors.black,
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -134,9 +132,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: 22.0,
-                                      fontWeight:FontWeight.w500,
-                                      letterSpacing: 0.5
-                                  ),
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
                                 ),
                               ),
                             ],
@@ -158,19 +155,18 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                     color: Colors.black,
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
                               Text(
-                                 pNumber,
+                                pNumber,
                                 style: GoogleFonts.roboto(
                                   textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
-                                    letterSpacing: 0.5
-                                  ),
+                                      color: Colors.grey[600],
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
                                 ),
                               ),
                             ],
@@ -191,7 +187,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                     color: Colors.black,
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -201,9 +197,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: 22.0,
-                                      fontWeight:FontWeight.w500,
-                                      letterSpacing: 0.5
-                                  ),
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
                                 ),
                               ),
                             ],
@@ -219,7 +214,6 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-
                             children: [
                               Text(
                                 'address : ',
@@ -227,10 +221,9 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                     color: Colors.black,
                                     fontSize: 22.0,
-                                    fontWeight:FontWeight.w500,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
-
                               ),
                               Text(
                                 pAddress,
@@ -238,9 +231,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                                   textStyle: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: 22.0,
-                                      fontWeight:FontWeight.w500,
-                                      letterSpacing: 0.5
-                                  ),
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: 0.5),
                                 ),
                               ),
                             ],
@@ -258,7 +250,7 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                               textStyle: TextStyle(
                                 color: Colors.black,
                                 fontSize: 22.0,
-                                fontWeight:FontWeight.w500,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
@@ -268,9 +260,8 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                               textStyle: TextStyle(
                                   color: Colors.grey[600],
                                   fontSize: 22.0,
-                                  fontWeight:FontWeight.w500,
-                                  letterSpacing: 0.5
-                              ),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0.5),
                             ),
                           ),
                         ],
@@ -292,13 +283,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                           children: [
                             Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 60.0),
+                                  const EdgeInsets.symmetric(horizontal: 60.0),
                               child: Container(
                                 height: 48.0,
                                 child: Material(
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                  shadowColor:
+                                      Colors.greenAccent.withOpacity(0.8),
                                   elevation: 7.0,
                                   child: Center(
                                     child: Text(
@@ -333,13 +325,14 @@ class _PatientDetailScreenState extends State<PatientDetailScreen> {
                           children: [
                             Padding(
                               padding:
-                              const EdgeInsets.symmetric(horizontal: 60.0),
+                                  const EdgeInsets.symmetric(horizontal: 60.0),
                               child: Container(
                                 height: 48.0,
                                 child: Material(
                                   color: Colors.green,
                                   borderRadius: BorderRadius.circular(20.0),
-                                  shadowColor: Colors.greenAccent.withOpacity(0.8),
+                                  shadowColor:
+                                      Colors.greenAccent.withOpacity(0.8),
                                   elevation: 7.0,
                                   child: Center(
                                     child: Text(

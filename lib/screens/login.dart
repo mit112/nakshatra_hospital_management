@@ -1,9 +1,9 @@
 import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -52,7 +52,7 @@ class _AuthenticateState extends State<Authenticate> {
               ),
             )
           : SingleChildScrollView(
-            child: GestureDetector(
+              child: GestureDetector(
                 onTap: () {
                   FocusScope.of(context).requestFocus(new FocusNode());
                 },
@@ -60,10 +60,10 @@ class _AuthenticateState extends State<Authenticate> {
                   height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                        colors: <Color>[Colors.teal,Colors.black] // red to
-                    ),
+                        begin: Alignment.topRight,
+                        end: Alignment.bottomLeft,
+                        colors: <Color>[Colors.teal, Colors.black] // red to
+                        ),
                   ),
                   child: GestureDetector(
                     onTap: () {
@@ -71,7 +71,9 @@ class _AuthenticateState extends State<Authenticate> {
                     },
                     child: Column(
                       children: [
-                        SizedBox(height: 50,),
+                        SizedBox(
+                          height: 50,
+                        ),
                         Stack(
                           children: <Widget>[
                             Container(
@@ -122,7 +124,7 @@ class _AuthenticateState extends State<Authenticate> {
                           ],
                         ),
                         SizedBox(
-                          height:100,
+                          height: 100,
                         ),
                         Column(
                           children: [
@@ -217,11 +219,12 @@ class _AuthenticateState extends State<Authenticate> {
                         BouncingWidget(
                           scaleFactor: _scaleFactor,
                           stayOnBottom: stayOnBottom,
-                          onPressed:login,
+                          onPressed: login,
                           child: Column(
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 60.0),
                                 child: Container(
                                   height: 48.0,
                                   child: Material(
@@ -250,7 +253,7 @@ class _AuthenticateState extends State<Authenticate> {
                   ),
                 ),
               ),
-          ),
+            ),
     );
   }
 }

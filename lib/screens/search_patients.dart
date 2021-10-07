@@ -2,15 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/screens/patient_detail_screen.dart';
-import 'package:nakshatra_hospital_management/screens/patient_registration_form.dart';
-import 'package:nakshatra_hospital_management/services/auth.dart';
-import 'package:nakshatra_hospital_management/screens/view_patients.dart';
-import 'package:nakshatra_hospital_management/screens/ot_register.dart';
-import 'package:provider/provider.dart';
 import 'package:nakshatra_hospital_management/services/data_controller.dart';
-import 'package:get/get.dart';
 
 class SearchPatients extends StatefulWidget {
   @override
@@ -27,14 +22,13 @@ class _SearchPatientsState extends State<SearchPatients> {
   Stream usersStream;
   bool isLoading = false;
 
-  delete() async{
+  delete() async {
     print("checking");
     CollectionReference reference =
-    FirebaseFirestore.instance.collection("patients");
+        FirebaseFirestore.instance.collection("patients");
     QuerySnapshot query = await reference.get();
     query.docs[0].reference.delete();
   }
-
 
   // void onSearch() async {
   //   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -72,47 +66,52 @@ class _SearchPatientsState extends State<SearchPatients> {
   Future getUserByUserName(String username) async {
     return FirebaseFirestore.instance
         .collection("patients")
-        .where("Firstname", isEqualTo: username)
+        .where("Surname", isGreaterThanOrEqualTo: username)
         .snapshots();
   }
+
   onSearchBtnClick() async {
     isSearching = true;
     setState(() {});
-    usersStream = await
-    getUserByUserName(searchController.text);
+    usersStream = await getUserByUserName(searchController.text);
     setState(() {});
   }
+
   navigateToPatientDetail(DocumentSnapshot post) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PatientDetailScreen(
-              post: post,
-            )));
+                  post: post,
+                )));
   }
+
   final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-
     Widget searchUsersList() {
       return Container(
-        height:460,
+        height: 460,
         child: StreamBuilder(
-          stream:usersStream,
-          builder:(context, AsyncSnapshot snapshots){
-            if(snapshots.data == null) return Container(child: Center(child: Text("No data")));
+          stream: usersStream,
+          builder: (context, AsyncSnapshot snapshots) {
+            if (snapshots.data == null)
+              return Container(child: Center(child: Text("No data")));
             return ListView.builder(
               cacheExtent: 9999,
-              itemCount:snapshots.data.docs.length,
+              itemCount: snapshots.data.docs.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                final name = '${ snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}';
+                final name =
+                    '${snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}';
                 return Slidable(
                   actionPane: SlidableDrawerActionPane(),
                   actionExtentRatio: 0.2,
                   child: Column(
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Card(
@@ -124,7 +123,7 @@ class _SearchPatientsState extends State<SearchPatients> {
                           ),
                           child: ListTile(
                               title: Text(
-                                '${ snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}',
+                                '${snapshots.data.docs[index]['Firstname']} ${snapshots.data.docs[index]['Surname']}',
                                 style: GoogleFonts.inter(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w500,
@@ -132,11 +131,12 @@ class _SearchPatientsState extends State<SearchPatients> {
                                 ),
                               ),
                               subtitle: Text(
-                                snapshots.data.docs[index]['BirthDate'],                                      style: GoogleFonts.inter(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                              ),
+                                snapshots.data.docs[index]['BirthDate'],
+                                style: GoogleFonts.inter(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                ),
                               ),
                               onTap: () => navigateToPatientDetail(
                                   snapshots.data.docs[index]),
@@ -153,23 +153,20 @@ class _SearchPatientsState extends State<SearchPatients> {
                   secondaryActions: [
                     IconSlideAction(
                       caption: "Delete",
-                      color:Colors.indigo[300],
+                      color: Colors.indigo[300],
                       icon: Icons.delete,
                       onTap: () {
                         delete();
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text('$name dismissed')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('$name dismissed')));
                       },
-
                     )
                   ],
                 );
               },
             );
           },
-
         ),
-
       );
       //
       // child: FutureBuilder<List>(
@@ -243,7 +240,6 @@ class _SearchPatientsState extends State<SearchPatients> {
       //   },
       //
       // ),
-
     }
 
     return Scaffold(
@@ -289,7 +285,7 @@ class _SearchPatientsState extends State<SearchPatients> {
       //               style: TextStyle(color: Colors.black, fontSize: 30.0)),
       //         ),
       //       ),
-      body:  Column(
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -297,15 +293,15 @@ class _SearchPatientsState extends State<SearchPatients> {
               children: [
                 isSearching
                     ? GestureDetector(
-                  onTap: () {
-                    isSearching = false;
-                    searchController.text = "";
-                    setState(() {});
-                  },
-                  child: Padding(
-                      padding: EdgeInsets.only(right: 12),
-                      child: Icon(Icons.arrow_back)),
-                )
+                        onTap: () {
+                          isSearching = false;
+                          searchController.text = "";
+                          setState(() {});
+                        },
+                        child: Padding(
+                            padding: EdgeInsets.only(right: 12),
+                            child: Icon(Icons.arrow_back)),
+                      )
                     : Container(),
                 Expanded(
                   child: Container(
@@ -321,10 +317,10 @@ class _SearchPatientsState extends State<SearchPatients> {
                       children: [
                         Expanded(
                             child: TextField(
-                              controller: searchController,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none, hintText: "username"),
-                            )),
+                          controller: searchController,
+                          decoration: InputDecoration(
+                              border: InputBorder.none, hintText: "username"),
+                        )),
                         GestureDetector(
                             onTap: () {
                               if (searchController.text != "") {
