@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const kFont = 'Abel';
 
@@ -73,4 +74,48 @@ class RoundedButtonlogin extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget constantrow({
+  @required String text,
+  @required String snap,
+}) {
+  return Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Flexible(
+            child: Text(
+              "$text : ",
+              // maxLines: 2,
+              // overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            child: Text(
+              snap,
+              style: GoogleFonts.roboto(
+                textStyle: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.5),
+              ),
+            ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 20,
+      )
+    ],
+  );
 }
