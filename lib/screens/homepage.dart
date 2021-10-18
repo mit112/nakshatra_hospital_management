@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nakshatra_hospital_management/screens/ot_register.dart';
 import 'package:nakshatra_hospital_management/screens/patient_registration_form.dart';
 import 'package:nakshatra_hospital_management/screens/search_patients.dart';
+import 'package:nakshatra_hospital_management/screens/view_ot.dart';
 import 'package:nakshatra_hospital_management/screens/view_patients.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:provider/provider.dart';
@@ -37,13 +38,6 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
 
-      // body: Center(
-      //   child: Column(
-      //     children: <Widget>[
-      //       Image.asset('assets/homepagelogo.jpeg'),
-      //     ],
-      //   ),
-      // ),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -56,11 +50,7 @@ class _HomepageState extends State<Homepage> {
                 decoration: BoxDecoration(
                   color: Colors.green,
                 ),
-                // currentAccountPicture: CircleAvatar(
-                //   radius: 40.0,
-                //   backgroundImage: NetworkImage(""),
-                //   backgroundColor: Colors.blue[100],
-                // ),
+
                 accountName: Text(
                   'Nakshatra Eye Care.',
                   style: GoogleFonts.roboto(
@@ -365,6 +355,45 @@ class _HomepageState extends State<Homepage> {
                               child: Center(
                                 child: Text(
                                   'OT Register',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  BouncingWidget(
+                    scaleFactor: _scaleFactor,
+                    stayOnBottom: stayOnBottom,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Viewot()));
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                          child: Container(
+                            height: 48.0,
+                            child: Material(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20.0),
+                              shadowColor: Colors.greenAccent.withOpacity(0.8),
+                              elevation: 7.0,
+                              child: Center(
+                                child: Text(
+                                  'Registered ot',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
