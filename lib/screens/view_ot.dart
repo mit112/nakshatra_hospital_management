@@ -29,20 +29,20 @@ class _ViewotState extends State<Viewot> {
     QuerySnapshot query = await reference.get();
     query.docs[0].reference.delete();
   }
-
-  Future getUserByUserName(String username) async {
-    return FirebaseFirestore.instance
-        .collection("otregister")
-        .where("date", isGreaterThanOrEqualTo: username)
-        .snapshots();
-  }
-
-  onSearchBtnClick() async {
-    isSearching = true;
-    setState(() {});
-    usersStream = await getUserByUserName(searchController.text);
-    setState(() {});
-  }
+  //
+  // Future getUserByUserName(String username) async {
+  //   return FirebaseFirestore.instance
+  //       .collection("otregister")
+  //       .where("date", isGreaterThanOrEqualTo: username)
+  //       .snapshots();
+  // }
+  //
+  // onSearchBtnClick() async {
+  //   isSearching = true;
+  //   setState(() {});
+  //   usersStream = await getUserByUserName(searchController.text);
+  //   setState(() {});
+  // }
 
   navigateToPatientDetail(DocumentSnapshot post) {
     Navigator.push(
@@ -59,7 +59,7 @@ class _ViewotState extends State<Viewot> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'otregister',
+          'OT Register',
           style: TextStyle(
             color: Colors.white,
             fontFamily: kFont,
@@ -71,62 +71,62 @@ class _ViewotState extends State<Viewot> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: [
-                      isSearching
-                          ? GestureDetector(
-                              onTap: () {
-                                isSearching = false;
-                                searchController.text = "";
-                                setState(() {});
-                              },
-                              child: Padding(
-                                  padding: EdgeInsets.only(right: 12),
-                                  child: Icon(Icons.arrow_back)),
-                            )
-                          : Container(),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 16),
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.green,
-                                  width: 1,
-                                  style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(24)),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: TextField(
-                                controller: searchController,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "username"),
-                              )),
-                              GestureDetector(
-                                  onTap: () {
-                                    if (searchController.text != "") {
-                                      onSearchBtnClick();
-                                    }
-                                  },
-                                  child: Icon(Icons.search))
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                //isSearching ? searchUsersList() : Container()
-              ],
-            ),
+            // Column(
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 10),
+            //       child: Row(
+            //         children: [
+            //           isSearching
+            //               ? GestureDetector(
+            //                   onTap: () {
+            //                     isSearching = false;
+            //                     searchController.text = "";
+            //                     setState(() {});
+            //                   },
+            //                   child: Padding(
+            //                       padding: EdgeInsets.only(right: 12),
+            //                       child: Icon(Icons.arrow_back)),
+            //                 )
+            //               : Container(),
+            //           Expanded(
+            //             child: Container(
+            //               margin: EdgeInsets.symmetric(vertical: 16),
+            //               padding: EdgeInsets.symmetric(horizontal: 16),
+            //               decoration: BoxDecoration(
+            //                   border: Border.all(
+            //                       color: Colors.green,
+            //                       width: 1,
+            //                       style: BorderStyle.solid),
+            //                   borderRadius: BorderRadius.circular(24)),
+            //               child: Row(
+            //                 children: [
+            //                   Expanded(
+            //                       child: TextField(
+            //                     controller: searchController,
+            //                     decoration: InputDecoration(
+            //                         border: InputBorder.none,
+            //                         hintText: "username"),
+            //                   )),
+            //                   GestureDetector(
+            //                       onTap: () {
+            //                         if (searchController.text != "") {
+            //                           onSearchBtnClick();
+            //                         }
+            //                       },
+            //                       child: Icon(Icons.search))
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     //isSearching ? searchUsersList() : Container()
+            //   ],
+            // ),
             Container(
-              height: 500,
+              height: MediaQuery.of(context).size.height,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("otregister")

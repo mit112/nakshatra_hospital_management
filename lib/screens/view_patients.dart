@@ -40,29 +40,29 @@ class _ViewPatientsState extends State<ViewPatients> {
     return qn.docs;
   }
 
-  Future get() async {
-    QuerySnapshot qn = collectionReference
-        .where(
-          "FirstName",
-          isGreaterThanOrEqualTo: searchController.text,
-        )
-        .snapshots() as QuerySnapshot;
-    return qn.docs;
-  }
+  // Future get() async {
+  //   QuerySnapshot qn = collectionReference
+  //       .where(
+  //         "FirstName",
+  //         isGreaterThanOrEqualTo: searchController.text,
+  //       )
+  //       .snapshots() as QuerySnapshot;
+  //   return qn.docs;
+  // }
 
-  Future getUserByUserName(String username) async {
-    return FirebaseFirestore.instance
-        .collection("patients")
-        .where("PatientId", isGreaterThanOrEqualTo: username)
-        .snapshots();
-  }
+  // Future getUserByUserName(String username) async {
+  //   return FirebaseFirestore.instance
+  //       .collection("patients")
+  //       .where("PatientId", isGreaterThanOrEqualTo: username)
+  //       .snapshots();
+  // }
 
-  onSearchBtnClick() async {
-    isSearching = true;
-    setState(() {});
-    usersStream = await getUserByUserName(searchController.text);
-    setState(() {});
-  }
+  // onSearchBtnClick() async {
+  //   isSearching = true;
+  //   setState(() {});
+  //   usersStream = await getUserByUserName(searchController.text);
+  //   setState(() {});
+  // }
 
   navigateToPatientDetail(DocumentSnapshot post) {
     Navigator.push(
@@ -94,62 +94,62 @@ class _ViewPatientsState extends State<ViewPatients> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    children: [
-                      isSearching
-                          ? GestureDetector(
-                              onTap: () {
-                                isSearching = false;
-                                searchController.text = "";
-                                setState(() {});
-                              },
-                              child: Padding(
-                                  padding: EdgeInsets.only(right: 12),
-                                  child: Icon(Icons.arrow_back)),
-                            )
-                          : Container(),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 16),
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.green,
-                                  width: 1,
-                                  style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(24)),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  child: TextField(
-                                controller: searchController,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "username"),
-                              )),
-                              GestureDetector(
-                                  onTap: () {
-                                    if (searchController.text != "") {
-                                      onSearchBtnClick();
-                                    }
-                                  },
-                                  child: Icon(Icons.search))
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                isSearching ? searchUsersList() : Container()
-              ],
-            ),
+            //Column(
+              //children: [
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                //   child: Row(
+                //     children: [
+                //       isSearching
+                //           ? GestureDetector(
+                //               onTap: () {
+                //                 isSearching = false;
+                //                 searchController.text = "";
+                //                 setState(() {});
+                //               },
+                //               child: Padding(
+                //                   padding: EdgeInsets.only(right: 12),
+                //                   child: Icon(Icons.arrow_back)),
+                //             )
+                //           : Container(),
+                //       Expanded(
+                //         child: Container(
+                //           margin: EdgeInsets.symmetric(vertical: 16),
+                //           padding: EdgeInsets.symmetric(horizontal: 16),
+                //           decoration: BoxDecoration(
+                //               border: Border.all(
+                //                   color: Colors.green,
+                //                   width: 1,
+                //                   style: BorderStyle.solid),
+                //               borderRadius: BorderRadius.circular(24)),
+                //           child: Row(
+                //             children: [
+                //               Expanded(
+                //                   child: TextField(
+                //                 controller: searchController,
+                //                 decoration: InputDecoration(
+                //                     border: InputBorder.none,
+                //                     hintText: "username"),
+                //               )),
+                //               GestureDetector(
+                //                   onTap: () {
+                //                     if (searchController.text != "") {
+                //                       onSearchBtnClick();
+                //                     }
+                //                   },
+                //                   child: Icon(Icons.search))
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                // isSearching ? searchUsersList() : Container()
+              //],
+            //),
             Container(
-              height: 460,
+              height: MediaQuery.of(context).size.height,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("patients")
