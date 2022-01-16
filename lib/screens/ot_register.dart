@@ -507,19 +507,19 @@ class _ot_registerState extends State<ot_register> {
                           //crossAxisAlignment: CrossAxisAlignment.end,
                           //mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(height: 60),
-                                Text(
-                                  'OT',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     SizedBox(height: 60),
+                            //     Text(
+                            //       'OT',
+                            //       style: TextStyle(
+                            //         fontSize: 25.0,
+                            //         fontWeight: FontWeight.bold,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                             Container(
                               decoration: BoxDecoration(
                                 // color: Colors.grey[400].withOpacity(0.5),
