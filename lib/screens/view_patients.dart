@@ -18,17 +18,14 @@ class _ViewPatientsState extends State<ViewPatients> {
   List list = List();
   TextEditingController searchController = new TextEditingController();
   bool isSearching = false;
-  // String name='h';
   String currentid;
   Stream usersStream;
   String uid = auth.currentUser.uid.toString();
-  // Timestamp t = document['Register Date'];
-  // DateTime d = t.toDate();
+
   CollectionReference collectionReference =
       FirebaseFirestore.instance.collection('patients');
 
   delete() async {
-    print("checking");
     CollectionReference reference =
         FirebaseFirestore.instance.collection("patients");
     QuerySnapshot query = await reference.get();
@@ -56,7 +53,6 @@ class _ViewPatientsState extends State<ViewPatients> {
         .where("PatientId", isGreaterThanOrEqualTo: username)
         .snapshots();
   }
-
   onSearchBtnClick() async {
     isSearching = true;
     setState(() {});
