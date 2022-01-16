@@ -63,7 +63,6 @@ class _ViewPatientsState extends State<ViewPatients> {
     usersStream = await getUserByUserName(searchController.text);
     setState(() {});
   }
-
   navigateToPatientDetail(DocumentSnapshot post) {
     Navigator.push(
         context,

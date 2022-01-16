@@ -229,12 +229,6 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       body: SingleChildScrollView(
-        // child: Image.asset(
-        //   'assets/homepagelogo.jpeg',
-        //   height: 200,
-        //   color: Colors.black.withOpacity(0.80),
-        // ),
-
         child: Column(
           children: [
             SizedBox(
