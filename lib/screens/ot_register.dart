@@ -385,70 +385,72 @@ class _ot_registerState extends State<ot_register> {
 
 //ADD FORM TO THE DATABASE
   void addOTData() {
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection('otregister');
-    int docuName;
+    if (formKey.currentState.validate()) {
+      CollectionReference collectionReference =
+      FirebaseFirestore.instance.collection('otregister');
+      int docuName;
 
-    //String makers fun
-    disinfectantsForManualCleaningStringMaker();
-    otAreaWipedCleanStringMaker();
-    otEquipmentWipedCleanStringMaker();
-    otFumigationChemicalsStringMaker();
-    otNonAccessibleAreaSprayedWithDisinfectantStringMaker();
-    swabSampleLocationsStringMaker();
-    washroomAreaWipedCleanStringMaker();
-    washroomChemicalForManualCleaningStringMaker();
-    washroomChemicalForFumigationStringMaker();
-    washroomNonAccessibleAreaSprayedWithDisinfectantStringMaker();
+      //String makers fun
+      disinfectantsForManualCleaningStringMaker();
+      otAreaWipedCleanStringMaker();
+      otEquipmentWipedCleanStringMaker();
+      otFumigationChemicalsStringMaker();
+      otNonAccessibleAreaSprayedWithDisinfectantStringMaker();
+      swabSampleLocationsStringMaker();
+      washroomAreaWipedCleanStringMaker();
+      washroomChemicalForManualCleaningStringMaker();
+      washroomChemicalForFumigationStringMaker();
+      washroomNonAccessibleAreaSprayedWithDisinfectantStringMaker();
 
-    collectionReference.add({
-      //OT details
-      'ot id': docuName,
-      'date': _selectedDate,
-      'manual cleaning start': pManual_started,
-      'manual cleaning end': pManual_completed,
-      'disinfectant for manual cleaning': disinfectantsForManualCleaningString,
-      'ot area wiped clean': otAreaWipedCleanString,
-      'ot equipment wiped clean': otEquipmentWipedCleanString,
-      'non accessible area sprayed with disinfectant':
-          otNonAccessibleAreaSprayedWithDisinfectantString,
-      'ot fumigation date': _selectedDate,
-      'ot fumigation started': pFumigation_started,
-      'ot fumigation completed': pFumigation_completed,
-      'ot fumigation chemicals used': otFumigationChemicalsString,
-      'washroom manual cleaning date': _selectedDate,
-      'washroom manual cleaning started': pWashroom_started,
-      'washroom manual cleaning ended': pWashroom_completed,
-      'washroom-chemical used for manual cleaning':
-          washroomChemicalForManualCleaningString,
-      'washroom area furniture wiped clean': washroomAreaWipedCleanString,
-      'washroom non accessible area sprayed':
-          washroomNonAccessibleAreaSprayedWithDisinfectantString,
-      'washroom fumigation date': _selectedDate,
-      'washroom fumigation started': pWfumigation_started,
-      'washroom fumigation ended': pWfumigation_completed,
-      'washroom chemicals used for fumigation':
-          washroomChemicalForFumigationString,
-      'notes': 'remaining',
-      'swab taken on': _selectedDate,
-      'swab taken time': pSwab_takentime,
-      'swab sample locations': swabSampleLocationsList,
-      'swab result date': _selectedDate,
-      'swab results': swabResults,
-      'Other Disinfectant': pOTDisinfectant,
-      'Other Area': pOTarea,
-      'Other Equipment': pOTEquipment,
-      'Other Non-accessible Area': pOTNonaccessible,
-      'Other fumigation Chemical': pOTfumigation,
-      'Other Chemical': pWashroom,
-      'Other Washroom Area': pWashroom_area,
-      'Other Washroom non-accessible': pWashroomNon_accessible,
-      'Other Washroom Chemicals': pWashroom_chemical,
-      'Other Swab Sample': pSwab_sample,
-      'Other tests': pSwab_result,
-    });
-    docuName = docuName + 1;
-    Navigator.pop(context);
+      collectionReference.add({
+        //OT details
+        'ot id': docuName,
+        'date': _selectedDate,
+        'manual cleaning start': pManual_started,
+        'manual cleaning end': pManual_completed,
+        'disinfectant for manual cleaning': disinfectantsForManualCleaningString,
+        'ot area wiped clean': otAreaWipedCleanString,
+        'ot equipment wiped clean': otEquipmentWipedCleanString,
+        'non accessible area sprayed with disinfectant':
+        otNonAccessibleAreaSprayedWithDisinfectantString,
+        'ot fumigation date': _selectedDate,
+        'ot fumigation started': pFumigation_started,
+        'ot fumigation completed': pFumigation_completed,
+        'ot fumigation chemicals used': otFumigationChemicalsString,
+        'washroom manual cleaning date': _selectedDate,
+        'washroom manual cleaning started': pWashroom_started,
+        'washroom manual cleaning ended': pWashroom_completed,
+        'washroom-chemical used for manual cleaning':
+        washroomChemicalForManualCleaningString,
+        'washroom area furniture wiped clean': washroomAreaWipedCleanString,
+        'washroom non accessible area sprayed':
+        washroomNonAccessibleAreaSprayedWithDisinfectantString,
+        'washroom fumigation date': _selectedDate,
+        'washroom fumigation started': pWfumigation_started,
+        'washroom fumigation ended': pWfumigation_completed,
+        'washroom chemicals used for fumigation':
+        washroomChemicalForFumigationString,
+        'notes': 'remaining',
+        'swab taken on': _selectedDate,
+        'swab taken time': pSwab_takentime,
+        'swab sample locations': swabSampleLocationsList,
+        'swab result date': _selectedDate,
+        'swab results': swabResults,
+        'Other Disinfectant': pOTDisinfectant,
+        'Other Area': pOTarea,
+        'Other Equipment': pOTEquipment,
+        'Other Non-accessible Area': pOTNonaccessible,
+        'Other fumigation Chemical': pOTfumigation,
+        'Other Chemical': pWashroom,
+        'Other Washroom Area': pWashroom_area,
+        'Other Washroom non-accessible': pWashroomNon_accessible,
+        'Other Washroom Chemicals': pWashroom_chemical,
+        'Other Swab Sample': pSwab_sample,
+        'Other tests': pSwab_result,
+      });
+      docuName = docuName + 1;
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -484,18 +486,6 @@ class _ot_registerState extends State<ot_register> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(left: 20, top: 20),
-              //   child: Text(
-              //     '',
-              //     style: GoogleFonts.lato(
-              //       textStyle: TextStyle(
-              //         fontSize: 30.0,
-              //         fontWeight: FontWeight.w400,
-              //       ),
-              //     ),
-              //   ),
-              // ),
               SizedBox(
                 height: 10,
               ),
@@ -504,22 +494,7 @@ class _ot_registerState extends State<ot_register> {
                   child: Form(
                       key: formKey,
                       child: Column(
-                          //crossAxisAlignment: CrossAxisAlignment.end,
-                          //mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     SizedBox(height: 60),
-                            //     Text(
-                            //       'OT',
-                            //       style: TextStyle(
-                            //         fontSize: 25.0,
-                            //         fontWeight: FontWeight.bold,
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
                             Container(
                               decoration: BoxDecoration(
                                 // color: Colors.grey[400].withOpacity(0.5),
@@ -548,8 +523,8 @@ class _ot_registerState extends State<ot_register> {
                                       firstDate: DateTime(1995),
                                       lastDate: DateTime.now()
                                           .add(Duration(days: 365)),
-                                      validator: (value) {
-                                        return null;
+                                      validator: (val) {
+                                        return val.isNotEmpty ? null : "Enter Time";
                                       },
                                       onChanged: (value) {
                                         if (value.isNotEmpty) {
@@ -576,16 +551,7 @@ class _ot_registerState extends State<ot_register> {
                                 // color: Colors.grey[400].withOpacity(0.5),
                                 color: Colors.grey[100].withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(16),
-                                // boxShadow: [
-                                //background color of box
-                                // BoxShadow(
-                                //   color: Colors.white70,
-                                //   offset: Offset(
-                                //     2.0, // Move to right 10  horizontally
-                                //     2.0, // Move to bottom 10 Vertically
-                                //   ),
-                                // )
-                                // ],
+
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
@@ -601,11 +567,7 @@ class _ot_registerState extends State<ot_register> {
                                   textInputAction: TextInputAction.next,
                                   decoration: InputDecoration(
                                     labelText: 'OT manual cleaning started at',
-                                    // labelStyle: TextStyle(
-                                    //   height: 1.2,
-                                    //   fontStyle: FontStyle.italic,
-                                    //   fontSize: 18.0,
-                                    // ),
+
                                   ),
                                 ),
                               ),
@@ -1246,11 +1208,7 @@ class _ot_registerState extends State<ot_register> {
                                     textInputAction: TextInputAction.next,
                                     decoration: InputDecoration(
                                       labelText: 'OT Fumigation started',
-                                      // labelStyle: TextStyle(
-                                      //   height: 1.2,
-                                      //   fontStyle: FontStyle.italic,
-                                      //   fontSize: 18.0,
-                                      // ),
+                                     
                                     ),
                                   ),
                                 ),
@@ -1263,16 +1221,7 @@ class _ot_registerState extends State<ot_register> {
                                   // color: Colors.grey[400].withOpacity(0.5),
                                   color: Colors.grey[100].withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(16),
-                                  // boxShadow: [
-                                  //background color of box
-                                  // BoxShadow(
-                                  //   color: Colors.white70,
-                                  //   offset: Offset(
-                                  //     2.0, // Move to right 10  horizontally
-                                  //     2.0, // Move to bottom 10 Vertically
-                                  //   ),
-                                  // )
-                                  // ],
+                                  
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(20.0),
@@ -1290,11 +1239,7 @@ class _ot_registerState extends State<ot_register> {
                                     textInputAction: TextInputAction.next,
                                     decoration: InputDecoration(
                                       labelText: 'OT Fumigation completed',
-                                      // labelStyle: TextStyle(
-                                      //   height: 1.2,
-                                      //   fontStyle: FontStyle.italic,
-                                      //   fontSize: 18.0,
-                                      // ),
+                                     
                                     ),
                                   ),
                                 ),
@@ -1305,7 +1250,6 @@ class _ot_registerState extends State<ot_register> {
                               Column(children: [
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.grey[400].withOpacity(0.5),
                                     color: Colors.white.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(16),
                                     boxShadow: [
@@ -1396,7 +1340,6 @@ class _ot_registerState extends State<ot_register> {
                                 SizedBox(height: 10),
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.grey[400].withOpacity(0.5),
                                     color: Colors.white.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(16),
                                     boxShadow: [
@@ -1441,19 +1384,8 @@ class _ot_registerState extends State<ot_register> {
                                 SizedBox(height: 20),
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.grey[400].withOpacity(0.5),
                                     color: Colors.grey[100].withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(16),
-                                    // boxShadow: [
-                                    //background color of box
-                                    // BoxShadow(
-                                    //   color: Colors.white70,
-                                    //   offset: Offset(
-                                    //     2.0, // Move to right 10  horizontally
-                                    //     2.0, // Move to bottom 10 Vertically
-                                    //   ),
-                                    // )
-                                    // ],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
@@ -1473,11 +1405,6 @@ class _ot_registerState extends State<ot_register> {
                                       decoration: InputDecoration(
                                         labelText:
                                             'Wash room manual cleaning started at',
-                                        // labelStyle: TextStyle(
-                                        //   height: 1.2,
-                                        //   fontStyle: FontStyle.italic,
-                                        //   fontSize: 18.0,
-                                        // ),
                                       ),
                                     ),
                                   ),
@@ -1485,7 +1412,6 @@ class _ot_registerState extends State<ot_register> {
                                 SizedBox(height: 20),
                                 Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.grey[400].withOpacity(0.5),
                                     color: Colors.white.withOpacity(0.5),
                                     borderRadius: BorderRadius.circular(16),
                                     boxShadow: [
@@ -2106,16 +2032,6 @@ class _ot_registerState extends State<ot_register> {
                                               Colors.grey[100].withOpacity(0.5),
                                           borderRadius:
                                               BorderRadius.circular(16),
-                                          // boxShadow: [
-                                          //background color of box
-                                          // BoxShadow(
-                                          //   color: Colors.white70,
-                                          //   offset: Offset(
-                                          //     2.0, // Move to right 10  horizontally
-                                          //     2.0, // Move to bottom 10 Vertically
-                                          //   ),
-                                          // )
-                                          // ],
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(20.0),

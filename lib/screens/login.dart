@@ -14,29 +14,31 @@ class _AuthenticateState extends State<Authenticate> {
   String email;
   double _scaleFactor = 1.0;
   bool stayOnBottom = false;
-
   String password;
   bool loading = false;
+  final formkey = GlobalKey<FormState>();
 
   void login() async {
-    var connectivityResult =
-        await Connectivity().checkConnectivity(); // User defined class
-    print(connectivityResult);
-    // ignore: unrelated_type_equality_checks
-    if (connectivityResult == ConnectivityResult.mobile ||
-        connectivityResult == ConnectivityResult.wifi) {
-      setState(() {
-        loading = true;
-      });
-      try {
-        context.read<AuthService>().signIn(
-              email: email.trim(),
-              password: password,
-            );
-        // final user = await _auth.signInWithEmailAndPassword(
-        //     email: email.trim(), password: password);
-      } catch (e) {
-        print(e);
+    if (formkey.currentState.validate()) {
+      var connectivityResult =
+      await Connectivity().checkConnectivity(); // User defined class
+      print(connectivityResult);
+      // ignore: unrelated_type_equality_checks
+      if (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi) {
+        setState(() {
+          loading = true;
+        });
+        try {
+          context.read<AuthService>().signIn(
+            email: email.trim(),
+            password: password,
+          );
+          // final user = await _auth.signInWithEmailAndPassword(
+          //     email: email.trim(), password: password);
+        } catch (e) {
+          print(e);
+        }
       }
     }
   }
@@ -126,12 +128,13 @@ class _AuthenticateState extends State<Authenticate> {
                         SizedBox(
                           height: 100,
                         ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30.0),
-                              child: Form(
+                        Form(
+                          key: formkey,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 30.0),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.grey[400].withOpacity(0.5),
@@ -150,6 +153,9 @@ class _AuthenticateState extends State<Authenticate> {
                                       email = value;
                                     },
                                     decoration: InputDecoration(
+                                      errorStyle: TextStyle(
+                                        fontSize: 13.0,
+                                      ),
                                       border: InputBorder.none,
                                       hintText: 'Email',
                                       hintStyle: TextStyle(
@@ -166,52 +172,55 @@ class _AuthenticateState extends State<Authenticate> {
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 40.0,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[400].withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: TextFormField(
-                                  validator: (val) {
-                                    return val.length > 6
-                                        ? null
-                                        : "Enter the password";
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  textInputAction: TextInputAction.done,
-                                  onChanged: (value) {
-                                    //Do something with the user input.
-                                    password = value;
-                                  },
-                                  obscureText: true,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Password',
-                                    hintStyle: TextStyle(
-                                      height: 1.5,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 18.0,
-                                    ),
-                                    icon: const Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6.0, left: 6.0, bottom: 4.0),
-                                      child: const Icon(Icons.lock),
+                              SizedBox(
+                                height: 40.0,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 30.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[400].withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: TextFormField(
+                                    validator: (val) {
+                                      return val.isNotEmpty || val.length > 6
+                                          ? null
+                                          : "Enter the password";
+
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                    onChanged: (value) {
+                                      //Do something with the user input.
+                                      password = value;
+                                    },
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      errorStyle: TextStyle(
+                                        fontSize: 13.0,
+                                      ),
+                                      border: InputBorder.none,
+                                      hintText: 'Password',
+                                      hintStyle: TextStyle(
+                                        height: 1.5,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 18.0,
+                                      ),
+                                      icon: const Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 6.0, left: 6.0, bottom: 4.0),
+                                        child: const Icon(Icons.lock),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 40.0,

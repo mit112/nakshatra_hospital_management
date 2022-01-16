@@ -189,42 +189,6 @@ class _HomepageState extends State<Homepage> {
             SizedBox(
               height: 10,
             ),
-            // Container(
-            //   height: 55,
-            //   child: ElevatedButton(
-            //     onPressed: () {
-            //       Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (context) => SearchPatients()));
-            //     },
-            //     child: Row(
-            //       children: [
-            //         Icon(
-            //           FontAwesomeIcons.chevronCircleDown,
-            //           color: Colors.indigo[300],
-            //         ),
-            //         SizedBox(
-            //           width: 30,
-            //         ),
-            //         Text(
-            //           'Search Patients',
-            //           style: GoogleFonts.roboto(
-            //             textStyle: TextStyle(
-            //               color: Colors.black,
-            //               fontSize: 18.0,
-            //               fontWeight: FontWeight.w500,
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //     style: ElevatedButton.styleFrom(
-            //       primary: Colors.white,
-            //       elevation: 3,
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -447,46 +411,6 @@ class _HomepageState extends State<Homepage> {
                   SizedBox(
                     height: 40,
                   ),
-                  // BouncingWidget(
-                  //   scaleFactor: _scaleFactor,
-                  //   stayOnBottom: stayOnBottom,
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //         context,
-                  //         MaterialPageRoute(
-                  //             builder: (context) => SearchPatients()));
-                  //   },
-                  //   child: Column(
-                  //     children: [
-                  //       Padding(
-                  //         padding: const EdgeInsets.symmetric(horizontal: 60.0),
-                  //         child: Container(
-                  //           height: 48.0,
-                  //           child: InkWell(
-                  //             splashColor: Colors.blue[100],
-                  //             child: Material(
-                  //               color: Colors.green,
-                  //               borderRadius: BorderRadius.circular(20.0),
-                  //               shadowColor:
-                  //                   Colors.greenAccent.withOpacity(0.8),
-                  //               elevation: 7.0,
-                  //               child: Center(
-                  //                 child: Text(
-                  //                   'Search Patients',
-                  //                   style: TextStyle(
-                  //                     fontWeight: FontWeight.bold,
-                  //                     fontSize: 18.0,
-                  //                     color: Colors.white,
-                  //                   ),
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 140,
                   )
