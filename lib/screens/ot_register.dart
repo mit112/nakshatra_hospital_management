@@ -2744,7 +2744,7 @@ class _ot_registerState extends State<ot_register> {
                                                         .withOpacity(0.8),
                                                     elevation: 7.0,
                                                     child: GestureDetector(
-                                                      child: Center(
+                                                         child: Center(
                                                         child: Text(
                                                           'Upload Files',
                                                           style: TextStyle(
