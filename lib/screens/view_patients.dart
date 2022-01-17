@@ -144,7 +144,7 @@ class _ViewPatientsState extends State<ViewPatients> {
               ],
             ),
             Container(
-              height: 460,
+              height: MediaQuery.of(context).size.height,
               child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("patients")
@@ -225,86 +225,6 @@ class _ViewPatientsState extends State<ViewPatients> {
                 },
               ),
             ),
-            // Container(
-            //   // height: MediaQuery.of(context).size.height,
-            //   height: 380,
-            //   child: FutureBuilder(
-            //     future: getPosts(),
-            //     builder: (_, snapshot) {
-            //       if (snapshot.connectionState == ConnectionState.waiting) {
-            //         return Center(
-            //           child:CircularProgressIndicator(),
-            //         );
-            //       } else {
-            //         return ListView.builder(
-            //             // ignore: missing_return
-            //             itemCount: snapshot.data.length,
-            //             itemBuilder: (_, index) {
-            //               final item = snapshot.data[index].data();
-            //               final name = '${snapshot.data[index].data()["Firstname"]} ${snapshot.data[index].data()["Surname"]}';
-            //               return Slidable(
-            //                   actionPane: SlidableDrawerActionPane(),
-            //                   actionExtentRatio: 0.2,
-            //                   child: Column(
-            //                     children: [
-            //                       SizedBox(height: 20,),
-            //                       Padding(
-            //                         padding: const EdgeInsets.symmetric(horizontal: 5),
-            //                         child: Card(
-            //                           elevation: 4,
-            //                           shadowColor: Colors.black.withOpacity(0.8),
-            //                           color: Colors.white,
-            //                           shape: RoundedRectangleBorder(
-            //                             borderRadius: BorderRadius.circular(10.0),
-            //                           ),
-            //                           child: ListTile(
-            //                               title: Text(
-            //                                '${snapshot.data[index].data()["Firstname"]} ${snapshot.data[index].data()["Surname"]} ',
-            //                                 style: GoogleFonts.inter(
-            //                                   color: Colors.black,
-            //                                   fontWeight: FontWeight.w500,
-            //                                   fontSize: 18,
-            //                                 ),
-            //                               ),
-            //                               subtitle: Text(
-            //                                '${snapshot.data[index].data()["BirthDate"]}',
-            //                                 style: GoogleFonts.inter(
-            //                                   color: Colors.grey,
-            //                                   fontWeight: FontWeight.w500,
-            //                                   fontSize: 18,
-            //                                 ),
-            //                               ),
-            //                               onTap: () => navigateToPatientDetail(
-            //                                   snapshot.data[index]),
-            //                               leading: Container(
-            //                                 child: Icon(
-            //                                   FontAwesomeIcons.circleNotch,
-            //                                   color: Colors.indigo[300],
-            //                                 ),
-            //                               )),
-            //                         ),
-            //                       ),
-            //                     ],
-            //                   ), //testing
-            //                   secondaryActions: [
-            //                     IconSlideAction(
-            //                       caption: "Delete",
-            //                       color:Colors.indigo[300],
-            //                       icon: Icons.delete,
-            //                       onTap: () {
-            //                         delete();
-            //                         ScaffoldMessenger.of(context)
-            //                       .showSnackBar(SnackBar(content: Text('$name dismissed')));
-            //                   },
-            //
-            //                     )
-            //                   ],
-            //               );
-            //             });
-            //       }
-            //     },
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -313,7 +233,7 @@ class _ViewPatientsState extends State<ViewPatients> {
 
   Widget searchUsersList() {
     return Container(
-      height: 460,
+      height: MediaQuery.of(context).size.height,
       child: StreamBuilder(
         stream: usersStream,
         builder: (context, AsyncSnapshot snapshots) {
@@ -390,78 +310,6 @@ class _ViewPatientsState extends State<ViewPatients> {
         },
       ),
     );
-    //
-    // child: FutureBuilder<List>(
-    //   future: futureFiles,
-    //   builder:(context,snapshots){
-    //     final video = snapshots.data;
-    //     return ListView.builder(
-    //       controller: _controllerOne,
-    //       itemCount:4,
-    //       scrollDirection: Axis.vertical,
-    //       itemBuilder: (BuildContext context,int index) {
-    //         return Stack(
-    //             children: [
-    //               Padding(
-    //                 padding: const EdgeInsets.symmetric(vertical:10,horizontal:15),
-    //                 child: Container(
-    //                   height:210,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     image:DecorationImage(
-    //                       image:NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScVBk5ZgsN_ov5BSfG5-hKxughNHAW4UHDGQ&usqp=CAU"),
-    //                       fit:BoxFit.cover,
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ),
-    //               Padding(
-    //                 padding: const EdgeInsets.only(left:160,top:80),
-    //                 child: Container(
-    //                   height:70,
-    //                   width: 70,
-    //                   decoration: BoxDecoration(
-    //                     shape:BoxShape.circle,
-    //                     color: Colors.white54,
-    //                   ),
-    //                   child: GestureDetector(
-    //                       onTap: () {
-    //                         Navigator.push(
-    //                             context, MaterialPageRoute(
-    //                             builder: (context) => Videoplayer(file:video![index]))
-    //                         );
-    //                       },
-    //                       child: Icon(Icons.play_arrow,color: Colors.white,size:50,)),
-    //                 ),
-    //               ),
-    //               Padding(
-    //                 padding: const EdgeInsets.only(top: 170,left:35),
-    //                 child: Text('Exercise for Knee Pain',
-    //                   style:TextStyle(
-    //                     color: Colors.white,
-    //                     fontSize:16.0,
-    //                     fontWeight: FontWeight.w800,
-    //                   ),
-    //                 ),
-    //               ),Padding(
-    //                 padding: const EdgeInsets.only(top: 190,left:35),
-    //                 child: Text('3 minutes',
-    //                   style:TextStyle(
-    //                     color: Colors.grey[300],
-    //                     fontWeight: FontWeight.w400,
-    //                     fontSize:15.0,
-    //                   ),
-    //                 ),
-    //               ),
-    //             ]
-    //         );
-    //
-    //
-    //       },
-    //     );
-    //   },
-    //
-    // ),
   }
 }
 
