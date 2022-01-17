@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nakshatra_hospital_management/services/auth.dart';
 import 'package:provider/provider.dart';
-
-// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/homepage.dart';
 import 'screens/homepage.dart';
-// import 'file:///F:/Projects/Template/nakshatra_hospital_management/lib/screens/login.dart';
 import 'screens/login.dart';
 
 Future<void> main() async {
