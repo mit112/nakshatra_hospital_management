@@ -131,10 +131,26 @@ class _otreportState extends State<otreport> {
                       constantrow(
                           text: 'swab taken time',
                           snap: widget.post.data()['swab taken time']),
-
-                      // constantrow(text: 'swab sample locations',
-                      //     snap:  widget.post.data()['swab sample locations']),
-
+                      // Container(
+                      //   child:StreamBuilder(
+                      //     stream: FirebaseFirestore.instance
+                      //         .collection("otregister")
+                      //         .snapshots(),
+                      //     builder: (context, AsyncSnapshot snapshots) {
+                      //       if (snapshots.data == null)
+                      //         return Container(
+                      //             child: Center(child: CircularProgressIndicator()));
+                      //       return ListView.builder(
+                      //         cacheExtent: 9999,
+                      //         itemCount: widget.post.data().length,
+                      //         scrollDirection: Axis.vertical,
+                      //         itemBuilder: (context, index) {
+                      //           return Text(widget.post.data[index].data["swab sample locations"][index]["Mode"]);
+                      //         },
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
                       constantrow(
                           text: 'swab result date',
                           snap: widget.post.data()['swab result date']),
@@ -142,6 +158,40 @@ class _otreportState extends State<otreport> {
                       constantrow(
                           text: 'swab results',
                           snap: widget.post.data()['swab results']),
+
+                      constantrow(
+                          text: 'Other Disinfectant',
+                          snap: widget.post.data()['Other Disinfectant']),
+                      constantrow(
+                          text: 'Other Area',
+                          snap: widget.post.data()['Other Area']),
+                      constantrow(
+                          text: 'Other Equipment',
+                          snap: widget.post.data()['Other Equipment']),
+                      constantrow(
+                          text: 'Other Non-accessible Area',
+                          snap: widget.post.data()['Other Non-accessible Area']),
+                      constantrow(
+                          text: 'Other fumigation Chemical',
+                          snap: widget.post.data()['Other fumigation Chemical']),
+                      constantrow(
+                          text: 'Other Chemical',
+                          snap: widget.post.data()['Other Chemical']),
+                      constantrow(
+                          text: 'Other Washroom Area',
+                          snap: widget.post.data()['Other Washroom Area']),
+                      constantrow(
+                          text: 'Other Washroom non-accessible',
+                          snap: widget.post.data()['Other Washroom non-accessible']),
+                      constantrow(
+                          text: 'Other Washroom Chemicals',
+                          snap: widget.post.data()['Other Washroom Chemicals']),
+                      constantrow(
+                          text: 'Other Swab Sample',
+                          snap: widget.post.data()['Other Swab Sample']),
+                      constantrow(
+                          text: 'Other tests',
+                          snap: widget.post.data()['Other tests']),
                       SizedBox(
                         height: 130.0,
                       ),
