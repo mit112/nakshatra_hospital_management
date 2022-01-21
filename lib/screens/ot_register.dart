@@ -124,7 +124,36 @@ class _ot_registerState extends State<ot_register> {
   //Todo: Something
   String fileName;
   File file;
-
+    @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(
+    pOTDisinfectant == null ||
+     pOTarea == null ||
+     pOTEquipment== null ||
+     pOTNonaccessible== null ||
+   pOTfumigation== null ||
+    pWashroom== null ||
+     pWashroom_area== null ||
+     pWashroomNon_accessible== null ||
+     pWashroom_chemical== null ||
+     pSwab_sample== null ||
+    pSwab_result== null )
+    {
+          pOTDisinfectant = "Not Answered";
+          pOTarea = "Not Answered";
+          pOTEquipment = "Not Answered";
+          pOTNonaccessible = "Not Answered";
+          pOTfumigation = "Not Answered";
+          pWashroom = "Not Answered";
+          pWashroom_area = "Not Answered";
+          pWashroomNon_accessible = "Not Answered";
+          pWashroom_chemical = "Not Answered";
+          pSwab_sample = "Not Answered";
+          pSwab_result = "Not Answered";
+    }
+  }
   void disinfectantsForManualCleaningStringMaker() {
     if (valuebaci)
       disinfectantsForManualCleaningList
@@ -726,12 +755,7 @@ class _ot_registerState extends State<ot_register> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
                                   child: TextFormField(
-                                    validator: (val) {
-                                      return val.isNotEmpty
-                                          ? null
-                                          : "Enter text";
-                                    },
-                                    //
+
                                     onChanged: (val) {
                                       pOTDisinfectant = val;
                                       setState(() {});
@@ -855,10 +879,7 @@ class _ot_registerState extends State<ot_register> {
                                   height: 10.0,
                                 ),
                                 TextFormField(
-                                  validator: (val) {
-                                    return val.isNotEmpty ? null : "Enter text";
-                                  },
-                                  //
+
                                   onChanged: (val) {
                                     pOTarea = val;
                                     setState(() {});
@@ -971,10 +992,6 @@ class _ot_registerState extends State<ot_register> {
                                   height: 20.0,
                                 ),
                                 TextFormField(
-                                  validator: (val) {
-                                    return val.isNotEmpty ? null : "Enter text";
-                                  },
-                                  //
                                   onChanged: (val) {
                                     pOTEquipment = val;
                                     setState(() {});
@@ -1124,12 +1141,8 @@ class _ot_registerState extends State<ot_register> {
                                     height: 10.0,
                                   ),
                                   TextFormField(
-                                    validator: (val) {
-                                      return val.isNotEmpty
-                                          ? null
-                                          : "Enter text";
-                                    },
-                                    //
+
+
                                     onChanged: (val) {
                                       pOTNonaccessible = val;
                                       setState(() {});
@@ -1519,12 +1532,7 @@ class _ot_registerState extends State<ot_register> {
                                     height: 10.0,
                                   ),
                                   TextFormField(
-                                    validator: (val) {
-                                      return val.isNotEmpty
-                                          ? null
-                                          : "Enter text";
-                                    },
-                                    //
+
                                     onChanged: (val) {
                                       pWashroom = val;
                                       setState(() {});
@@ -1708,12 +1716,7 @@ class _ot_registerState extends State<ot_register> {
                                         height: 10.0,
                                       ),
                                       TextFormField(
-                                        validator: (val) {
-                                          return val.isNotEmpty
-                                              ? null
-                                              : "Enter text";
-                                        },
-                                        //
+
                                         onChanged: (val) {
                                           pWashroom_area = val;
                                           setState(() {});
@@ -1852,12 +1855,7 @@ class _ot_registerState extends State<ot_register> {
                                           height: 10.0,
                                         ),
                                         TextFormField(
-                                          validator: (val) {
-                                            return val.isNotEmpty
-                                                ? null
-                                                : "Enter text";
-                                          },
-                                          //
+
                                           onChanged: (val) {
                                             pWashroomNon_accessible = val;
                                             setState(() {});
@@ -2068,12 +2066,7 @@ class _ot_registerState extends State<ot_register> {
                                             height: 10.0,
                                           ),
                                           TextFormField(
-                                            validator: (val) {
-                                              return val.isNotEmpty
-                                                  ? null
-                                                  : "Enter text";
-                                            },
-                                            //
+                                           
                                             onChanged: (val) {
                                               pWashroom_chemical = val;
                                               setState(() {});
@@ -2418,12 +2411,7 @@ class _ot_registerState extends State<ot_register> {
                                               height: 10.0,
                                             ),
                                             TextFormField(
-                                              validator: (val) {
-                                                return val.isNotEmpty
-                                                    ? null
-                                                    : "Enter text";
-                                              },
-                                              //
+
                                               onChanged: (val) {
                                                 pSwab_sample = val;
                                                 setState(() {});
