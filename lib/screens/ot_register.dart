@@ -585,6 +585,7 @@ class _ot_registerState extends State<ot_register> {
                                 DateTimePicker(
                                   initialValue: '',
                                   type: DateTimePickerType.date,
+                                  textInputAction: TextInputAction.next,
                                   dateLabelText: ' OT-date of manual cleaning',
                                   firstDate: DateTime(1995),
                                   lastDate:
@@ -628,7 +629,7 @@ class _ot_registerState extends State<ot_register> {
                                 pManual_started = val;
                                 setState(() {});
                               },
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.text,
                               textInputAction: TextInputAction.next,
                               decoration: InputDecoration(
                                 labelText: 'OT manual cleaning started at',
@@ -667,16 +668,11 @@ class _ot_registerState extends State<ot_register> {
                                     pManual_completed = val;
                                     setState(() {});
                                   },
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.text,
                                   textInputAction: TextInputAction.next,
                                   decoration: InputDecoration(
                                     labelText:
-                                        ' OT manual cleaning completed at',
-                                    // labelStyle: TextStyle(
-                                    //   height: 1.2,
-                                    //   fontStyle: FontStyle.italic,
-                                    //   fontSize: 18.0,
-                                    // ),
+                                        ' OT manual cleaning completed at',                                   
                                   ),
                                 ),
                                 SizedBox(
@@ -694,17 +690,7 @@ class _ot_registerState extends State<ot_register> {
                           decoration: BoxDecoration(
                             // color: Colors.grey[400].withOpacity(0.5),
                             color: Colors.grey[100].withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(16),
-                            // boxShadow: [
-                            //background color of box
-                            // BoxShadow(
-                            //   color: Colors.white70,
-                            //   offset: Offset(
-                            //     2.0, // Move to right 10  horizontally
-                            //     2.0, // Move to bottom 10 Vertically
-                            //   ),
-                            // )
-                            // ],
+                            borderRadius: BorderRadius.circular(16),                           
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
@@ -1141,8 +1127,6 @@ class _ot_registerState extends State<ot_register> {
                                     height: 10.0,
                                   ),
                                   TextFormField(
-
-
                                     onChanged: (val) {
                                       pOTNonaccessible = val;
                                       setState(() {});
@@ -1238,7 +1222,7 @@ class _ot_registerState extends State<ot_register> {
                                   pFumigation_started = val;
                                   setState(() {});
                                 },
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                   labelText: 'OT Fumigation started',
@@ -1265,7 +1249,7 @@ class _ot_registerState extends State<ot_register> {
                                   pFumigation_completed = val;
                                   setState(() {});
                                 },
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.text,
                                 textInputAction: TextInputAction.next,
                                 decoration: InputDecoration(
                                   labelText: 'OT Fumigation completed',
