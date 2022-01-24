@@ -79,336 +79,349 @@ class _ReportDetailScreenState extends State<ReportDetailScreen> {
           style: kFieldStyle,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Column(
-              children: [
-                Card(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-                    width: double.infinity,
+      body: FutureBuilder(
+          future: downloadFile(widget.post.data()['file name']),
+          builder: (context, AsyncSnapshot snapshot) {
+            if(snapshot.hasError) {
+              return Center(
+                child: Text(
+                  'Connection Error',
+                ),
+              );
+            } else if(snapshot.connectionState == ConnectionState.done) {
+              return SingleChildScrollView(
+                child: Container(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Center(
-                          child: Text(
-                            widget.post.data()['report id'],
-                            style: TextStyle(
-                              fontFamily: kFont,
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                        Card(
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Date : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              widget.post.data()['date'],
-                              style: kMyStyle,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Temperature : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              widget.post.data()['body temp'],
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Flu symptoms : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              '${widget.post.data()['flu symptoms']}',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'fee collected : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              widget.post.data()['fee collected'],
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Other Fees : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              otherFees,
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'fee details : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              widget.post.data()['fee details'],
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Expenses : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              widget.post.data()['expenses'],
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Other Expenses : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              otherExpenses,
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Notes : ',
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 22.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              notes,
-                              style: GoogleFonts.roboto(
-                                textStyle: TextStyle(
-                                    color: Colors.grey[600],
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 0.5),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        BouncingWidget(
-                          scaleFactor: _scaleFactor,
-                          stayOnBottom: stayOnBottom,
-                          onPressed: () async {
-                            await downloadFile(
-                                '${widget.post.data()['file name']}');
-                            print(filePath);
-                            if (filePath != null) {
-                              OpenFile.open(filePath);
-                            }
-                          },
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 60.0),
-                                child: Container(
-                                  height: 48.0,
-                                  child: Material(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    shadowColor:
-                                        Colors.greenAccent.withOpacity(0.8),
-                                    elevation: 7.0,
-                                    child: InkWell(
-                                      splashColor: Colors.indigo[200],
-                                      onTap: () async {},
-                                      child: Center(
-                                        child: Text(
-                                          'Show File',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18.0,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+                            width: double.infinity,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    widget.post.data()['report id'],
+                                    style: TextStyle(
+                                      fontFamily: kFont,
+                                      fontSize: 30.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Date : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.post.data()['date'],
+                                      style: kMyStyle,
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Temperature : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.post.data()['body temp'],
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Flu symptoms : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${widget.post.data()['flu symptoms']}',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'fee collected : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.post.data()['fee collected'],
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Other Fees : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      otherFees,
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'fee details : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.post.data()['fee details'],
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Expenses : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.post.data()['expenses'],
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Other Expenses : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      otherExpenses,
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Notes : ',
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      notes,
+                                      style: GoogleFonts.roboto(
+                                        textStyle: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.w500,
+                                            letterSpacing: 0.5),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                BouncingWidget(
+                                  scaleFactor: _scaleFactor,
+                                  stayOnBottom: stayOnBottom,
+                                  onPressed: () => null,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 60.0),
+                                        child: Container(
+                                          height: 48.0,
+                                          child: Material(
+                                            color: Colors.green,
+                                            borderRadius: BorderRadius.circular(20.0),
+                                            shadowColor:
+                                            Colors.greenAccent.withOpacity(0.8),
+                                            elevation: 7.0,
+                                            child: InkWell(
+                                              splashColor: Colors.indigo[200],
+                                              onTap: () => OpenFile.open(filePath),
+                                              child: Center(
+                                                child: Text(
+                                                  'Show File',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18.0,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
-                )
-              ],
-            ),
-          ),
-        ),
+                ),
+              );
+            } else {
+              return Center(
+                child: Text(
+                  'Loading',
+                ),
+              );
+            }
+          }
       ),
     );
   }
+
 }
