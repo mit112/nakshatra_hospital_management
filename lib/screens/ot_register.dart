@@ -41,7 +41,8 @@ class _ot_registerState extends State<ot_register> {
       pWashroom_completed,
       pWfumigation_started,
       pWfumigation_completed,
-      pSwab_takentime;
+      pSwab_takentime,
+      notes;
   String _selectedDate;
   String infecto;
 
@@ -478,43 +479,43 @@ class _ot_registerState extends State<ot_register> {
         'manual cleaning end': pManual_completed,
         'disinfectant for manual cleaning':
             disinfectantsForManualCleaningString,
+        'Other Disinfectant': pOTDisinfectant,
         'ot area wiped clean': otAreaWipedCleanString,
+        'Other Area': pOTarea,
         'ot equipment wiped clean': otEquipmentWipedCleanString,
+        'Other Equipment': pOTEquipment,
         'non accessible area sprayed with disinfectant':
             otNonAccessibleAreaSprayedWithDisinfectantString,
+        'Other Non-accessible Area': pOTNonaccessible,
         'ot fumigation date': _selectedDate,
         'ot fumigation started': pFumigation_started,
         'ot fumigation completed': pFumigation_completed,
         'ot fumigation chemicals used': otFumigationChemicalsString,
+        'Other fumigation Chemical': pOTfumigation,
         'washroom manual cleaning date': _selectedDate,
         'washroom manual cleaning started': pWashroom_started,
         'washroom manual cleaning ended': pWashroom_completed,
         'washroom-chemical used for manual cleaning':
             washroomChemicalForManualCleaningString,
+        'Other Chemical': pWashroom,
         'washroom area furniture wiped clean': washroomAreaWipedCleanString,
+        'Other Washroom Area': pWashroom_area,
         'washroom non accessible area sprayed':
             washroomNonAccessibleAreaSprayedWithDisinfectantString,
+        'Other Washroom non-accessible': pWashroomNon_accessible,
         'washroom fumigation date': _selectedDate,
         'washroom fumigation started': pWfumigation_started,
         'washroom fumigation ended': pWfumigation_completed,
         'washroom chemicals used for fumigation':
             washroomChemicalForFumigationString,
-        'notes': 'remaining',
+        'Other Washroom Chemicals': pWashroom_chemical,
+        'notes': notes,
         'swab taken on': _selectedDate,
         'swab taken time': pSwab_takentime,
         'swab sample locations': swabSampleLocationsList,
+        'Other Swab Sample': pSwab_sample,
         'swab result date': _selectedDate,
         'swab results': swabResults,
-        'Other Disinfectant': pOTDisinfectant,
-        'Other Area': pOTarea,
-        'Other Equipment': pOTEquipment,
-        'Other Non-accessible Area': pOTNonaccessible,
-        'Other fumigation Chemical': pOTfumigation,
-        'Other Chemical': pWashroom,
-        'Other Washroom Area': pWashroom_area,
-        'Other Washroom non-accessible': pWashroomNon_accessible,
-        'Other Washroom Chemicals': pWashroom_chemical,
-        'Other Swab Sample': pSwab_sample,
         'Other tests': pSwab_result,
       });
       Navigator.pop(context);
@@ -2099,12 +2100,22 @@ class _ot_registerState extends State<ot_register> {
                                           child: Column(
                                             children: [
                                               TextFormField(
+                                                validator: (val) {
+                                                  return val.isNotEmpty
+                                                      ? null
+                                                      : "Enter text";
+                                                },
+                                                onChanged: (val) {
+                                                  notes = val;
+                                                  setState(() {});
+                                                },
                                                 keyboardType:
                                                     TextInputType.text,
                                                 textInputAction:
                                                     TextInputAction.done,
                                                 decoration: InputDecoration(
                                                   labelText: 'Notes',
+
                                                   labelStyle: TextStyle(
                                                     height: 1.2,
                                                     fontStyle: FontStyle.italic,
@@ -2561,8 +2572,8 @@ class _ot_registerState extends State<ot_register> {
                                                 TextInputAction.next,
                                             decoration: InputDecoration(
                                               labelText:
-                                                  ' OT/wash room swab & other test results'
-                                                  'Files submitted:',
+                                                  ' Test results',
+                                                 //'Files submitted:',
                                               labelStyle: TextStyle(
                                                 height: 1.2,
                                                 fontStyle: FontStyle.italic,
