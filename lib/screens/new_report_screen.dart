@@ -30,7 +30,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
       nurse = false,
       attendant = false;
   String flu, feeDetails, otherExpenses, feeAmount, otherFees, fileName, notes;
-  String pTemp = '';
+  String pTemp = '90';
   String selectedDate;
   DocumentSnapshot doc;
   String uid = auth.currentUser.uid.toString();
@@ -197,7 +197,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                         height: 20.0,
                       ),
                       Text(
-                        "Patient body temp. in deg.C",
+                        "Patient body temp. in deg.F",
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18.0,
@@ -206,7 +206,7 @@ class _NewReportScreenState extends State<NewReportScreen> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: DropdownButton<String>(
-                          value: 'Choose your temp',
+                          value: pTemp,
                           icon: const Icon(Icons.arrow_drop_down_outlined),
                           iconSize: 24,
                           elevation: 16,
@@ -225,7 +225,6 @@ class _NewReportScreenState extends State<NewReportScreen> {
                             });
                           },
                           items: <String>[
-                            'Choose your temp',
                             '90',
                             '91',
                             '92',
