@@ -89,19 +89,31 @@ class _otreportState extends State<otreport> {
                                 text: 'disinfectant for manual cleaning',
                                 snap: widget.post
                                     .data()['disinfectant for manual cleaning']),
+                            constantrow(
+                                text: 'Other Disinfectant',
+                                snap: widget.post.data()['Other Disinfectant']),
 
                             constantrow(
                                 text: 'ot area wiped clean',
                                 snap: widget.post.data()['ot area wiped clean']),
+                            constantrow(
+                                text: 'Other Area',
+                                snap: widget.post.data()['Other Area']),
 
                             constantrow(
                                 text: 'ot equipment wiped clean',
                                 snap: widget.post.data()['ot equipment wiped clean']),
+                            constantrow(
+                                text: 'Other Equipment',
+                                snap: widget.post.data()['Other Equipment']),
 
                             constantrow(
                                 text: 'non accessible area sprayed with disinfectant',
                                 snap: widget.post.data()[
                                 'non accessible area sprayed with disinfectant']),
+                            constantrow(
+                                text: 'Other Non-accessible Area',
+                                snap: widget.post.data()['Other Non-accessible Area']),
 
                             constantrow(
                                 text: 'ot fumigation date',
@@ -118,6 +130,13 @@ class _otreportState extends State<otreport> {
                                 text: 'ot fumigation chemicals used',
                                 snap: widget.post
                                     .data()['ot fumigation chemicals used']),
+                            constantrow(
+                                text: 'Other fumigation Chemical',
+                                snap: widget.post.data()['Other fumigation Chemical']),
+
+
+
+
 
                             constantrow(
                                 text: 'washroom manual cleaning date',
@@ -128,16 +147,29 @@ class _otreportState extends State<otreport> {
                                 text: 'washroom-chemical used for manual cleaning',
                                 snap: widget.post.data()[
                                 'washroom-chemical used for manual cleaning']),
+                            constantrow(
+                                text: 'Other Chemical',
+                                snap: widget.post.data()['Other Chemical']),
+
+
+
+
 
                             constantrow(
                                 text: 'washroom area furniture wiped clean',
                                 snap: widget.post
                                     .data()['washroom area furniture wiped clean']),
+                            constantrow(
+                                text: 'Other Washroom Area',
+                                snap: widget.post.data()['Other Washroom Area']),
 
                             constantrow(
                                 text: 'washroom non accessible area sprayed',
                                 snap: widget.post
                                     .data()['washroom non accessible area sprayed']),
+                            constantrow(
+                                text: 'Other Washroom non-accessible',
+                                snap: widget.post.data()['Other Washroom non-accessible']),
 
                             constantrow(
                                 text: 'washroom fumigation date',
@@ -157,6 +189,12 @@ class _otreportState extends State<otreport> {
                                 text: 'washroom chemicals used for fumigation',
                                 snap: widget.post.data()[
                                 'washroom chemicals used for fumigation']),
+                            constantrow(
+                                text: 'Other Washroom Chemicals',
+                                snap: widget.post.data()['Other Washroom Chemicals']),
+
+
+
 
                             constantrow(
                                 text: 'notes', snap: widget.post.data()['notes']),
@@ -189,6 +227,13 @@ class _otreportState extends State<otreport> {
                             //   ),
                             // ),
                             constantrow(
+                                text: 'Other Swab Sample',
+                                snap: widget.post.data()['swab sample locations']),
+                            constantrow(
+                                text: 'Other Swab Sample',
+                                snap: widget.post.data()['Other Swab Sample']),
+
+                            constantrow(
                                 text: 'swab result date',
                                 snap: widget.post.data()['swab result date']),
 
@@ -196,36 +241,6 @@ class _otreportState extends State<otreport> {
                                 text: 'swab results',
                                 snap: widget.post.data()['swab results']),
 
-                            constantrow(
-                                text: 'Other Disinfectant',
-                                snap: widget.post.data()['Other Disinfectant']),
-                            constantrow(
-                                text: 'Other Area',
-                                snap: widget.post.data()['Other Area']),
-                            constantrow(
-                                text: 'Other Equipment',
-                                snap: widget.post.data()['Other Equipment']),
-                            constantrow(
-                                text: 'Other Non-accessible Area',
-                                snap: widget.post.data()['Other Non-accessible Area']),
-                            constantrow(
-                                text: 'Other fumigation Chemical',
-                                snap: widget.post.data()['Other fumigation Chemical']),
-                            constantrow(
-                                text: 'Other Chemical',
-                                snap: widget.post.data()['Other Chemical']),
-                            constantrow(
-                                text: 'Other Washroom Area',
-                                snap: widget.post.data()['Other Washroom Area']),
-                            constantrow(
-                                text: 'Other Washroom non-accessible',
-                                snap: widget.post.data()['Other Washroom non-accessible']),
-                            constantrow(
-                                text: 'Other Washroom Chemicals',
-                                snap: widget.post.data()['Other Washroom Chemicals']),
-                            constantrow(
-                                text: 'Other Swab Sample',
-                                snap: widget.post.data()['Other Swab Sample']),
                             constantrow(
                                 text: 'Other tests',
                                 snap: widget.post.data()['Other tests']),
