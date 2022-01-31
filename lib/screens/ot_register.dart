@@ -512,7 +512,7 @@ class _ot_registerState extends State<ot_register> {
         'notes': notes,
         'swab taken on': _selectedDate,
         'swab taken time': pSwab_takentime,
-        'swab sample locations': swabSampleLocationsList,
+        'swab sample locations': swabSampleLocationsString,
         'Other Swab Sample': pSwab_sample,
         'swab result date': _selectedDate,
         'swab results': swabResults,
